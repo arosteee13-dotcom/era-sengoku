@@ -43,6 +43,17 @@
       </header>
       <div id="map-container">
         <div id="map-grid"></div>
+        <div id="modal-evento" class="modal-hidden">
+          <div class="modal-evento-backdrop"></div>
+          <img id="modal-evento-imagen" class="modal-imagen-hidden" src="" alt="">
+          <div class="modal-evento-inner">
+            <div class="modal-evento-title-bar" id="modal-evento-titulo">Letrero</div>
+            <div class="modal-evento-body">
+              <span id="modal-evento-texto"></span>
+            </div>
+            <div class="modal-evento-continuar">Continuar ▼</div>
+          </div>
+        </div>
       </div>
       <div id="location-bar">
         <span class="location-name">Yakemoto</span>
@@ -68,14 +79,6 @@
     </div>
     </div>
 
-  </div>
-
-  <div id="modal-interaccion" class="modal-hidden">
-    <div class="modal-content">
-      <div class="modal-header">Letrero</div>
-      <p id="modal-text">Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.</p>
-      <div class="modal-footer">Continuar ▼</div>
-    </div>
   </div>
 
   <script src="game.js"></script>

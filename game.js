@@ -74,9 +74,10 @@
   const mapContainer  = $('map-container');
   const mapGrid       = $('map-grid');
   const dialogueText  = $('dialogue-text');
-  const modalInteraccion = $('modal-interaccion');
-  const modalTextEl      = $('modal-text');
-  const modalFooter      = document.querySelector('.modal-footer');
+  const modalEvento     = $('modal-evento');
+  const modalEventoImg  = $('modal-evento-imagen');
+  const modalEventoTexto = $('modal-evento-texto');
+  const modalEventoTitulo = $('modal-evento-titulo');
 
   /* ─── GESTIÓN DE PANTALLAS ─── */
   function showScreen(id) {
@@ -292,8 +293,75 @@
     }
   }
 
+  const CARTEL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
+  const TAKESHI_TEXTO = "¡Hola! Soy <b>Takeshi</b>. Mi padre dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?";
+
+  let eventoTimer = null;
+
+  function escribirEvento(html, velocidad) {
+    velocidad = velocidad || 20;
+    modalEventoTexto.innerHTML = '';
+    document.querySelectorAll('#modal-evento-texto + .modal-evento-cursor').forEach(el => el.remove());
+    const chars = Array.from(html);
+    let idx = 0;
+    let buffer = '';
+
+    const cursorSpan = document.createElement('span');
+    cursorSpan.className = 'modal-evento-cursor';
+    cursorSpan.textContent = '▌';
+    modalEventoTexto.after(cursorSpan);
+
+    function tipear() {
+      if (idx >= chars.length) {
+        if (cursorSpan.parentNode) cursorSpan.remove();
+        eventoTimer = null;
+        return;
+      }
+
+      let chunk = '';
+      if (chars[idx] === '<') {
+        while (idx < chars.length && chars[idx] !== '>') { chunk += chars[idx]; idx++; }
+        if (idx < chars.length) { chunk += chars[idx]; idx++; }
+      } else if (chars[idx] === '&') {
+        while (idx < chars.length && chars[idx] !== ';') { chunk += chars[idx]; idx++; }
+        if (idx < chars.length) { chunk += chars[idx]; idx++; }
+      } else {
+        chunk = chars[idx]; idx++;
+      }
+
+      buffer += chunk;
+      modalEventoTexto.innerHTML = buffer;
+      eventoTimer = setTimeout(tipear, velocidad);
+    }
+
+    tipear();
+  }
+
+  function abrirEvento(titulo, texto, imagen) {
+    movimientoBloqueado = true;
+    modalEventoTitulo.textContent = titulo;
+    modalEventoTexto.innerHTML = '';
+
+    if (imagen) {
+      modalEventoImg.src = imagen;
+      modalEventoImg.classList.remove('modal-imagen-hidden');
+    } else {
+      modalEventoImg.classList.add('modal-imagen-hidden');
+    }
+
+    escribirEvento(texto);
+    modalEvento.classList.remove('modal-hidden');
+  }
+
+  function cerrarEvento() {
+    if (eventoTimer) { clearTimeout(eventoTimer); eventoTimer = null; }
+    movimientoBloqueado = false;
+    modalEventoImg.classList.add('modal-imagen-hidden');
+    modalEvento.classList.add('modal-hidden');
+  }
+
   function interact() {
-    if (movimientoBloqueado) { cerrarModal(); return; }
+    if (movimientoBloqueado) { cerrarEvento(); return; }
     const tx = playerX + playerDir.dx;
     const ty = playerY + playerDir.dy;
     if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
@@ -302,21 +370,12 @@
     }
     const tile = MAP[ty][tx];
     if (tile === '🪧') {
-      abrirModal();
+      abrirEvento('Letrero', CARTEL_TEXTO);
+    } else if (tile === '👦') {
+      abrirEvento('Takeshi', TAKESHI_TEXTO, 'img/personajes/takeshi.png');
     } else {
       setDialogue('No hay nada con lo que interactuar aquí.');
     }
-  }
-
-  function abrirModal() {
-    movimientoBloqueado = true;
-    modalTextEl.textContent = MODAL_TEXTO;
-    modalInteraccion.classList.remove('modal-hidden');
-  }
-
-  function cerrarModal() {
-    movimientoBloqueado = false;
-    modalInteraccion.classList.add('modal-hidden');
   }
 
   function showInventory() {
@@ -389,7 +448,7 @@
       if (document.activeElement.tagName === 'INPUT') return;
       if (movimientoBloqueado) {
         if (e.key === ' ' || e.key === 'e' || e.key === 'E' || e.key === 'Enter') {
-          e.preventDefault(); cerrarModal();
+          e.preventDefault(); cerrarEvento();
         }
         return;
       }
@@ -405,7 +464,7 @@
       if (e.key === 'i' || e.key === 'I') { e.preventDefault(); showInventory(); }
     });
 
-    modalInteraccion.addEventListener('click', cerrarModal);
+    modalEvento.addEventListener('click', cerrarEvento);
   }
 
   function bindResize() {
