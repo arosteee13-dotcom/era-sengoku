@@ -2,55 +2,80 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Era Sengoku</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sengoku - Caminos de Acero</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="game-container">
 
-<div id="game">
-  <!-- GAME WORLD (60%) -->
-  <div id="gameWorld">
-    <canvas id="gridCanvas"></canvas>
-
-    <!-- HUD -->
-    <div id="hud">
-      <span id="hudHonor">⚔ Honor: 0</span>
-      <span id="hudLocation">🏯 Aldea</span>
-    </div>
-
-    <!-- Inventory toggle -->
-    <button id="btnInventory" aria-label="Inventario">🎒</button>
-  </div>
-
-  <!-- CONTROL PANEL (40%) -->
-  <div id="controlPanel">
-    <!-- D-Pad -->
-    <div id="dpad">
-      <button id="btnUp"    class="dpad-btn" aria-label="Arriba">▲</button>
-      <button id="btnLeft"  class="dpad-btn" aria-label="Izquierda">◀</button>
-      <button id="btnRight" class="dpad-btn" aria-label="Derecha">▶</button>
-      <button id="btnDown"  class="dpad-btn" aria-label="Abajo">▼</button>
-    </div>
-
-    <!-- Dialogue box (hidden by default) -->
-    <div id="dialogueBox" hidden>
-      <p id="dialogueText"></p>
-      <div id="dialogueButtons">
-        <button id="btnOptionA" class="dialogue-option">Opción A</button>
-        <button id="btnOptionB" class="dialogue-option">Opción B</button>
+    <!-- PANTALLA 1: MENÚ PRINCIPAL -->
+    <div id="screen-menu" class="screen">
+      <div class="menu-inner">
+        <p class="menu-title-small">戦国時代</p>
+        <h1 class="menu-title-large">Sengoku</h1>
+        <p class="menu-title-gold">Caminos de Acero</p>
+        <p class="menu-intro">Japón, año 1560. Eres un joven ronin que busca su destino en las tierras de Owari. El camino del guerrero está lleno de desafíos, pero también de honor.</p>
+        <div class="menu-buttons">
+          <button id="btn-continue" class="btn-continue hidden">Continuar partida</button>
+          <button id="btn-new-game" class="btn-new-game">Nueva partida</button>
+        </div>
       </div>
     </div>
+
+    <!-- PANTALLA 2: REGISTRO DE NOMBRE -->
+    <div id="screen-name" class="screen hidden">
+      <div class="menu-inner">
+        <p class="menu-title-small">戦国時代</p>
+        <h1 class="menu-title-large">Sengoku</h1>
+        <p class="menu-title-gold">Caminos de Acero</p>
+        <div class="name-form">
+          <input id="name-input" type="text" placeholder="¿Cuál es tu nombre, ronin?" maxlength="16" autocomplete="off">
+          <button id="btn-start" class="btn-start">Comenzar el viaje</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANTALLA 3: EL JUEGO -->
+    <div id="screen-game" class="screen hidden">
+      <header id="game-header">
+        <h1 id="player-name-display">—</h1>
+      </header>
+      <div id="map-container">
+        <div id="map-grid"></div>
+        <div id="modal-interaccion" class="modal-hidden">
+          <div class="modal-inner">
+            <div class="modal-title-bar" id="modal-titulo">Letrero</div>
+            <div class="modal-body" id="modal-texto">Texto del evento.</div>
+            <div class="modal-continuar">Continuar ▼</div>
+          </div>
+        </div>
+      </div>
+      <div id="location-bar">
+        <span class="location-name">Yakemoto</span>
+        <span class="location-sub">Aldea de Owari</span>
+      </div>
+      <div id="control-panel">
+        <div id="dialogue-box">
+          <p id="dialogue-text">Bienvenido a la aldea...</p>
+        </div>
+        <div id="controls">
+          <div id="dpad">
+            <div class="dpad-center"></div>
+            <button id="btn-up" class="dpad-btn" data-dir="up">▲</button>
+            <button id="btn-left" class="dpad-btn" data-dir="left">◀</button>
+            <button id="btn-right" class="dpad-btn" data-dir="right">▶</button>
+            <button id="btn-down" class="dpad-btn" data-dir="down">▼</button>
+          </div>
+          <div id="action-buttons">
+            <button id="btn-bag">🎒</button>
+            <button id="btn-action">A</button>
+        </div>
+      </div>
+    </div>
+    </div>
+
   </div>
-</div>
-
-<!-- INVENTORY OVERLAY (hidden by default) -->
-<div id="inventoryOverlay">
-  <h2>Inventario</h2>
-  <div id="inventoryGrid"></div>
-  <button id="btnCloseInv">Cerrar</button>
-</div>
-
-<script src="game.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>

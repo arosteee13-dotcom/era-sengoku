@@ -1,340 +1,479 @@
-/* ============================================================
-   ERA SENGOKU — Lógica del juego
-   Grid-based movement, NPC dialogues, inventory
-   ============================================================ */
+(function () {
+  'use strict';
 
-// ============================================================
-//  CONFIGURACIÓN DEL GRID
-// ============================================================
-const COLS = 8;
-const ROWS = 8;
-const TILE_SIZE = 64;
+  /* ─── MAPA 22×18 ─── */
+  const MAP = [
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🛖','🛖','🛖','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🏠','🏠','🟩','🟩','🌲'],
+    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🌸','🟫','🌸','🟫','🟩','🟩','🟩','🟫','🌸','🟫','🌸','🏠','🏠','🟩','🟩','🌲'],
+    ['🌲','🟩','🪧','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','👦','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🏔️','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+  ];
 
-// ============================================================
-//  ESTADO DEL JUEGO
-// ============================================================
-let honor = 0;
-let inventario = [];
-let dialogueActive = false;
-let currentNPC = null;
+  const ROWS = MAP.length;
+  const COLS = MAP[0].length;
 
-// ============================================================
-//  MAPA DE BALDOSAS (tileMap)
-//  0 = pasto, 1 = camino, 2 = agua, 3 = edificio
-// ============================================================
-const tileMap = [
-  [0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 1, 1, 1, 1, 0, 2, 0],
-  [0, 0, 0, 0, 1, 0, 2, 0],
-  [0, 3, 0, 0, 1, 1, 1, 0],
-  [0, 0, 0, 0, 0, 0, 1, 0],
-  [0, 1, 1, 1, 1, 1, 1, 0],
-  [0, 1, 0, 0, 0, 0, 3, 0],
-  [0, 1, 0, 0, 0, 0, 0, 0],
-];
+  const OBSTACLES = new Set(['🌲', '🏠', '⬜️', '🏔️', '🪧', '👦']);
 
-// ============================================================
-//  PERSONAJES NO JUGADORES (NPCs)
-// ============================================================
-const npcs = [
-  {
-    id: 'npc_ronin',
-    name: 'Ronin',
-    col: 2,
-    row: 3,
-    color: '#e94560',
-    active: true,
-    dialogues: [
-      {
-        text: 'Forastero... este camino está lleno de peligros. ¿Buscas fortuna o buscas la muerte?',
-        options: [
-          {
-            label: 'Busco fortuna',
-            effect: () => {
-              honor += 10;
-              addItem('Moneda de Oro');
-            },
-          },
-          {
-            label: 'Busco la muerte',
-            effect: () => {
-              honor -= 5;
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'npc_monje',
-    name: 'Monje',
-    col: 6,
-    row: 7,
-    color: '#533483',
-    active: true,
-    dialogues: [
-      {
-        text: 'La guerra consume la tierra. Dime, joven guerrero: ¿qué camino honrarás?',
-        options: [
-          {
-            label: 'El camino del honor',
-            effect: () => {
-              honor += 15;
-              addItem(' Pergamino Sabio');
-            },
-          },
-          {
-            label: 'El camino del poder',
-            effect: () => {
-              honor -= 10;
-            },
-          },
-        ],
-      },
-    ],
-  },
-];
+  const eventos = {
+    "5,10": { tipo: "cartel", titulo: "Letrero", texto: "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca." },
+    "15,7": { tipo: "npc", titulo: "Takeshi", texto: "— ¡Hola! Soy <b>Takeshi</b>. Mi padre dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?" },
+  };
 
-// ============================================================
-//  JUGADOR
-// ============================================================
-const player = { col: 1, row: 1 };
+  const TILE_IMAGES = {
+    '🟩': 'img/hierba.jpg',
+    '🟫': 'img/tierra.jpg',
+    '🚪': 'img/puerta.jpg',
+    '⬜️': 'img/pared_blanca.jpg',
+    '🛖': 'img/techo.jpg',
+    '🪧': 'img/cartel.png',
+    '🌲': 'img/arbol.png',
+  };
 
-// ============================================================
-//  CANVAS
-// ============================================================
-const canvas = document.getElementById('gridCanvas');
-const ctx = canvas.getContext('2d');
+  const PATTERNS = [
+    {
+      tiles: [
+        ['🛖','🛖','🛖'],
+        ['⬜️','🚪','⬜️'],
+      ],
+      image: 'img/casa_aldea.png',
+    },
+  ];
 
-function resizeCanvas() {
-  const rect = document.getElementById('gameWorld').getBoundingClientRect();
-  const size = Math.min(rect.width, rect.height);
-  canvas.width = COLS * TILE_SIZE;
-  canvas.height = ROWS * TILE_SIZE;
-  canvas.style.width = size + 'px';
-  canvas.style.height = size + 'px';
-}
+  /* ─── ESTADO ─── */
+  let playerName = '';
+  let playerX = 11;
+  let playerY = 9;
+  let playerDir = { dx: 0, dy: -1 };
+  let inventory = [];
+  let tileSize = 0;
+  let movimientoBloqueado = false;
 
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+  /* ─── DOM REFS ─── */
+  const $ = (id) => document.getElementById(id);
+  const screenMenu    = $('screen-menu');
+  const screenName    = $('screen-name');
+  const screenGame    = $('screen-game');
+  const btnContinue   = $('btn-continue');
+  const btnNewGame    = $('btn-new-game');
+  const btnStart      = $('btn-start');
+  const nameInput     = $('name-input');
+  const playerNameDsp = $('player-name-display');
+  const mapContainer  = $('map-container');
+  const mapGrid       = $('map-grid');
+  const dialogueText  = $('dialogue-text');
+  const modalInteraccion = $('modal-interaccion');
+  const modalTitulo      = $('modal-titulo');
+  const modalTexto       = $('modal-texto');
 
-// ============================================================
-//  RENDERIZADO
-// ============================================================
-const TILE_COLORS  = ['#3a7d32', '#c2a061', '#2b6e9e', '#6b4226'];
-const TILE_BORDERS = ['#2d5a27', '#a8853e', '#1f5280', '#4a2e1a'];
+  /* ─── GESTIÓN DE PANTALLAS ─── */
+  function showScreen(id) {
+    [screenMenu, screenName, screenGame].forEach(s => s.classList.add('hidden'));
+    $(id).classList.remove('hidden');
+  }
 
-function render() {
-  const tw = TILE_SIZE;
-  const th = TILE_SIZE;
-
-  // Baldosas
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      const type = tileMap[r][c];
-      ctx.fillStyle = TILE_COLORS[type];
-      ctx.fillRect(c * tw, r * th, tw, th);
-      ctx.strokeStyle = TILE_BORDERS[type];
-      ctx.lineWidth = 1;
-      ctx.strokeRect(c * tw, r * th, tw, th);
+  /* ─── COMPROBAR PARTIDA GUARDADA ─── */
+  function checkSavedGame() {
+    const saved = localStorage.getItem('sengoku_playerName');
+    if (saved) {
+      btnContinue.classList.remove('hidden');
+    } else {
+      btnContinue.classList.add('hidden');
     }
   }
 
-  // NPCs
-  for (const npc of npcs) {
-    if (!npc.active) continue;
-    const cx = npc.col * tw + tw / 2;
-    const cy = npc.row * th + th / 2;
-    ctx.fillStyle = npc.color;
-    ctx.beginPath();
-    ctx.arc(cx, cy, tw * 0.3, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#f0e6d3';
-    ctx.font = 'bold 11px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(npc.name, cx, cy);
+  /* ─── MANEJADORES DEL MENÚ ─── */
+  function onContinue() {
+    const saved = localStorage.getItem('sengoku_playerName');
+    if (saved) {
+      playerName = saved;
+      showScreen('screen-game');
+      initGame();
+    }
   }
 
-  // Jugador
-  const px = player.col * tw + tw / 2;
-  const py = player.row * th + th / 2;
-  ctx.fillStyle = '#f6d365';
-  ctx.shadowColor = 'rgba(246, 211, 101, 0.6)';
-  ctx.shadowBlur = 12;
-  ctx.fillRect(px - tw * 0.3, py - tw * 0.3, tw * 0.6, th * 0.6);
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = '#e8b830';
-  ctx.fillRect(px - tw * 0.2, py - tw * 0.2, tw * 0.4, th * 0.4);
-
-  // Borde de selección en la tile del jugador
-  ctx.strokeStyle = '#f6d365';
-  ctx.lineWidth = 3;
-  ctx.strokeRect(player.col * tw, player.row * th, tw, th);
-
-  // HUD
-  document.getElementById('hudHonor').textContent = ` Honor: ${honor}`;
-  let loc = ' Aldea';
-  const npcHere = npcs.find(n => n.active && n.col === player.col && n.row === player.row);
-  if (npcHere) {
-    loc = ` ${npcHere.name}`;
-  } else if (tileMap[player.row][player.col] === 3) {
-    loc = ' Templo';
-  } else if (tileMap[player.row][player.col] === 2) {
-    loc = ' Lago';
+  function onNewGame() {
+    nameInput.value = '';
+    showScreen('screen-name');
+    setTimeout(() => nameInput.focus(), 150);
   }
-  document.getElementById('hudLocation').textContent = loc;
-}
 
-// ============================================================
-//  MOVIMIENTO
-// ============================================================
-function movePlayer(dCol, dRow) {
-  if (dialogueActive) return;
-
-  const nc = player.col + dCol;
-  const nr = player.row + dRow;
-
-  if (nc < 0 || nc >= COLS || nr < 0 || nr >= ROWS) return;
-  if (tileMap[nr][nc] === 2) return;
-
-  player.col = nc;
-  player.row = nr;
-
-  checkNPCInteraction();
-  render();
-}
-
-// ============================================================
-//  SISTEMA DE DIÁLOGOS
-// ============================================================
-function checkNPCInteraction() {
-  if (dialogueActive) return;
-
-  for (const npc of npcs) {
-    if (!npc.active) continue;
-    const dist = Math.abs(player.col - npc.col) + Math.abs(player.row - npc.row);
-    if (dist <= 1) {
-      startDialogue(npc);
+  function onStartJourney() {
+    const name = nameInput.value.trim();
+    if (!name) {
+      nameInput.style.borderColor = '#c9302c';
+      nameInput.placeholder = 'Escribe tu nombre, ronin...';
+      setTimeout(() => {
+        nameInput.style.borderColor = '#C59B27';
+        nameInput.placeholder = '¿Cuál es tu nombre, ronin?';
+      }, 1500);
       return;
     }
+    playerName = name;
+    localStorage.setItem('sengoku_playerName', name);
+    showScreen('screen-game');
+    initGame();
   }
-  hideDialogue();
-}
 
-function startDialogue(npc) {
-  dialogueActive = true;
-  currentNPC = npc;
-
-  document.getElementById('dpad').hidden = true;
-
-  const db = document.getElementById('dialogueBox');
-  db.hidden = false;
-
-  const d = npc.dialogues[0];
-  document.getElementById('dialogueText').textContent = d.text;
-
-  const btnA = document.getElementById('btnOptionA');
-  const btnB = document.getElementById('btnOptionB');
-
-  btnA.textContent = d.options[0].label;
-  btnB.textContent = d.options[1].label;
-
-  // Reemplazar botones para eliminar listeners viejos
-  const newBtnA = btnA.cloneNode(true);
-  const newBtnB = btnB.cloneNode(true);
-  btnA.parentNode.replaceChild(newBtnA, btnA);
-  btnB.parentNode.replaceChild(newBtnB, btnB);
-
-  newBtnA.addEventListener('click', () => {
-    d.options[0].effect();
-    if (currentNPC) currentNPC.active = false;
-    endDialogue();
-  });
-
-  newBtnB.addEventListener('click', () => {
-    d.options[1].effect();
-    if (currentNPC) currentNPC.active = false;
-    endDialogue();
-  });
-}
-
-function endDialogue() {
-  dialogueActive = false;
-  currentNPC = null;
-  hideDialogue();
-  render();
-}
-
-function hideDialogue() {
-  document.getElementById('dialogueBox').hidden = true;
-  document.getElementById('dpad').hidden = false;
-  dialogueActive = false;
-}
-
-// ============================================================
-//  INVENTARIO
-// ============================================================
-function addItem(itemName) {
-  if (inventario.length < 16) {
-    inventario.push(itemName);
+  /* ─── MAPA ─── */
+  function getTileSize() {
+    return Math.floor(mapContainer.clientWidth / 9);
   }
-}
 
-function removeItem(itemName) {
-  const idx = inventario.indexOf(itemName);
-  if (idx !== -1) inventario.splice(idx, 1);
-}
+  function applyViewport() {
+    tileSize = getTileSize();
+    mapContainer.style.height = (tileSize * 9) + 'px';
+    mapGrid.style.setProperty('--tile-size', tileSize + 'px');
+    mapGrid.style.gridTemplateColumns = `repeat(${COLS}, ${tileSize}px)`;
+    mapGrid.style.gridTemplateRows = `repeat(${ROWS}, ${tileSize}px)`;
+  }
 
-function renderInventory() {
-  const grid = document.getElementById('inventoryGrid');
-  grid.innerHTML = '';
-  for (let i = 0; i < 16; i++) {
-    const cell = document.createElement('div');
-    cell.className = 'inv-cell';
-    if (inventario[i]) {
-      cell.classList.add('has-item');
-      cell.textContent = inventario[i];
+  function isWalkable(col, row) {
+    if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return false;
+    return !OBSTACLES.has(MAP[row][col]);
+  }
+
+  function buildGrid() {
+    applyViewport();
+    mapGrid.innerHTML = '';
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'tile';
+        mapGrid.appendChild(cell);
+      }
     }
-    grid.appendChild(cell);
   }
-}
 
-function toggleInventory() {
-  const overlay = document.getElementById('inventoryOverlay');
-  const opening = !overlay.classList.contains('open');
-  overlay.classList.toggle('open');
-  if (opening) renderInventory();
-}
+  const OBJECT_TILES = new Set(['🌸', '🏔️', '🏠', '👦']);
 
-// ============================================================
-//  EVENTOS — D-PAD
-// ============================================================
-document.getElementById('btnUp')    .addEventListener('click', () => movePlayer( 0, -1));
-document.getElementById('btnDown')  .addEventListener('click', () => movePlayer( 0,  1));
-document.getElementById('btnLeft')  .addEventListener('click', () => movePlayer(-1,  0));
-document.getElementById('btnRight') .addEventListener('click', () => movePlayer( 1,  0));
+  function scanPatterns() {
+    const found = [];
+    const used = Array.from({ length: ROWS }, () => Array(COLS).fill(false));
 
-// ============================================================
-//  EVENTOS — INVENTARIO
-// ============================================================
-document.getElementById('btnInventory').addEventListener('click', toggleInventory);
-document.getElementById('btnCloseInv') .addEventListener('click', toggleInventory);
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        if (used[r][c]) continue;
 
-// ============================================================
-//  EVENTOS — TECLADO (para pruebas en escritorio)
-// ============================================================
-document.addEventListener('keydown', (e) => {
-  switch (e.key) {
-    case 'ArrowUp':    case 'w': movePlayer( 0, -1); e.preventDefault(); break;
-    case 'ArrowDown':  case 's': movePlayer( 0,  1); e.preventDefault(); break;
-    case 'ArrowLeft':  case 'a': movePlayer(-1,  0); e.preventDefault(); break;
-    case 'ArrowRight': case 'd': movePlayer( 1,  0); e.preventDefault(); break;
-    case 'i': case 'I': toggleInventory(); e.preventDefault(); break;
+        for (const pattern of PATTERNS) {
+          const h = pattern.tiles.length;
+          const w = pattern.tiles[0].length;
+          if (r + h > ROWS || c + w > COLS) continue;
+
+          let match = true;
+          for (let pr = 0; pr < h && match; pr++)
+            for (let pc = 0; pc < w && match; pc++)
+              if (MAP[r + pr][c + pc] !== pattern.tiles[pr][pc])
+                match = false;
+
+          if (match) {
+            found.push({ row: r, col: c, pattern, h, w });
+            for (let pr = 0; pr < h; pr++)
+              for (let pc = 0; pc < w; pc++)
+                used[r + pr][c + pc] = true;
+            break;
+          }
+        }
+      }
+    }
+    return found;
   }
-});
 
-// ============================================================
-//  INICIALIZAR
-// ============================================================
-render();
+  function render() {
+    document.querySelectorAll('.pattern-overlay, .player-overlay').forEach(el => el.remove());
+
+    const patterns = scanPatterns();
+    const patternCells = new Set();
+    patterns.forEach(p => {
+      for (let pr = 0; pr < p.h; pr++)
+        for (let pc = 0; pc < p.w; pc++)
+          patternCells.add(`${p.row + pr},${p.col + pc}`);
+    });
+
+    const cells = mapGrid.children;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const idx = r * COLS + c;
+        const cell = cells[idx];
+        const tile = MAP[r][c];
+        cell.className = 'tile';
+        cell.style.backgroundImage = '';
+
+        if (patternCells.has(`${r},${c}`)) {
+          cell.textContent = '';
+        } else if (TILE_IMAGES[tile]) {
+          cell.textContent = '';
+          cell.style.backgroundImage = `url(${TILE_IMAGES[tile]})`;
+          cell.classList.add('tile-image');
+        } else {
+          cell.textContent = tile;
+          if (OBJECT_TILES.has(tile)) cell.classList.add('tile-object');
+        }
+      }
+    }
+
+    patterns.forEach(p => {
+      const el = document.createElement('div');
+      el.className = 'pattern-overlay';
+      el.style.position = 'absolute';
+      el.style.left = (p.col * tileSize) + 'px';
+      el.style.top = (p.row * tileSize) + 'px';
+      el.style.width = (p.w * tileSize) + 'px';
+      el.style.height = (p.h * tileSize) + 'px';
+      el.style.backgroundImage = `url(${p.pattern.image})`;
+      el.style.backgroundSize = '100% 100%';
+      el.style.backgroundRepeat = 'no-repeat';
+      el.style.imageRendering = 'pixelated';
+      el.style.zIndex = '1';
+      el.style.pointerEvents = 'none';
+      mapGrid.appendChild(el);
+    });
+
+    const px = document.createElement('div');
+    px.className = 'player-overlay';
+    px.style.position = 'absolute';
+    px.style.left = (playerX * tileSize) + 'px';
+    px.style.top = (playerY * tileSize) + 'px';
+    px.style.width = tileSize + 'px';
+    px.style.height = tileSize + 'px';
+    px.style.display = 'flex';
+    px.style.alignItems = 'center';
+    px.style.justifyContent = 'center';
+    px.style.fontSize = (tileSize * 0.78) + 'px';
+    px.style.lineHeight = '1';
+    px.style.zIndex = '10';
+    px.style.pointerEvents = 'none';
+    px.style.filter = 'drop-shadow(0 0 6px rgba(197,155,39,0.8))';
+    px.style.animation = 'pulse-player 1.2s ease-in-out infinite';
+    px.textContent = '🥷';
+    mapGrid.appendChild(px);
+  }
+
+  function updateCamera() {
+    const ts = tileSize || getTileSize();
+    const mapW = COLS * ts;
+    const mapH = ROWS * ts;
+    const viewW = mapContainer.clientWidth;
+    const viewH = mapContainer.clientHeight;
+
+    let ox = viewW / 2 - (playerX * ts + ts / 2);
+    let oy = viewH / 2 - (playerY * ts + ts / 2);
+
+    const minOx = Math.min(0, viewW - mapW);
+    const minOy = Math.min(0, viewH - mapH);
+    ox = Math.max(minOx, Math.min(0, ox));
+    oy = Math.max(minOy, Math.min(0, oy));
+
+    mapGrid.style.transform = `translate(${ox}px, ${oy}px)`;
+  }
+
+  function movePlayer(dx, dy) {
+    if (movimientoBloqueado) return;
+    playerDir = { dx, dy };
+    const nx = playerX + dx;
+    const ny = playerY + dy;
+    if (isWalkable(nx, ny)) {
+      playerX = nx;
+      playerY = ny;
+      render();
+      updateCamera();
+    }
+  }
+
+  function interact() {
+    if (movimientoBloqueado) { cerrarModal(); return; }
+    const tx = playerX + playerDir.dx;
+    const ty = playerY + playerDir.dy;
+    if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
+      setDialogue('No hay nada en esa dirección.');
+      return;
+    }
+    const clave = ty + "," + tx;
+    if (eventos[clave]) {
+      abrirModal(eventos[clave].titulo, eventos[clave].texto);
+    } else {
+      setDialogue('Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.');
+    }
+  }
+
+  let escribirTimer = null;
+
+  function escribirModal(html, velocidad) {
+    velocidad = velocidad || 20;
+    modalTexto.innerHTML = '';
+    const chars = Array.from(html);
+    let idx = 0;
+    let buffer = '';
+
+    const textSpan = document.createElement('span');
+    const cursorSpan = document.createElement('span');
+    cursorSpan.className = 'modal-cursor';
+    cursorSpan.textContent = '▌';
+    modalTexto.appendChild(textSpan);
+    modalTexto.appendChild(cursorSpan);
+
+    function tipear() {
+      if (idx >= chars.length) {
+        if (cursorSpan.parentNode) cursorSpan.remove();
+        escribirTimer = null;
+        return;
+      }
+
+      let chunk = '';
+      if (chars[idx] === '<') {
+        while (idx < chars.length && chars[idx] !== '>') { chunk += chars[idx]; idx++; }
+        if (idx < chars.length) { chunk += chars[idx]; idx++; }
+      } else if (chars[idx] === '&') {
+        while (idx < chars.length && chars[idx] !== ';') { chunk += chars[idx]; idx++; }
+        if (idx < chars.length) { chunk += chars[idx]; idx++; }
+      } else {
+        chunk = chars[idx]; idx++;
+      }
+
+      buffer += chunk;
+      textSpan.innerHTML = buffer;
+      escribirTimer = setTimeout(tipear, velocidad);
+    }
+
+    tipear();
+  }
+
+  function abrirModal(titulo, texto) {
+    movimientoBloqueado = true;
+    modalTitulo.textContent = titulo;
+    modalTexto.innerHTML = '';
+    escribirModal(texto);
+    modalInteraccion.classList.remove('modal-hidden');
+  }
+
+  function cerrarModal() {
+    if (escribirTimer) { clearTimeout(escribirTimer); escribirTimer = null; }
+    movimientoBloqueado = false;
+    modalInteraccion.classList.add('modal-hidden');
+  }
+
+  function showInventory() {
+    if (inventory.length === 0) {
+      setDialogue('Tu <span class="highlight">bolsa</span> está vacía. Explora y encuentra objetos útiles.');
+    } else {
+      setDialogue('Inventario: <span class="highlight">' + inventory.join(', ') + '</span>');
+    }
+  }
+
+  function setDialogue(msg) {
+    dialogueText.innerHTML = msg;
+  }
+
+  function handleDir(dir) {
+    switch (dir) {
+      case 'up':    movePlayer(0, -1); break;
+      case 'down':  movePlayer(0,  1); break;
+      case 'left':  movePlayer(-1, 0); break;
+      case 'right': movePlayer( 1, 0); break;
+    }
+  }
+
+  /* ─── INICIALIZAR EL JUEGO ─── */
+  function initGame() {
+    playerX = 11;
+    playerY = 9;
+    playerDir = { dx: 0, dy: -1 };
+    inventory = [];
+    playerNameDsp.textContent = playerName;
+
+    buildGrid();
+    render();
+    updateCamera();
+
+    setDialogue('Bienvenido a la <span class="highlight">Aldea de Owari</span>, ' + playerName + '. El destino te espera.');
+  }
+
+  /* ─── EVENTOS ─── */
+  function bindButtons() {
+    btnContinue.addEventListener('click', onContinue);
+    btnNewGame.addEventListener('click', onNewGame);
+    btnStart.addEventListener('click', onStartJourney);
+
+    nameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') onStartJourney();
+    });
+
+    const dirs = ['up', 'down', 'left', 'right'];
+    dirs.forEach(d => {
+      const btn = document.querySelector(`[data-dir="${d}"]`);
+      if (!btn) return;
+      const h = (e) => { e.preventDefault(); handleDir(d); };
+      btn.addEventListener('touchstart', h, { passive: false });
+      btn.addEventListener('mousedown', h);
+    });
+
+    const aBtn = $('btn-action');
+    const aH = (e) => { e.preventDefault(); interact(); };
+    aBtn.addEventListener('touchstart', aH, { passive: false });
+    aBtn.addEventListener('mousedown', aH);
+
+    const bagBtn = $('btn-bag');
+    const bagH = (e) => { e.preventDefault(); showInventory(); };
+    bagBtn.addEventListener('touchstart', bagH, { passive: false });
+    bagBtn.addEventListener('mousedown', bagH);
+
+    document.addEventListener('keydown', (e) => {
+      if (screenGame.classList.contains('hidden')) return;
+      if (document.activeElement.tagName === 'INPUT') return;
+      if (movimientoBloqueado) {
+        if (e.key === ' ' || e.key === 'e' || e.key === 'E' || e.key === 'Enter') {
+          e.preventDefault(); cerrarModal();
+        }
+        return;
+      }
+      const km = {
+        'ArrowUp': 'up', 'w': 'up', 'W': 'up',
+        'ArrowDown': 'down', 's': 'down', 'S': 'down',
+        'ArrowLeft': 'left', 'a': 'left', 'A': 'left',
+        'ArrowRight': 'right', 'd': 'right', 'D': 'right',
+      };
+      const dir = km[e.key];
+      if (dir) { e.preventDefault(); handleDir(dir); return; }
+      if (e.key === ' ' || e.key === 'e' || e.key === 'E') { e.preventDefault(); interact(); }
+      if (e.key === 'i' || e.key === 'I') { e.preventDefault(); showInventory(); }
+    });
+
+    modalInteraccion.addEventListener('click', cerrarModal);
+  }
+
+  function bindResize() {
+    const handler = () => {
+      if (screenGame.classList.contains('hidden')) return;
+      applyViewport();
+      updateCamera();
+    };
+    window.addEventListener('resize', handler);
+    window.addEventListener('orientationchange', () => setTimeout(handler, 200));
+  }
+
+  /* ─── ARRANQUE ─── */
+  function init() {
+    checkSavedGame();
+    bindButtons();
+    bindResize();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
