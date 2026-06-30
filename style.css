@@ -1,0 +1,348 @@
+/* ============================================================
+   ERA SENGOKU — Estilos
+   Paleta histórica japonesa: oscuros terrosos, dorado, crema
+   Base: 9:16 vertical, táctil
+   ============================================================ */
+
+/* === VARIABLES === */
+:root {
+  --background-dark: #181512;
+  --text-light:      #D1C7BD;
+  --accent-gold:     #C59B27;
+}
+
+/* === RESET === */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0d0b09;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* === GAME WRAPPER — 9:16 vertical === */
+#game {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--background-dark);
+  box-shadow: 0 0 40px rgba(197, 155, 39, 0.08);
+}
+
+/* === GAME WORLD (60%) === */
+#gameWorld {
+  flex: 0 0 60%;
+  position: relative;
+  background: #2a3222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 3px solid var(--accent-gold);
+}
+
+#gridCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* === HUD === */
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: linear-gradient(180deg, rgba(24, 21, 18, 0.85) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+#hud span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-light);
+  background: rgba(24, 21, 18, 0.7);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(197, 155, 39, 0.25);
+}
+
+/* === INVENTORY BUTTON === */
+#btnInventory {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  border: 2px solid var(--accent-gold);
+  border-radius: 8px;
+  background: rgba(24, 21, 18, 0.85);
+  color: var(--accent-gold);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.12s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btnInventory:active {
+  background: var(--accent-gold);
+  color: var(--background-dark);
+  transform: scale(0.9);
+}
+
+/* === CONTROL PANEL (40%) === */
+#controlPanel {
+  flex: 0 0 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-dark);
+  padding: 12px;
+  border-top: 1px solid rgba(197, 155, 39, 0.12);
+}
+
+/* === D-PAD === */
+#dpad {
+  display: grid;
+  grid-template-columns: 80px 80px 80px;
+  grid-template-rows: 80px 80px 80px;
+  gap: 6px;
+  justify-content: center;
+  align-content: center;
+}
+
+.dpad-btn {
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
+  border: 2px solid #2a251f;
+  border-radius: 12px;
+  background: #1f1b17;
+  color: var(--accent-gold);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: all 0.08s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 #0f0d0b, inset 0 1px 0 rgba(209, 199, 189, 0.06);
+}
+
+.dpad-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #0f0d0b;
+  background: var(--accent-gold);
+  color: var(--background-dark);
+}
+
+#btnUp    { grid-column: 2; grid-row: 1; }
+#btnLeft  { grid-column: 1; grid-row: 2; }
+#btnRight { grid-column: 3; grid-row: 2; }
+#btnDown  { grid-column: 2; grid-row: 3; }
+
+/* === DIALOGUE BOX === */
+#dialogueBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 420px;
+  padding: 18px 20px;
+  background: var(--background-dark);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  gap: 14px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+#dialogueText {
+  color: var(--text-light);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+  min-height: 56px;
+}
+
+#dialogueButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.dialogue-option {
+  flex: 1;
+  max-width: 180px;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.08s, opacity 0.08s;
+}
+
+.dialogue-option:active {
+  transform: scale(0.93);
+  opacity: 0.85;
+}
+
+#btnOptionA {
+  background: var(--accent-gold);
+  color: var(--background-dark);
+  box-shadow: 0 3px 0 #9a7a1f;
+}
+
+#btnOptionB {
+  background: #3d3227;
+  color: var(--text-light);
+  box-shadow: 0 3px 0 #2a221b;
+}
+
+/* === INVENTORY OVERLAY === */
+#inventoryOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 11, 9, 0.92);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+#inventoryOverlay.open {
+  display: flex;
+}
+
+#inventoryOverlay h2 {
+  color: var(--accent-gold);
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-weight: 400;
+}
+
+#inventoryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 72px);
+  grid-template-rows: repeat(4, 72px);
+  gap: 6px;
+}
+
+.inv-cell {
+  width: 72px;
+  height: 72px;
+  background: #1f1b17;
+  border: 1px solid rgba(197, 155, 39, 0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  word-break: break-word;
+  padding: 4px;
+}
+
+.inv-cell.has-item {
+  background: #2a221b;
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+#btnCloseInv {
+  padding: 14px 48px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent-gold);
+  color: var(--background-dark);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.08s;
+  box-shadow: 0 3px 0 #9a7a1f;
+}
+
+#btnCloseInv:active {
+  transform: scale(0.93);
+}
+
+/* === RESPONSIVE === */
+@media (min-aspect-ratio: 9/16) {
+  #game {
+    border-left: 1px solid rgba(197, 155, 39, 0.12);
+    border-right: 1px solid rgba(197, 155, 39, 0.12);
+  }
+}
+
+@media (max-height: 640px) {
+  .dpad-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 22px;
+  }
+  #dpad {
+    grid-template-columns: 64px 64px 64px;
+    grid-template-rows: 64px 64px 64px;
+    gap: 4px;
+  }
+  #dialogueText {
+    font-size: 13px;
+  }
+  .dialogue-option {
+    padding: 10px 0;
+    font-size: 13px;
+  }
+}
+
+@media (max-height: 520px) {
+  .dpad-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 18px;
+  }
+  #dpad {
+    grid-template-columns: 52px 52px 52px;
+    grid-template-rows: 52px 52px 52px;
+    gap: 3px;
+  }
+}

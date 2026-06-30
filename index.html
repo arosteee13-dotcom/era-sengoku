@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Era Sengoku</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game">
+  <!-- GAME WORLD (60%) -->
+  <div id="gameWorld">
+    <canvas id="gridCanvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud">
+      <span id="hudHonor">⚔ Honor: 0</span>
+      <span id="hudLocation">🏯 Aldea</span>
+    </div>
+
+    <!-- Inventory toggle -->
+    <button id="btnInventory" aria-label="Inventario">🎒</button>
+  </div>
+
+  <!-- CONTROL PANEL (40%) -->
+  <div id="controlPanel">
+    <!-- D-Pad -->
+    <div id="dpad">
+      <button id="btnUp"    class="dpad-btn" aria-label="Arriba">▲</button>
+      <button id="btnLeft"  class="dpad-btn" aria-label="Izquierda">◀</button>
+      <button id="btnRight" class="dpad-btn" aria-label="Derecha">▶</button>
+      <button id="btnDown"  class="dpad-btn" aria-label="Abajo">▼</button>
+    </div>
+
+    <!-- Dialogue box (hidden by default) -->
+    <div id="dialogueBox" hidden>
+      <p id="dialogueText"></p>
+      <div id="dialogueButtons">
+        <button id="btnOptionA" class="dialogue-option">Opción A</button>
+        <button id="btnOptionB" class="dialogue-option">Opción B</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVENTORY OVERLAY (hidden by default) -->
+<div id="inventoryOverlay">
+  <h2>Inventario</h2>
+  <div id="inventoryGrid"></div>
+  <button id="btnCloseInv">Cerrar</button>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
