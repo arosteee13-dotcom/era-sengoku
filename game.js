@@ -19,7 +19,7 @@
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','👦','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🏔️','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
   ];
 
@@ -40,6 +40,7 @@
     '🪧': 'img/cartel.png',
     '🌲': 'img/arbol.png',
     '👦': 'img/personajes/takeshi.png',
+    '🌸': 'img/flores.png',
   };
 
   const PATTERNS = [
@@ -60,6 +61,7 @@
   let inventory = [];
   let tileSize = 0;
   let movimientoBloqueado = false;
+  let jugadorCaminando = false;
 
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
@@ -158,7 +160,7 @@
     }
   }
 
-  const OBJECT_TILES = new Set(['🌸', '🏔️', '🏠']);
+  const OBJECT_TILES = new Set(['🏔️', '🏠']);
 
   function scanPatterns() {
     const found = [];
@@ -257,7 +259,9 @@
     px.style.zIndex = '10';
     px.style.pointerEvents = 'none';
     px.style.filter = 'drop-shadow(0 0 6px rgba(197,155,39,0.8))';
-    px.style.animation = 'pulse-player 1.2s ease-in-out infinite';
+    px.style.animation = jugadorCaminando
+      ? 'player-walk 0.2s ease-out'
+      : 'pulse-player 1.2s ease-in-out infinite';
     px.textContent = '🥷';
     mapGrid.appendChild(px);
   }
@@ -288,17 +292,124 @@
     if (isWalkable(nx, ny)) {
       playerX = nx;
       playerY = ny;
+      pasoEnCasilla(playerX, playerY);
+      jugadorCaminando = true;
       render();
       updateCamera();
+      setTimeout(() => { jugadorCaminando = false; }, 200);
     }
+  }
+
+  /* ─── SONIDOS CON WEB AUDIO API ─── */
+
+  let audioCtx = null;
+  let masterGain = null;
+
+  function crearAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.5;
+      masterGain.connect(audioCtx.destination);
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return { ctx: audioCtx, master: masterGain };
+  }
+
+  function generarSonidoHierba() {
+    const { ctx, master } = crearAudioContext();
+    const duracion = 0.14;
+    const bufferSize = Math.floor(ctx.sampleRate * duracion);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      const t = i / bufferSize;
+      const ataque = Math.min(1, i / (ctx.sampleRate * 0.012));
+      const caida = 1 - Math.pow(t, 1.8);
+      data[i] = (Math.random() * 2 - 1) * ataque * caida;
+    }
+
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+
+    const filtro = ctx.createBiquadFilter();
+    filtro.type = 'lowpass';
+    filtro.frequency.value = 1500 * (0.85 + Math.random() * 0.3);
+    filtro.Q.value = 0.2;
+
+    const ganancia = ctx.createGain();
+    ganancia.gain.value = 0.10 * (0.9 + Math.random() * 0.2);
+
+    source.connect(filtro);
+    filtro.connect(ganancia);
+    ganancia.connect(master);
+    source.start();
+  }
+
+  function generarSonidoTierra() {
+    const { ctx, master } = crearAudioContext();
+    const duracion = 0.10;
+    const bufferSize = Math.floor(ctx.sampleRate * duracion);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let i = 0; i < bufferSize; i++) {
+      const t = i / bufferSize;
+      const ataque = Math.min(1, i / (ctx.sampleRate * 0.01));
+      const caida = Math.pow(1 - t, 2.2);
+      data[i] = (Math.random() * 2 - 1) * ataque * caida;
+    }
+
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+
+    const filtro = ctx.createBiquadFilter();
+    filtro.type = 'lowpass';
+    filtro.frequency.value = 500 * (0.85 + Math.random() * 0.3);
+    filtro.Q.value = 0.2;
+
+    const ganancia = ctx.createGain();
+    ganancia.gain.value = 0.12 * (0.9 + Math.random() * 0.2);
+
+    source.connect(filtro);
+    filtro.connect(ganancia);
+    ganancia.connect(master);
+    source.start();
+  }
+
+  function reproducirSonidoDialogo() {
+    const { ctx, master } = crearAudioContext();
+    const osc = ctx.createOscillator();
+    const ganancia = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.value = 500 + Math.random() * 200;
+
+    const now = ctx.currentTime;
+    ganancia.gain.setValueAtTime(0, now);
+    ganancia.gain.linearRampToValueAtTime(0.04, now + 0.005);
+    ganancia.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+
+    osc.connect(ganancia);
+    ganancia.connect(master);
+    osc.start(now);
+    osc.stop(now + 0.04);
+  }
+
+  function pasoEnCasilla(x, y) {
+    const tile = MAP[y][x];
+    if (tile === '🟫') generarSonidoTierra();
+    else generarSonidoHierba();
   }
 
   const CARTEL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
   const TAKESHI_TEXTO = "¡Hola! Soy <b>Takeshi</b>. Mi padre dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?";
 
   let eventoTimer = null;
+  let eventoConSonido = false;
 
-  function escribirEvento(html, velocidad) {
+  function escribirEvento(html, velocidad, conSonido) {
     velocidad = velocidad || 20;
     modalEventoTexto.innerHTML = '';
     document.querySelectorAll('#modal-evento-texto + .modal-evento-cursor').forEach(el => el.remove());
@@ -331,13 +442,16 @@
 
       buffer += chunk;
       modalEventoTexto.innerHTML = buffer;
+      if (conSonido && chunk.length === 1 && chunk !== '<' && chunk !== '&') {
+        reproducirSonidoDialogo();
+      }
       eventoTimer = setTimeout(tipear, velocidad);
     }
 
     tipear();
   }
 
-  function abrirEvento(titulo, texto, imagen) {
+  function abrirEvento(titulo, texto, imagen, esPersonaje) {
     movimientoBloqueado = true;
     modalEventoTitulo.textContent = titulo;
     modalEventoTexto.innerHTML = '';
@@ -349,7 +463,7 @@
       modalEventoImg.classList.add('modal-imagen-hidden');
     }
 
-    escribirEvento(texto);
+    escribirEvento(texto, 20, esPersonaje);
     modalEvento.classList.remove('modal-hidden');
   }
 
@@ -370,9 +484,9 @@
     }
     const tile = MAP[ty][tx];
     if (tile === '🪧') {
-      abrirEvento('Letrero', CARTEL_TEXTO);
+      abrirEvento('Letrero', CARTEL_TEXTO, null, false);
     } else if (tile === '👦') {
-      abrirEvento('Takeshi', TAKESHI_TEXTO, 'img/personajes/takeshi.png');
+      abrirEvento('Takeshi', TAKESHI_TEXTO, 'img/personajes/takeshi.png', true);
     } else {
       setDialogue('No hay nada con lo que interactuar aquí.');
     }
