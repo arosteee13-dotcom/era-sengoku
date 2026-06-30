@@ -28,10 +28,8 @@
 
   const OBSTACLES = new Set(['🌲', '🏠', '⬜️', '🏔️', '🪧', '👦']);
 
-  const eventos = {
-    "5,10": { tipo: "cartel", titulo: "Letrero", texto: "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca." },
-    "15,7": { tipo: "npc", titulo: "Takeshi", texto: "— ¡Hola! Soy <b>Takeshi</b>. Mi padre dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?" },
-  };
+  const CARTEL_COORDS = { row: 10, col: 2 };
+  const MODAL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
 
   const TILE_IMAGES = {
     '🟩': 'img/hierba.jpg',
@@ -41,6 +39,7 @@
     '🛖': 'img/techo.jpg',
     '🪧': 'img/cartel.png',
     '🌲': 'img/arbol.png',
+    '👦': 'img/personajes/takeshi.png',
   };
 
   const PATTERNS = [
@@ -76,8 +75,8 @@
   const mapGrid       = $('map-grid');
   const dialogueText  = $('dialogue-text');
   const modalInteraccion = $('modal-interaccion');
-  const modalTitulo      = $('modal-titulo');
-  const modalTexto       = $('modal-texto');
+  const modalTextEl      = $('modal-text');
+  const modalFooter      = document.querySelector('.modal-footer');
 
   /* ─── GESTIÓN DE PANTALLAS ─── */
   function showScreen(id) {
@@ -158,7 +157,7 @@
     }
   }
 
-  const OBJECT_TILES = new Set(['🌸', '🏔️', '🏠', '👦']);
+  const OBJECT_TILES = new Set(['🌸', '🏔️', '🏠']);
 
   function scanPatterns() {
     const found = [];
@@ -301,66 +300,21 @@
       setDialogue('No hay nada en esa dirección.');
       return;
     }
-    const clave = ty + "," + tx;
-    if (eventos[clave]) {
-      abrirModal(eventos[clave].titulo, eventos[clave].texto);
+    const tile = MAP[ty][tx];
+    if (tile === '🪧') {
+      abrirModal();
     } else {
-      setDialogue('Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.');
+      setDialogue('No hay nada con lo que interactuar aquí.');
     }
   }
 
-  let escribirTimer = null;
-
-  function escribirModal(html, velocidad) {
-    velocidad = velocidad || 20;
-    modalTexto.innerHTML = '';
-    const chars = Array.from(html);
-    let idx = 0;
-    let buffer = '';
-
-    const textSpan = document.createElement('span');
-    const cursorSpan = document.createElement('span');
-    cursorSpan.className = 'modal-cursor';
-    cursorSpan.textContent = '▌';
-    modalTexto.appendChild(textSpan);
-    modalTexto.appendChild(cursorSpan);
-
-    function tipear() {
-      if (idx >= chars.length) {
-        if (cursorSpan.parentNode) cursorSpan.remove();
-        escribirTimer = null;
-        return;
-      }
-
-      let chunk = '';
-      if (chars[idx] === '<') {
-        while (idx < chars.length && chars[idx] !== '>') { chunk += chars[idx]; idx++; }
-        if (idx < chars.length) { chunk += chars[idx]; idx++; }
-      } else if (chars[idx] === '&') {
-        while (idx < chars.length && chars[idx] !== ';') { chunk += chars[idx]; idx++; }
-        if (idx < chars.length) { chunk += chars[idx]; idx++; }
-      } else {
-        chunk = chars[idx]; idx++;
-      }
-
-      buffer += chunk;
-      textSpan.innerHTML = buffer;
-      escribirTimer = setTimeout(tipear, velocidad);
-    }
-
-    tipear();
-  }
-
-  function abrirModal(titulo, texto) {
+  function abrirModal() {
     movimientoBloqueado = true;
-    modalTitulo.textContent = titulo;
-    modalTexto.innerHTML = '';
-    escribirModal(texto);
+    modalTextEl.textContent = MODAL_TEXTO;
     modalInteraccion.classList.remove('modal-hidden');
   }
 
   function cerrarModal() {
-    if (escribirTimer) { clearTimeout(escribirTimer); escribirTimer = null; }
     movimientoBloqueado = false;
     modalInteraccion.classList.add('modal-hidden');
   }
