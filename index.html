@@ -23,19 +23,6 @@
       </div>
     </div>
 
-    <!-- PANTALLA 2: REGISTRO DE NOMBRE -->
-    <div id="screen-name" class="screen hidden">
-      <div class="menu-inner">
-        <p class="menu-title-small">戦国時代</p>
-        <h1 class="menu-title-large">Sengoku</h1>
-        <p class="menu-title-gold">Caminos de Acero</p>
-        <div class="name-form">
-          <input id="name-input" type="text" placeholder="¿Cuál es tu nombre, ronin?" maxlength="16" autocomplete="off">
-          <button id="btn-start" class="btn-start">Comenzar el viaje</button>
-        </div>
-      </div>
-    </div>
-
     <!-- PANTALLA 3: EL JUEGO -->
     <div id="screen-game" class="screen hidden">
       <header id="game-header">
@@ -46,7 +33,7 @@
           <div class="banner-principal" id="banner-titulo">Aldea de Owari</div>
           <div class="banner-secundario" id="banner-subtitulo">Provincia de Owari - 1560</div>
         </div>
-        <div id="map-grid"></div>
+        <div id="map-grid">        </div>
         <div id="modal-evento" class="modal-hidden">
           <div class="modal-evento-backdrop"></div>
           <img id="modal-evento-imagen" class="modal-imagen-hidden" src="" alt="">
@@ -64,9 +51,6 @@
         <span class="location-sub">Aldea de Owari</span>
       </div>
       <div id="control-panel">
-        <div id="dialogue-box">
-          <p id="dialogue-text">Bienvenido a la aldea...</p>
-        </div>
         <div id="controls">
           <div id="dpad">
             <div class="dpad-center"></div>
@@ -76,7 +60,7 @@
             <button id="btn-down" class="dpad-btn" data-dir="down">▼</button>
           </div>
           <div id="action-buttons">
-            <button id="btn-bag">🎒</button>
+            <button id="btn-bag">◇</button>
             <button id="btn-action">A</button>
         </div>
       </div>
@@ -84,6 +68,28 @@
     </div>
 
     <div id="fade-overlay"></div>
+
+    <div id="screen-narrativa" class="modal-hidden">
+      <div class="narrativa-contenido">
+        <div class="narrativa-texto" id="narrativa-texto"></div>
+        <div class="narrativa-pista">Presiona A o Enter para continuar</div>
+      </div>
+    </div>
+
+    <div id="modal-inventario" class="modal-hidden">
+      <div class="inv-content">
+        <div class="inv-header">Zurrón</div>
+        <div class="inv-lista" id="inv-lista">
+          <div class="inv-vacio">Tu zurrón está vacío, busca provisiones.</div>
+        </div>
+        <div class="inv-cerrar">Cerrar</div>
+      </div>
+    </div>
+
+    <div id="anim-recoger" class="anim-oculto">
+      <div class="anim-icono" id="anim-icono"></div>
+      <div class="anim-texto" id="anim-texto">¡Recibido!</div>
+    </div>
 
   </div>
 

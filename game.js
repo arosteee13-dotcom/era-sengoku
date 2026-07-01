@@ -96,6 +96,7 @@
     '📦': 'img/mesa.png',
     '🧓': 'img/personajes/hana.png',
     '👴': 'img/personajes/genji.png',
+    '👩': 'img/personajes/madre.png',
   };
 
   const PATTERNS = [
@@ -118,9 +119,9 @@
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
   let habladoConTakeshi = false;
-  let progresoTakeshi = 0;
-  let habladoConGenji = false;
+  let visitadoCasaGenji = false;
   let visitadoCasaMadre = false;
+  let madreDioItems = false;
 
   const GENJI_DIALOGOS = [
     "El tiempo pasa incluso para las piedras, joven guerrero. He visto crecer este pueblo desde que era solo unas chozas. Cuida de él cuando yo ya no esté.",
@@ -138,16 +139,12 @@
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
   const screenMenu    = $('screen-menu');
-  const screenName    = $('screen-name');
   const screenGame    = $('screen-game');
   const btnContinue   = $('btn-continue');
   const btnNewGame    = $('btn-new-game');
-  const btnStart      = $('btn-start');
-  const nameInput     = $('name-input');
   const playerNameDsp = $('player-name-display');
   const mapContainer  = $('map-container');
   const mapGrid       = $('map-grid');
-  const dialogueText  = $('dialogue-text');
   const modalEvento     = $('modal-evento');
   const modalEventoImg  = $('modal-evento-imagen');
   const modalEventoTexto = $('modal-evento-texto');
@@ -156,10 +153,17 @@
   const bannerUbicacion = $('banner-ubicacion');
   const bannerTitulo    = $('banner-titulo');
   const bannerSubtitulo = $('banner-subtitulo');
+  const modalInventario = $('modal-inventario');
+  const invLista        = $('inv-lista');
+  const screenNarrativa = $('screen-narrativa');
+  const narrativaTexto  = $('narrativa-texto');
+  const animRecoger     = $('anim-recoger');
+  const animIcono       = $('anim-icono');
+  const animTexto        = $('anim-texto');
 
   /* ─── GESTIÓN DE PANTALLAS ─── */
   function showScreen(id) {
-    [screenMenu, screenName, screenGame].forEach(s => s.classList.add('hidden'));
+    [screenMenu, screenGame].forEach(s => s.classList.add('hidden'));
     $(id).classList.remove('hidden');
   }
 
@@ -176,34 +180,137 @@
   /* ─── MANEJADORES DEL MENÚ ─── */
   function onContinue() {
     const saved = localStorage.getItem('sengoku_playerName');
-    if (saved) {
-      playerName = saved;
+    if (!saved) return;
+    playerName = saved;
+    movimientoBloqueado = true;
+    fadeOverlay.style.transition = 'opacity 0.5s ease';
+    fadeOverlay.style.opacity = '1';
+    setTimeout(() => {
       showScreen('screen-game');
-      initGame();
-    }
+      if (mapaActivo !== MAP) setMapa(MAP);
+      mapContainer.style.backgroundColor = '';
+      buildGrid();
+      render();
+      updateCamera();
+      mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+      fadeOverlay.style.opacity = '0';
+      setTimeout(() => {
+        fadeOverlay.style.transition = '';
+        movimientoBloqueado = false;
+      }, 500);
+    }, 500);
+  }
+
+  function iniciarNarrativa() {
+    showScreen('screen-game');
+    movimientoBloqueado = true;
+
+    fadeOverlay.style.transition = 'opacity 0.5s ease';
+    fadeOverlay.style.opacity = '1';
+
+    setTimeout(() => {
+      screenNarrativa.style.opacity = '1';
+      screenNarrativa.classList.remove('modal-hidden');
+      narrativaTexto.innerHTML = '';
+      const texto = 'Bienvenido a la Aldea de Owari. Kenji, tu destino está en tus manos...';
+      const chars = Array.from(texto);
+      let idx = 0;
+      let buffer = '';
+      const textSpan = document.createElement('span');
+      const cursorSpan = document.createElement('span');
+      cursorSpan.className = 'tn-cursor';
+      cursorSpan.textContent = '▌';
+      narrativaTexto.appendChild(textSpan);
+      narrativaTexto.appendChild(cursorSpan);
+
+      function tipear() {
+        if (idx >= chars.length) {
+          if (cursorSpan.parentNode) cursorSpan.remove();
+          return;
+        }
+        buffer += chars[idx];
+        idx++;
+        textSpan.textContent = buffer;
+        setTimeout(tipear, 30);
+      }
+      tipear();
+
+      let terminado = false;
+      let finalizando = false;
+      function saltar() {
+        if (terminado) return;
+        terminado = true;
+        if (cursorSpan.parentNode) cursorSpan.remove();
+        textSpan.textContent = texto;
+      }
+      function finalizar() {
+        if (finalizando) return;
+        finalizando = true;
+        saltar();
+        document.removeEventListener('keydown', onKey);
+        document.removeEventListener('click', onClick);
+
+        screenNarrativa.style.transition = 'opacity 1.5s ease';
+        screenNarrativa.style.opacity = '0';
+
+        setTimeout(() => {
+          screenNarrativa.classList.add('modal-hidden');
+
+          setTimeout(() => {
+            iniciarNuevaPartida();
+
+            fadeOverlay.style.transition = 'opacity 2.5s ease';
+            fadeOverlay.style.opacity = '0';
+
+            setTimeout(() => {
+              fadeOverlay.style.transition = '';
+              movimientoBloqueado = false;
+            }, 2500);
+          }, 1000);
+        }, 1500);
+      }
+      function onKey(e) {
+        if (e.key === ' ' || e.key === 'Enter' || e.key === 'a' || e.key === 'A') {
+          e.preventDefault();
+          finalizar();
+        }
+      }
+      function onClick() { finalizar(); }
+
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('click', onClick);
+
+      setTimeout(() => {
+        saltar();
+      }, 4000);
+    }, 500);
   }
 
   function onNewGame() {
-    nameInput.value = '';
-    showScreen('screen-name');
-    setTimeout(() => nameInput.focus(), 150);
+    iniciarNarrativa();
   }
 
-  function onStartJourney() {
-    const name = nameInput.value.trim();
-    if (!name) {
-      nameInput.style.borderColor = '#c9302c';
-      nameInput.placeholder = 'Escribe tu nombre, ronin...';
-      setTimeout(() => {
-        nameInput.style.borderColor = '#C59B27';
-        nameInput.placeholder = '¿Cuál es tu nombre, ronin?';
-      }, 1500);
-      return;
-    }
-    playerName = name;
-    localStorage.setItem('sengoku_playerName', name);
-    showScreen('screen-game');
-    initGame();
+  function iniciarNuevaPartida() {
+    playerName = 'Kenji';
+    playerX = 11;
+    playerY = 9;
+    playerDir = { dx: 0, dy: -1 };
+    inventory = [];
+    madreDioItems = false;
+    visitadoCasaGenji = false;
+    visitadoCasaMadre = false;
+    habladoConTakeshi = false;
+    localStorage.setItem('sengoku_playerName', 'Kenji');
+    if (mapaActivo !== MAP) setMapa(MAP);
+    mapContainer.style.backgroundColor = '';
+
+    buildGrid();
+    render();
+    updateCamera();
+    mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    setTimeout(() => {
+      movimientoBloqueado = false;
+    }, 2000);
   }
 
   /* ─── MAPA ─── */
@@ -402,7 +509,7 @@
     setTimeout(() => { jugadorCaminando = false; }, 200);
   }
 
-  function hacerTransicion(callback) {
+  function hacerTransicion(callback, despues) {
     if (transicionActiva) return;
     transicionActiva = true;
     movimientoBloqueado = true;
@@ -419,6 +526,7 @@
           fadeOverlay.style.transition = '';
           transicionActiva = false;
           movimientoBloqueado = false;
+          if (despues) despues();
         }, 350);
       }, 50);
     }, 350);
@@ -446,6 +554,7 @@
     const key = playerY + ',' + playerX;
     const idx = ENTRADAS[key];
     if (idx === undefined) return;
+    if (idx === 0) visitadoCasaGenji = true;
     if (idx === 2) visitadoCasaMadre = true;
     hacerTransicion(() => {
       exteriorState = { px: playerX, py: playerY, dir: playerDir };
@@ -584,17 +693,13 @@
 
   const CARTEL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
   function getDialogoTakeshi() {
-    const d0 = '¡Hola! Soy <b>Takeshi</b>. Mi abuelo dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?';
-    const d1 = '¿Ya has hablado con el abuelo <b>Genji</b>? Me ha dicho que tienes "mucho peso en los hombros". ¡Yo no sé qué significa eso, pero dice que si me porto bien y te ayudo, quizás me enseñes a desenvainar la katana sin cortarme los dedos! ¿Es verdad que las katanas brillan cuando hay peligro?';
-    const d2 = '¡He visto que has estado en tu casa! Mi abuelo dice que tu madre es una mujer muy fuerte. Me alegra que no estés siempre solo por ahí fuera, con los rumores de guerra que trae el viento. A veces, tener un hogar al que volver es la mejor armadura, ¿a que sí, Kenji?';
-
-    if (progresoTakeshi === 0) {
-      return habladoConGenji ? d1 : d0;
+    if (visitadoCasaMadre) {
+      return '¡He visto que has estado en tu casa! Mi abuelo dice que tu madre es una mujer muy fuerte. Me alegra que no estés siempre solo por ahí fuera, con los rumores de guerra que trae el viento. A veces, tener un hogar al que volver es la mejor armadura, ¿a que sí, Kenji?';
     }
-    if (progresoTakeshi === 1) {
-      return visitadoCasaMadre ? d2 : d1;
+    if (visitadoCasaGenji) {
+      return '¿Ya has hablado con el abuelo <b>Genji</b>? Me ha dicho que tienes "mucho peso en los hombros". ¡Yo no sé qué significa eso, pero dice que si me porto bien y te ayudo, quizás me enseñes a desenvainar la katana sin cortarme los dedos! ¿Es verdad que las katanas brillan cuando hay peligro?';
     }
-    return d2;
+    return '¡Hola! Soy <b>Takeshi</b>. Mi abuelo dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?';
   }
 
   let eventoTimer = null;
@@ -662,21 +767,37 @@
 
   function cerrarEvento() {
     if (eventoTimer) { clearTimeout(eventoTimer); eventoTimer = null; }
-    if (modalEventoTitulo.textContent === 'Takeshi') {
-      if (progresoTakeshi === 0 && habladoConGenji) progresoTakeshi = 1;
-      else if (progresoTakeshi === 1 && visitadoCasaMadre) progresoTakeshi = 2;
+    if (modalEventoTitulo.textContent === 'Tu madre' && !madreDioItems) {
+      madreDioItems = true;
+      setTimeout(() => mostrarAnimRecoger([
+        { icono: 'img/comida/arroz_con_ciruelas.png', nombre: 'Ración de Arroz', descripcion: 'Recupera energía' },
+      ]), 200);
+      setTimeout(() => mostrarAnimRecoger([
+        { icono: 'img/comida/cantimplora_de_te.png', nombre: 'Té de ciruela', descripcion: 'Bebida reconfortante' },
+      ]), 2400);
     }
     movimientoBloqueado = false;
     modalEventoImg.classList.add('modal-imagen-hidden');
     modalEvento.classList.add('modal-hidden');
   }
 
+  function mostrarAnimRecoger(items) {
+    animRecoger.classList.remove('anim-oculto');
+    animIcono.innerHTML = items.map(i =>
+      '<img src="' + i.icono + '" class="anim-icono-img">'
+    ).join(' ');
+    animTexto.textContent = 'Recibido: ' + items.map(i => i.nombre).join(' + ');
+    items.forEach(item => inventory.push(item));
+    setTimeout(() => {
+      animRecoger.classList.add('anim-oculto');
+    }, 1800);
+  }
+
   function interact() {
     if (movimientoBloqueado) { cerrarEvento(); return; }
     const tx = playerX + playerDir.dx;
     const ty = playerY + playerDir.dy;
-    if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
-      setDialogue('No hay nada en esa dirección.');
+      if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
       return;
     }
     const tile = mapaActivo[ty][tx];
@@ -686,32 +807,44 @@
       habladoConTakeshi = true;
       abrirEvento('Takeshi', getDialogoTakeshi(), 'img/personajes/takeshi.png', true);
     } else if (tile === '👴') {
-      habladoConGenji = true;
       const dialogo = habladoConTakeshi ? GENJI_TRAS_TAKESHI : GENJI_DIALOGOS[Math.floor(Math.random() * GENJI_DIALOGOS.length)];
       habladoConTakeshi = false;
       abrirEvento('Genji, el anciano', dialogo, 'img/personajes/genji.png', true);
     } else if (tile === '🧓') {
       abrirEvento('Hana, la sabia', HANA_DIALOGOS[Math.floor(Math.random() * HANA_DIALOGOS.length)], 'img/personajes/hana.png', true);
     } else if (tile === '👩') {
-      abrirEvento('Tu madre', MADRE_TEXTO, null, true);
-    } else if (tile === '👩') {
       visitadoCasaMadre = true;
-      abrirEvento('Tu madre', MADRE_TEXTO, null, true);
-    } else {
-      setDialogue('No hay nada con lo que interactuar aquí.');
+      abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
     }
   }
 
-  function showInventory() {
+  function abrirInventario() {
+    invLista.innerHTML = '';
     if (inventory.length === 0) {
-      setDialogue('Tu <span class="highlight">bolsa</span> está vacía. Explora y encuentra objetos útiles.');
+      invLista.innerHTML = '<div class="inv-vacio">Tu zurrón está vacío, busca provisiones.</div>';
     } else {
-      setDialogue('Inventario: <span class="highlight">' + inventory.join(', ') + '</span>');
+      inventory.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'inv-item';
+        const src = item.icono || '';
+        const imgHtml = src.match(/\.(png|jpg|jpeg)$/i)
+          ? '<img src="' + src + '" class="inv-item-img">'
+          : '<div class="inv-item-icono">' + (src || '📦') + '</div>';
+        div.innerHTML = imgHtml
+          + '<div class="inv-item-texto">'
+          + '<div class="inv-item-nombre">' + item.nombre + '</div>'
+          + '<div class="inv-item-desc">' + item.descripcion + '</div>'
+          + '</div>';
+        invLista.appendChild(div);
+      });
     }
+    modalInventario.classList.remove('modal-hidden');
+    movimientoBloqueado = true;
   }
 
-  function setDialogue(msg) {
-    dialogueText.innerHTML = msg;
+  function cerrarInventario() {
+    modalInventario.classList.add('modal-hidden');
+    movimientoBloqueado = false;
   }
 
   function handleDir(dir) {
@@ -729,6 +862,7 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
+    madreDioItems = false;
     playerNameDsp.textContent = playerName;
     if (mapaActivo !== MAP) setMapa(MAP);
     mapContainer.style.backgroundColor = '';
@@ -736,22 +870,13 @@
       buildGrid();
       render();
       updateCamera();
-      const u = UBICACIONES[idx];
-      if (u) mostrarUbicacion(u.titulo, u.sub);
-
-    setDialogue('Bienvenido a la <span class="highlight">Aldea de Owari</span>, ' + playerName + '. El destino te espera.');
+      mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
   }
 
   /* ─── EVENTOS ─── */
   function bindButtons() {
     btnContinue.addEventListener('click', onContinue);
     btnNewGame.addEventListener('click', onNewGame);
-    btnStart.addEventListener('click', onStartJourney);
-
-    nameInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') onStartJourney();
-    });
-
     const dirs = ['up', 'down', 'left', 'right'];
     dirs.forEach(d => {
       const btn = document.querySelector(`[data-dir="${d}"]`);
@@ -767,16 +892,21 @@
     aBtn.addEventListener('mousedown', aH);
 
     const bagBtn = $('btn-bag');
-    const bagH = (e) => { e.preventDefault(); showInventory(); };
+    const bagH = (e) => { e.preventDefault(); abrirInventario(); };
     bagBtn.addEventListener('touchstart', bagH, { passive: false });
     bagBtn.addEventListener('mousedown', bagH);
 
     document.addEventListener('keydown', (e) => {
       if (screenGame.classList.contains('hidden')) return;
-      if (document.activeElement.tagName === 'INPUT') return;
       if (movimientoBloqueado) {
         if (e.key === ' ' || e.key === 'e' || e.key === 'E' || e.key === 'Enter') {
-          e.preventDefault(); cerrarEvento();
+          e.preventDefault();
+          if (!modalEvento.classList.contains('modal-hidden')) cerrarEvento();
+          else if (!modalInventario.classList.contains('modal-hidden')) cerrarInventario();
+        }
+        if (e.key === 'i' || e.key === 'I') {
+          e.preventDefault();
+          if (!modalInventario.classList.contains('modal-hidden')) cerrarInventario();
         }
         return;
       }
@@ -789,10 +919,14 @@
       const dir = km[e.key];
       if (dir) { e.preventDefault(); handleDir(dir); return; }
       if (e.key === ' ' || e.key === 'e' || e.key === 'E') { e.preventDefault(); interact(); }
-      if (e.key === 'i' || e.key === 'I') { e.preventDefault(); showInventory(); }
+      if (e.key === 'i' || e.key === 'I') { e.preventDefault(); abrirInventario(); }
     });
 
     modalEvento.addEventListener('click', cerrarEvento);
+    modalInventario.querySelector('.inv-cerrar').addEventListener('click', cerrarInventario);
+    animRecoger.addEventListener('click', () => {
+      animRecoger.classList.add('anim-oculto');
+    });
   }
 
   function bindResize() {
