@@ -41,7 +41,28 @@
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟩','🌲','🌲','🌲','🌲','🌲','🟩','🟩','🌲','🌲','🌲','🌲','🟩','🌲'],
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟩','🌲','🌲','🌲','🌲','🌲','🌲','🟩','🌲','🌲','🌲','🌲','🟩','🌲'],
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟩','🌲','🌲','🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲'],
+  ];
+
+  const MAPA_CIUDAD = [
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+    ['🌲','🟫','🏮','🌲','🏠','🏠','🌲','🏮','🟫','🟫','🟫','🟫','🟫','🏮','🌲','🏠','🏠','🌲','🏮','🟫','🌲','🌲'],
+    ['🌲','🟫','🟩','🌲','🏠','🌲','🌲','🏮','🟫','🟩','🟩','🟩','🟫','🏮','🌲','🌲','🏠','🌲','🟩','🟫','🌲','🌲'],
+    ['🌲','🟫','🏮','🌲','🌲','🌲','🌲','🏮','🟫','🟩','🟩','🟩','🟫','🏮','🌲','🌲','🌲','🌲','🏮','🟫','🌲','🌲'],
+    ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+    ['🌲','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🌲','🌲'],
+    ['🌲','🟩','🟩','🏠','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🏠','🟩','🟩','🟩','🌲','🌲'],
+    ['🌲','🏮','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🏮','🌲','🌲'],
+    ['🌲','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟫'],
+    ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🪧','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫'],
+    ['🌲','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
+    ['🌲','🏮','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🏮','🌲','🌲'],
+    ['🌲','🟩','🟩','🏠','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🏠','🟩','🟩','🟩','🌲','🌲'],
+    ['🌲','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🌲','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+    ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲'],
   ];
 
   const INTERIORES = [
@@ -96,7 +117,7 @@
     COLS = mapa[0].length;
   }
 
-  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️', '🗿', '🪓', '💰', '🧑‍🌾']);
+  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️', '🗿', '🏮', '🪓', '💰', '🧑‍🌾']);
 
   const ENTRADAS = { "4,3": 0, "4,18": 1, "10,3": 2 };
 
@@ -122,6 +143,7 @@
     '💰': 'img/personajes/mercader.png',
     '🧑‍🌾': 'img/personajes/campesino.png',
     '🗿': 'img/estatua_jizo.png',
+    '🏮': 'img/farolillo.png',
   };
 
   const PATTERNS = [
@@ -254,8 +276,9 @@
     fadeOverlay.style.opacity = '1';
     setTimeout(() => {
       showScreen('screen-game');
-      if (mapaActivo !== MAP) setMapa(MAP);
-      mapContainer.style.backgroundColor = '';
+      if (mapaActual === 'bosque') { setMapa(MAPA_BOSQUE); mapContainer.style.backgroundColor = '#1a2a1a'; }
+      else if (mapaActual === 'ciudad') { setMapa(MAPA_CIUDAD); mapContainer.style.backgroundColor = '#2a2018'; }
+      else { setMapa(MAP); mapContainer.style.backgroundColor = ''; }
       buildGrid();
       render();
       updateCamera();
@@ -436,7 +459,7 @@
   }
 
   const OBJECT_TILES = new Set(['🏔️', '🏠']);
-  const CAPA2_TILES = new Set(['💰', '🪓', '🧑‍🌾', '🪧', '👦', '👴', '🧓', '👩', '🗿']);
+  const CAPA2_TILES = new Set(['💰', '🪓', '🧑‍🌾', '🪧', '👦', '👴', '🧓', '👩', '🗿', '🏮']);
 
   function scanPatterns() {
     const found = [];
@@ -711,6 +734,11 @@
       objetivoTexto.style.opacity = '1';
       return;
     }
+    if (mapaActual === 'ciudad') {
+      objetivoTexto.textContent = 'Ciudad de los Mercaderes. Habla con sus habitantes y explora las tiendas.';
+      objetivoTexto.style.opacity = '1';
+      return;
+    }
     if (misionAldeanosCompletada) {
       objetivoTexto.textContent = 'Has hablado con todos los aldeanos. El camino al bosque de Aokigahara está abierto hacia el este.';
       objetivoTexto.style.opacity = '1';
@@ -740,7 +768,7 @@
         return;
       }
       cargarMapaBosque();
-    } else if (mapaActual === 'bosque' && (x === 21 && y === 0 || x === 0 && y === 10)) {
+    } else if (mapaActual === 'bosque' && x === 0 && y === 10) {
       mapaActual = 'aldea';
       hacerTransicion(() => {
         setMapa(MAP);
@@ -759,16 +787,24 @@
       }, () => {
         setTimeout(() => { movimientoBloqueado = false; }, 2000);
       });
+    } else if (mapaActual === 'bosque' && x === 20 && y === 0) {
+      cargarMapaCiudad(20, 17);
+    } else if (mapaActual === 'ciudad' && x === 21 && y === 9) {
+      cargarMapaBosque(21, 0);
+    } else if (mapaActual === 'bosque' && x === 20 && y === 17) {
+      cargarMapaCiudad(20, 17);
+    } else if (mapaActual === 'ciudad' && x === 20 && y === 17) {
+      cargarMapaBosque(20, 17);
     }
   }
 
-  function cargarMapaBosque() {
+  function cargarMapaBosque(ex, ey) {
     mapaActual = 'bosque';
     if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
     hacerTransicion(() => {
       setMapa(MAPA_BOSQUE);
       mapContainer.style.backgroundColor = '#1a2a1a';
-      playerX = 1; playerY = 10;
+      playerX = ex || 1; playerY = ey || 10;
       playerDir = { dx: 1, dy: 0 };
       buildGrid();
       render();
@@ -842,6 +878,26 @@
     mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
     actualizarObjetivo();
     audioAmbiente.cambiarAmbiente('exterior');
+    });
+  }
+
+  function cargarMapaCiudad(ex, ey) {
+    mapaActual = 'ciudad';
+    if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
+    hacerTransicion(() => {
+      setMapa(MAPA_CIUDAD);
+      mapContainer.style.backgroundColor = '#2a2018';
+      playerX = ex || 1; playerY = ey || 9;
+      playerDir = { dx: 1, dy: 0 };
+      buildGrid();
+      render();
+      updateCamera();
+      mostrarUbicacion('Ciudad de los Mercaderes', 'Puesto comercial de las tierras del este');
+      actualizarObjetivo();
+      audioAmbiente.cambiarAmbiente('exterior');
+    }, () => {
+      movimientoBloqueado = true;
+      setTimeout(() => { movimientoBloqueado = false; }, 2000);
     });
   }
 
@@ -1500,7 +1556,6 @@
     const saveBtn = $('btn-save');
     const saveH = (e) => {
       e.preventDefault();
-      if (mapaActivo !== MAP) return;
       const data = {
         name: playerName,
         px: playerX, py: playerY,
