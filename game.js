@@ -13,35 +13,35 @@
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🛖','🛖','🛖','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫'],
-    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟩','🟩','🟩','🟩','💰','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🧑‍🌾','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','👦','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🪓','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
   ];
 
   const MAPA_BOSQUE = [
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟫','🟫','🟫','🟫','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🌲','🌲','🟩','🟩','🌲','🟩','🟩','🌲','🟩','🌲','🌲','🟩','🌲'],
-    ['🌲','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🟩','🟩','🌲'],
-    ['🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🌲'],
-    ['🌲','🟩','🌲','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🌲','🟩','🌲','🟩','🟩','🌲','🟩','🌲','🌲','🌲','🟩','🟩','🌲','🟩','🟩','🌲','🟩','🌲','🌲','🟩','🌲'],
+    ['🌲','🟩','🟩','🌲','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🟩','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🌲'],
-    ['🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🌲'],
+    ['🌲','🟫','🟩','🟩','🌲','🌲','🟩','🟩','🌲','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟫','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🌲'],
+    ['🟫','🟫','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟫','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+    ['🌲','🟩','🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲'],
   ];
 
   const INTERIORES = [
@@ -50,7 +50,7 @@
         ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
         ['⬜️','🟫','🟫','🟫','🟫','📚','📚','⬜️'],
         ['⬜️','🟫','🪑','📦','🪑','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','👴','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
         ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
         ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
         ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
@@ -62,7 +62,7 @@
         ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
         ['⬜️','🟫','🟫','🟫','📚','📚','🟫','⬜️'],
         ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','📦','🟫','🟫','🧓','🟫','⬜️'],
+        ['⬜️','🟫','📦','🟫','🟫','🟫','🟫','⬜️'],
         ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','⬜️'],
         ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
         ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
@@ -73,7 +73,7 @@
       mapa: [
         ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
         ['⬜️','📚','📚','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','👩','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
         ['⬜️','🟫','🟫','🟫','🪑','📦','🪑','⬜️'],
         ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
         ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
@@ -244,6 +244,9 @@
     habladoConTakeshi = data.takeshi || false;
     madreDioItems = data.dioItems || false;
     inventory = data.inv || [];
+    misionAldeanosCompletada = data.mision || false;
+    aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
+    mapaActual = data.mapa || 'aldea';
 
     movimientoBloqueado = true;
     fadeOverlay.style.transition = 'opacity 0.5s ease';
@@ -257,6 +260,9 @@
       updateCamera();
       mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
       actualizarObjetivo();
+      iniciarNPCs();
+      if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
+      npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
       fadeOverlay.style.opacity = '0';
       setTimeout(() => {
         fadeOverlay.style.transition = '';
@@ -295,6 +301,7 @@
         buffer += chars[idx];
         idx++;
         textSpan.textContent = buffer;
+        reproducirSonidoDialogo();
         setTimeout(tipear, 30);
       }
       tipear();
@@ -322,7 +329,7 @@
           screenNarrativa.classList.add('modal-hidden');
 
           setTimeout(() => {
-            iniciarNuevaPartida();
+            try { iniciarNuevaPartida(); } catch(e) { console.error('Error al iniciar:', e); }
 
             fadeOverlay.style.transition = 'opacity 2.5s ease';
             fadeOverlay.style.opacity = '0';
@@ -382,8 +389,8 @@
       iniciarNPCs();
       npcTimer = setInterval(() => {
         actualizarNPCs();
-        if (mapaActivo === MAP) render();
-      }, 1200);
+        render();
+      }, 1800);
     }
     setTimeout(() => {
       movimientoBloqueado = false;
@@ -392,12 +399,13 @@
 
   /* ─── MAPA ─── */
   function getTileSize() {
-    return Math.floor(mapContainer.clientWidth / 9);
+    const div = mapaActual === 'bosque' ? 6 : 9;
+    return Math.floor(mapContainer.clientWidth / div);
   }
 
   function applyViewport() {
     tileSize = getTileSize();
-    mapContainer.style.height = (tileSize * 9) + 'px';
+    mapContainer.style.height = (tileSize * (mapaActual === 'bosque' ? 6 : 9)) + 'px';
     mapGrid.style.setProperty('--tile-size', tileSize + 'px');
     mapGrid.style.gridTemplateColumns = `repeat(${COLS}, ${tileSize}px)`;
     mapGrid.style.gridTemplateRows = `repeat(${ROWS}, ${tileSize}px)`;
@@ -405,7 +413,10 @@
 
   function isWalkable(col, row) {
     if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return false;
-    return !OBSTACLES.has(mapaActivo[row][col]);
+    if (OBSTACLES.has(mapaActivo[row][col])) return false;
+    const ocupado = [...npcsRutina.filter(n => n.activo), ...npcs].some(n => n.x === col && n.y === row);
+    if (ocupado) return false;
+    return true;
   }
 
   function buildGrid() {
@@ -476,7 +487,7 @@
 
         if (patternCells.has(`${r},${c}`)) {
           cell.textContent = '';
-        } else if (tile === '🟫' && mapaActivo !== MAP) {
+        } else if (tile === '🟫' && INTERIORES.some(c => c.mapa === mapaActivo)) {
           cell.textContent = '';
           cell.style.backgroundImage = 'url(img/suelo_casa_aldea.png)';
           cell.classList.add('tile-image');
@@ -534,26 +545,56 @@
     pw.appendChild(px);
     mapGrid.appendChild(pw);
 
-    if (mapaActivo === MAP) {
-      npcs.forEach(n => {
-        const el = document.createElement('div');
-        el.className = 'ambient-npc';
-        el.style.position = 'absolute';
-        el.style.left = (n.x * tileSize) + 'px';
-        el.style.top = (n.y * tileSize) + 'px';
-        el.style.width = tileSize + 'px';
-        el.style.height = tileSize + 'px';
+    // Niebla del bosque
+    const fog = document.getElementById('fog-overlay');
+    if (mapaActual === 'bosque') {
+      fog.classList.remove('fog-oculto');
+      const ts = tileSize || 1;
+      const tr = mapGrid.style.transform || 'translate(0px, 0px)';
+      const partes = tr.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
+      const ox = partes ? parseFloat(partes[1]) : 0;
+      const oy = partes ? parseFloat(partes[2]) : 0;
+      const cx = playerX * ts + ts / 2 + ox;
+      const cy = playerY * ts + ts / 2 + oy;
+      const radio = Math.max(mapContainer.clientWidth, mapContainer.clientHeight) * 0.55;
+      const mascara = 'radial-gradient(circle ' + radio + 'px at ' + cx + 'px ' + cy + 'px, transparent 0%, transparent 25%, rgba(0,0,0,0.82) 65%)';
+      fog.style.mask = mascara;
+      fog.style.webkitMask = mascara;
+    } else {
+      fog.classList.add('fog-oculto');
+    }
+
+    const npcsVisibles = mapaActivo === MAP
+      ? [...npcsRutina.filter(n => n.activo), ...npcs]
+      : npcsRutina.filter(n => n.activo && n.tipo === 'interior');
+    npcsVisibles.forEach(n => {
+      const el = document.createElement('div');
+      el.className = 'ambient-npc';
+      el.style.position = 'absolute';
+      el.style.left = (n.x * tileSize) + 'px';
+      el.style.top = (n.y * tileSize) + 'px';
+      el.style.width = tileSize + 'px';
+      el.style.height = tileSize + 'px';
+      el.style.pointerEvents = 'none';
+      const img = TILE_IMAGES[n.emoji];
+      if (img) {
+        el.style.backgroundImage = 'url(' + img + ')';
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+        el.style.backgroundRepeat = 'no-repeat';
+        el.style.imageRendering = 'pixelated';
+        el.style.opacity = '1';
+      } else {
         el.style.display = 'flex';
         el.style.alignItems = 'center';
         el.style.justifyContent = 'center';
         el.style.fontSize = (tileSize * 0.7) + 'px';
-        el.style.zIndex = '5';
-        el.style.pointerEvents = 'none';
-        el.style.opacity = '0.5';
         el.textContent = n.emoji;
-        mapGrid.appendChild(el);
-      });
-    }
+        el.style.opacity = '0.5';
+      }
+      el.style.zIndex = String(100 + n.y);
+      mapGrid.appendChild(el);
+    });
   }
 
   function updateCamera() {
@@ -685,7 +726,7 @@
         return;
       }
       cargarMapaBosque();
-    } else if (mapaActual === 'bosque' && x === 20 && y === 11) {
+    } else if (mapaActual === 'bosque' && x === 0 && y === 10) {
       mapaActual = 'aldea';
       hacerTransicion(() => {
         setMapa(MAP);
@@ -702,10 +743,6 @@
         if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
         npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
       }, () => {
-    movimientoBloqueado = true;
-    misionAldeanosCompletada = data.mision || false;
-    aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
-    mapaActual = data.mapa || 'aldea';
         setTimeout(() => { movimientoBloqueado = false; }, 2000);
       });
     }
@@ -743,6 +780,15 @@
     if (idx === undefined) return;
     if (idx === 0) visitadoCasaGenji = true;
     if (idx === 2) visitadoCasaMadre = true;
+
+    // Precargar imagen del NPC de la casa
+    const imgNPC = ['genji','hana','madre'][idx];
+    const npcData = npcsRutina.find(n => n.id === imgNPC);
+    if (npcData && TILE_IMAGES[npcData.emoji]) {
+      const img = new Image();
+      img.src = TILE_IMAGES[npcData.emoji];
+    }
+
     hacerTransicion(() => {
       exteriorState = { px: playerX, py: playerY, dir: playerDir };
       const casa = INTERIORES[idx];
@@ -758,6 +804,11 @@
       if (u) mostrarUbicacion(u.titulo, u.sub);
       actualizarObjetivo();
       audioAmbiente.cambiarAmbiente('interior');
+      npcsRutina.forEach(n => {
+        if (n.id === 'genji' && idx === 0) n.activo = true;
+        else if (n.id === 'hana' && idx === 1) n.activo = true;
+        else if (n.id === 'madre' && idx === 2) n.activo = true;
+      });
     });
   }
 
@@ -770,6 +821,7 @@
       playerY = exteriorState.py;
       playerDir = exteriorState.dir;
       exteriorState = null;
+      npcsRutina.forEach(n => { if (n.tipo === 'interior') n.activo = false; });
       buildGrid();
       render();
       updateCamera();
@@ -1048,12 +1100,48 @@
     },
   };
 
+  /* ─── NPCS CON RUTINA ─── */
+
+  const npcsRutina = [];
+
+  function asignarRutina(npc, tipo, opts) {
+    npc.tipo = tipo;
+    if (tipo === 'interior') {
+      npc.area = opts.area || 3;
+      npc.timer = 0;
+      npc.pausa = 1400 + Math.random() * 1000;
+    } else if (tipo === 'patrulla') {
+      npc.homeX = npc.x;
+      npc.dirX = opts.dirX || 1;
+      npc.pasos = opts.pasos || 5;
+      npc.restantes = npc.pasos;
+      npc.pausaFin = (opts.pausaFin || 2) * 1000;
+      npc.pausando = false;
+      npc.timerPausa = 0;
+    }
+    npcsRutina.push(npc);
+  }
+
+  asignarRutina(
+    { id: 'takeshi', x: 10, y: 11, emoji: '👦', activo: true, mapa: MAP },
+    'patrulla', { dirX: -1, pasos: 5, pausaFin: 2 }
+  );
+  asignarRutina(
+    { id: 'genji', x: 3, y: 3, emoji: '👴', activo: false, mapa: INTERIORES[0].mapa },
+    'interior', { area: 3 }
+  );
+  asignarRutina(
+    { id: 'hana', x: 3, y: 3, emoji: '🧓', activo: false, mapa: INTERIORES[1].mapa },
+    'interior', { area: 3 }
+  );
+  asignarRutina(
+    { id: 'madre', x: 2, y: 3, emoji: '👩', activo: false, mapa: INTERIORES[2].mapa },
+    'interior', { area: 3 }
+  );
+
   /* ─── NPCS AMBIENTALES ─── */
 
   const PATRULLAS = [
-    { x: 4, y: 11, dx: 1, pasos: 6, emoji: '🧑', restantes: 3 },
-    { x: 12, y: 5, dx: -1, pasos: 4, emoji: '🧑', restantes: 2 },
-    { x: 16, y: 12, dx: 1, pasos: 3, emoji: '🧑', restantes: 1 },
     { x: 8, y: 13, dx: 1, pasos: 4, emoji: '💰', restantes: 2 },
     { x: 5, y: 5, dx: -1, pasos: 3, emoji: '🪓', restantes: 1 },
     { x: 18, y: 8, dx: -1, pasos: 3, emoji: '🧑‍🌾', restantes: 2 },
@@ -1070,12 +1158,41 @@
   }
 
   function actualizarNPCs() {
-    npcs.forEach(n => {
-      if (n.restantes <= 0) {
-        n.dirX *= -1;
-        n.restantes = n.pasos;
+    if (movimientoBloqueado) return;
+    npcsRutina.forEach(n => {
+      if (!n.activo) return;
+      if (n.mapa !== mapaActivo) return;
+      if (n.tipo === 'patrulla') {
+        if (n.pausando) { n.timerPausa -= 1800; if (n.timerPausa <= 0) { n.pausando = false; n.dirX *= -1; n.restantes = n.pasos; } return; }
+        if (n.restantes <= 0) { n.pausando = true; n.timerPausa = n.pausaFin; return; }
+        const sigX = n.x + n.dirX;
+        if (sigX === playerX && n.y === playerY) { n.pausando = true; n.timerPausa = 800; return; }
+        const t = n.mapa[n.y] ? n.mapa[n.y][sigX] : null;
+        if (t === '🟩' || t === '🟫') { n.x = sigX; n.restantes--; }
+        else { n.pausando = true; n.timerPausa = 500; }
+      } else if (n.tipo === 'interior') {
+        n.timer += 1800;
+        if (n.timer >= n.pausa) {
+          n.timer = 0; n.pausa = 1400 + Math.random() * 1000;
+          const casa = INTERIORES.find(c => c.mapa === n.mapa);
+          const obstaculos = casa && casa.objetos ? casa.objetos.filter(o => o.esSolido).map(o => o.x+','+o.y) : [];
+          const dirs = [{dx:0,dy:-1},{dx:0,dy:1},{dx:-1,dy:0},{dx:1,dy:0}];
+          const v = dirs.filter(d => {
+            const nx=n.x+d.dx, ny=n.y+d.dy;
+            if (nx === playerX && ny === playerY) return false;
+            if (obstaculos.includes(nx+','+ny)) return false;
+            return n.mapa && n.mapa[ny] && n.mapa[ny][nx]==='🟫';
+          });
+          if (v.length) { const m=v[Math.floor(Math.random()*v.length)]; n.x+=m.dx; n.y+=m.dy; }
+        }
       }
-      n.x += n.dirX;
+    });
+    npcs.forEach(n => {
+      if (n.restantes <= 0) { n.dirX*=-1; n.restantes=n.pasos; }
+      const sigX = n.x + n.dirX;
+      if (sigX === playerX && n.y === playerY) { n.restantes = 0; return; }
+      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX]==='🟩'||mapaActivo[n.y][sigX]==='🟫')) n.x = sigX;
+      else n.restantes = 0;
       n.restantes--;
     });
   }
@@ -1241,36 +1358,41 @@
     }
     const tx = playerX + playerDir.dx;
     const ty = playerY + playerDir.dy;
-      if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
+    if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
       return;
     }
     const tile = mapaActivo[ty][tx];
+
+    // Detección por tile fijo (🪧, 💰, 🪓, 🧑‍🌾 en MAP)
     if (tile === '🪧') {
-      abrirEvento('Letrero', CARTEL_TEXTO, null, false);
-    } else if (tile === '👦') {
-      habladoConTakeshi = true;
-      abrirEvento('Takeshi', getDialogoTakeshi(), 'img/personajes/takeshi.png', true);
-    } else if (tile === '👴') {
-      const dialogo = habladoConTakeshi ? GENJI_TRAS_TAKESHI : GENJI_DIALOGOS[Math.floor(Math.random() * GENJI_DIALOGOS.length)];
-      habladoConTakeshi = false;
-      abrirEvento('Genji, el anciano', dialogo, 'img/personajes/genji.png', true);
-    } else if (tile === '🧓') {
-      abrirEvento('Hana, la sabia', HANA_DIALOGOS[Math.floor(Math.random() * HANA_DIALOGOS.length)], 'img/personajes/hana.png', true);
-    } else if (tile === '👩') {
-      visitadoCasaMadre = true;
-      abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
+      abrirEvento('Letrero', CARTEL_TEXTO, null, true);
     } else if (DIALOGOS_AMBIENTE[tile]) {
       const d = DIALOGOS_AMBIENTE[tile];
       abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
-    } else if (mapaActivo === MAP) {
-      const cerca = [...PATRULLAS, ...npcsRutina.filter(n => n.activo)].find(n => {
+    } else {
+      // Detección por proximidad (adyacente)
+      const cerca = [...npcsRutina.filter(n => n.activo), ...PATRULLAS].find(n => {
         const dx = Math.abs(n.x - playerX);
         const dy = Math.abs(n.y - playerY);
         return (dx === 1 && dy === 0) || (dx === 0 && dy === 1);
       });
-      if (cerca && DIALOGOS_AMBIENTE[cerca.emoji]) {
-        const d = DIALOGOS_AMBIENTE[cerca.emoji];
-        abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
+      if (cerca) {
+        if (cerca.id === 'takeshi') {
+          habladoConTakeshi = true;
+          abrirEvento('Takeshi', getDialogoTakeshi(), 'img/personajes/takeshi.png', true);
+        } else if (cerca.id === 'genji') {
+          const dialogo = habladoConTakeshi ? GENJI_TRAS_TAKESHI : GENJI_DIALOGOS[Math.floor(Math.random() * GENJI_DIALOGOS.length)];
+          habladoConTakeshi = false;
+          abrirEvento('Genji, el anciano', dialogo, 'img/personajes/genji.png', true);
+        } else if (cerca.id === 'hana') {
+          abrirEvento('Hana, la sabia', HANA_DIALOGOS[Math.floor(Math.random() * HANA_DIALOGOS.length)], 'img/personajes/hana.png', true);
+        } else if (cerca.id === 'madre') {
+          visitadoCasaMadre = true;
+          abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
+        } else if (DIALOGOS_AMBIENTE[cerca.emoji]) {
+          const d = DIALOGOS_AMBIENTE[cerca.emoji];
+          abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
+        }
       }
     }
   }
