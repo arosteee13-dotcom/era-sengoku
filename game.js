@@ -9,17 +9,17 @@
     ['🌲','🟩','⬜️','🚪','⬜️','🟫','🌸','🟫','🌸','🟫','🟩','🟩','🟩','🟫','🌸','🟫','🌸','⬜️','🚪','⬜️','🟩','🌲'],
     ['🌲','🟩','🪧','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🛖','🛖','🛖','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟩','🟩','🟩','🟩','💰','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🧑‍🌾','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','👦','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🪓','🟩','🌲'],
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
   ];
 
@@ -75,7 +75,7 @@
     COLS = mapa[0].length;
   }
 
-  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️']);
+  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️', '🪓', '💰', '🧑‍🌾']);
 
   const ENTRADAS = { "4,3": 0, "4,18": 1, "10,3": 2 };
 
@@ -97,6 +97,9 @@
     '🧓': 'img/personajes/hana.png',
     '👴': 'img/personajes/genji.png',
     '👩': 'img/personajes/madre.png',
+    '🪓': 'img/personajes/lenador.png',
+    '💰': 'img/personajes/mercader.png',
+    '🧑‍🌾': 'img/personajes/campesino.png',
   };
 
   const PATTERNS = [
@@ -121,6 +124,7 @@
   let playerX = 11;
   let playerY = 9;
   let playerDir = { dx: 0, dy: -1 };
+  let ultimaDirX = 1;
   let inventory = [];
   let tileSize = 0;
   let movimientoBloqueado = false;
@@ -129,6 +133,12 @@
   let visitadoCasaGenji = false;
   let visitadoCasaMadre = false;
   let madreDioItems = false;
+
+  const DIALOGOS_AMBIENTE = {
+    '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
+    '💰': { titulo: 'Mercader', texto: 'Vengo de tierras lejanas. Mis sedas son finas, pero mis noticias son mejores. ¿Te interesa saber qué se dice sobre los extranjeros en la capital?', img: 'img/personajes/mercader.png' },
+    '🧑‍🌾': { titulo: 'Campesino', texto: 'El arroz crece lento este año, Kenji. Si buscas el zorro de fuego, dicen que se vio una luz roja hacia el bosque al anochecer.', img: 'img/personajes/campesino.png' },
+  };
 
   const GENJI_DIALOGOS = [
     "El tiempo pasa incluso para las piedras, joven guerrero. He visto crecer este pueblo desde que era solo unas chozas. Cuida de él cuando yo ya no esté.",
@@ -450,25 +460,31 @@
       mapGrid.appendChild(el);
     });
 
+    const pw = document.createElement('div');
+    pw.className = 'player-overlay';
+    pw.style.position = 'absolute';
+    pw.style.left = (playerX * tileSize) + 'px';
+    pw.style.top = (playerY * tileSize) + 'px';
+    pw.style.width = tileSize + 'px';
+    pw.style.height = tileSize + 'px';
+    pw.style.zIndex = String(100 + playerY);
+    pw.style.pointerEvents = 'none';
+    pw.style.transform = ultimaDirX === 1 ? 'scaleX(-1)' : '';
+
     const px = document.createElement('div');
-    px.className = 'player-overlay';
-    px.style.position = 'absolute';
-    px.style.left = (playerX * tileSize) + 'px';
-    px.style.top = (playerY * tileSize) + 'px';
-    px.style.width = tileSize + 'px';
-    px.style.height = tileSize + 'px';
+    px.style.width = '100%';
+    px.style.height = '100%';
     px.style.backgroundImage = 'url(img/personajes/personaje_principal.png)';
     px.style.backgroundSize = 'cover';
     px.style.backgroundPosition = 'center';
     px.style.backgroundRepeat = 'no-repeat';
     px.style.imageRendering = 'pixelated';
-    px.style.zIndex = '15';
-    px.style.pointerEvents = 'none';
     px.style.filter = 'drop-shadow(0 0 6px rgba(197,155,39,0.8))';
     px.style.animation = jugadorCaminando
       ? 'player-walk 0.2s ease-out'
       : 'pulse-player 1.2s ease-in-out infinite';
-    mapGrid.appendChild(px);
+    pw.appendChild(px);
+    mapGrid.appendChild(pw);
 
     if (mapaActivo === MAP) {
       npcs.forEach(n => {
@@ -521,6 +537,7 @@
   function movePlayer(dx, dy) {
     if (movimientoBloqueado) return;
     playerDir = { dx, dy };
+    if (dx !== 0) ultimaDirX = dx;
     const nx = playerX + dx;
     const ny = playerY + dy;
 
@@ -920,9 +937,12 @@
   /* ─── NPCS AMBIENTALES ─── */
 
   const PATRULLAS = [
-    { x: 4, y: 11, dx: 1, pasos: 6, emoji: '🧑' },
-    { x: 12, y: 5, dx: -1, pasos: 4, emoji: '🧑' },
-    { x: 16, y: 12, dx: 1, pasos: 3, emoji: '🧑' },
+    { x: 4, y: 11, dx: 1, pasos: 6, emoji: '🧑', restantes: 3 },
+    { x: 12, y: 5, dx: -1, pasos: 4, emoji: '🧑', restantes: 2 },
+    { x: 16, y: 12, dx: 1, pasos: 3, emoji: '🧑', restantes: 1 },
+    { x: 8, y: 13, dx: 1, pasos: 4, emoji: '💰', restantes: 2 },
+    { x: 5, y: 5, dx: -1, pasos: 3, emoji: '🪓', restantes: 1 },
+    { x: 18, y: 8, dx: -1, pasos: 3, emoji: '🧑‍🌾', restantes: 2 },
   ];
 
   let npcs = [];
@@ -1072,6 +1092,19 @@
     } else if (tile === '👩') {
       visitadoCasaMadre = true;
       abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
+    } else if (DIALOGOS_AMBIENTE[tile]) {
+      const d = DIALOGOS_AMBIENTE[tile];
+      abrirEvento(d.titulo, d.texto, d.img, true);
+    } else if (mapaActivo === MAP) {
+      const cerca = [...PATRULLAS, ...npcsRutina.filter(n => n.activo)].find(n => {
+        const dx = Math.abs(n.x - playerX);
+        const dy = Math.abs(n.y - playerY);
+        return (dx === 1 && dy === 0) || (dx === 0 && dy === 1);
+      });
+      if (cerca && DIALOGOS_AMBIENTE[cerca.emoji]) {
+        const d = DIALOGOS_AMBIENTE[cerca.emoji];
+        abrirEvento(d.titulo, d.texto, d.img, true);
+      }
     }
   }
 

@@ -646,6 +646,39 @@ html, body {
   50% { opacity: 0; }
 }
 
+/* ───── OPCIONES DE DIÁLOGO ───── */
+
+#modal-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px 14px 6px;
+  flex-shrink: 0;
+}
+
+.modal-opciones-oculto { display: none !important; }
+
+.opcion-btn {
+  background: linear-gradient(135deg, #2a2218, #3a3020);
+  border: 1px solid #5a4a32;
+  border-radius: 6px;
+  color: #D1C7BD;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 7px 12px;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  transition: background 0.15s, border-color 0.15s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.opcion-btn:active {
+  background: linear-gradient(135deg, #3a3020, #4a3a28);
+  border-color: #C59B27;
+}
+
 /* ───── FUNDIDO A NEGRO ───── */
 
 #fade-overlay {
