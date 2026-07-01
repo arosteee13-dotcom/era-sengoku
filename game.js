@@ -10,8 +10,8 @@
     ['🌲','🟩','🪧','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🛖','🛖','🛖','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🛖','🛖','🛖','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
@@ -75,7 +75,7 @@
     COLS = mapa[0].length;
   }
 
-  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪']);
+  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️']);
 
   const ENTRADAS = { "4,3": 0, "4,18": 1, "10,3": 2 };
 
@@ -106,6 +106,13 @@
         ['⬜️','🚪','⬜️'],
       ],
       image: 'img/casa_aldea.png',
+    },
+    {
+      tiles: [
+        ['⛲️','⛲️'],
+        ['⛲️','⛲️'],
+      ],
+      image: 'img/estanque.png',
     },
   ];
 
@@ -155,6 +162,7 @@
   const bannerSubtitulo = $('banner-subtitulo');
   const modalInventario = $('modal-inventario');
   const invLista        = $('inv-lista');
+  const objetivoTexto   = $('objetivo-texto');
   const screenNarrativa = $('screen-narrativa');
   const narrativaTexto  = $('narrativa-texto');
   const animRecoger     = $('anim-recoger');
@@ -193,6 +201,7 @@
       render();
       updateCamera();
       mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+      actualizarObjetivo();
       fadeOverlay.style.opacity = '0';
       setTimeout(() => {
         fadeOverlay.style.transition = '';
@@ -247,6 +256,7 @@
         if (finalizando) return;
         finalizando = true;
         saltar();
+        crearAudioContext().ctx.resume();
         document.removeEventListener('keydown', onKey);
         document.removeEventListener('click', onClick);
 
@@ -308,6 +318,15 @@
     render();
     updateCamera();
     mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    actualizarObjetivo();
+    audioAmbiente.cambiarAmbiente('exterior');
+    if (!npcTimer) {
+      iniciarNPCs();
+      npcTimer = setInterval(() => {
+        actualizarNPCs();
+        if (mapaActivo === MAP) render();
+      }, 1200);
+    }
     setTimeout(() => {
       movimientoBloqueado = false;
     }, 2000);
@@ -378,7 +397,7 @@
   }
 
   function render() {
-    document.querySelectorAll('.pattern-overlay, .player-overlay').forEach(el => el.remove());
+    document.querySelectorAll('.pattern-overlay, .player-overlay, .ambient-npc').forEach(el => el.remove());
 
     const patterns = scanPatterns();
     const patternCells = new Set();
@@ -450,6 +469,27 @@
       ? 'player-walk 0.2s ease-out'
       : 'pulse-player 1.2s ease-in-out infinite';
     mapGrid.appendChild(px);
+
+    if (mapaActivo === MAP) {
+      npcs.forEach(n => {
+        const el = document.createElement('div');
+        el.className = 'ambient-npc';
+        el.style.position = 'absolute';
+        el.style.left = (n.x * tileSize) + 'px';
+        el.style.top = (n.y * tileSize) + 'px';
+        el.style.width = tileSize + 'px';
+        el.style.height = tileSize + 'px';
+        el.style.display = 'flex';
+        el.style.alignItems = 'center';
+        el.style.justifyContent = 'center';
+        el.style.fontSize = (tileSize * 0.7) + 'px';
+        el.style.zIndex = '5';
+        el.style.pointerEvents = 'none';
+        el.style.opacity = '0.5';
+        el.textContent = n.emoji;
+        mapGrid.appendChild(el);
+      });
+    }
   }
 
   function updateCamera() {
@@ -544,6 +584,22 @@
     }, 3000);
   }
 
+  function actualizarObjetivo() {
+    let texto = 'Observa tu entorno. El camino se revelará.';
+    if (visitadoCasaMadre) {
+      texto = 'Tienes provisiones para el viaje. Habla con los aldeanos antes de partir.';
+    } else if (visitadoCasaGenji) {
+      texto = 'El anciano Genji te ha dado su bendición. Tu madre te espera en casa.';
+    } else if (habladoConTakeshi) {
+      texto = 'El bosque de Aokigahara aguarda. Busca a Genji, el anciano de la aldea.';
+    }
+    objetivoTexto.style.opacity = '0';
+    setTimeout(() => {
+      objetivoTexto.textContent = texto;
+      objetivoTexto.style.opacity = '1';
+    }, 500);
+  }
+
   const UBICACIONES = {
     0: { titulo: 'Cabaña del Maestro', sub: 'Biblioteca de los Recuerdos' },
     1: { titulo: 'Casa de Té de Hana', sub: 'El aroma del hogar' },
@@ -569,6 +625,8 @@
       updateCamera();
       const u = UBICACIONES[idx];
       if (u) mostrarUbicacion(u.titulo, u.sub);
+      actualizarObjetivo();
+      audioAmbiente.cambiarAmbiente('interior');
     });
   }
 
@@ -584,7 +642,9 @@
       buildGrid();
       render();
       updateCamera();
-      mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    actualizarObjetivo();
+    audioAmbiente.cambiarAmbiente('exterior');
     });
   }
 
@@ -597,7 +657,7 @@
     if (!audioCtx) {
       audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       masterGain = audioCtx.createGain();
-      masterGain.gain.value = 0.5;
+      masterGain.gain.value = 0.8;
       masterGain.connect(audioCtx.destination);
     }
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -691,6 +751,201 @@
     else generarSonidoHierba();
   }
 
+  /* ─── AMBIENTE SONORO ─── */
+
+  const audioAmbiente = {
+    activo: false,
+    nodos: [],
+    zona: null,
+    master: null,
+
+    init() {
+      const { ctx, master } = crearAudioContext();
+      this.master = ctx.createGain();
+      this.master.gain.value = 0;
+      this.master.connect(master);
+    },
+
+    _crearFuente() {
+      const { ctx } = crearAudioContext();
+      const gan = ctx.createGain();
+      gan.gain.value = 0.6;
+      gan.connect(this.master);
+      this.nodos.push(gan);
+      return gan;
+    },
+
+    _fadeA(destino, duracion, cb) {
+      const ahora = crearAudioContext().ctx.currentTime;
+      this.master.gain.cancelScheduledValues(ahora);
+      this.master.gain.setValueAtTime(this.master.gain.value, ahora);
+      this.master.gain.linearRampToValueAtTime(destino, ahora + duracion);
+      if (cb) setTimeout(cb, duracion * 1000);
+    },
+
+    _pararNodos() {
+      this.nodos.forEach(n => {
+        try { n.disconnect(); } catch(e) {}
+      });
+      this.nodos = [];
+    },
+
+    _ruidoBlanco(duracion) {
+      const { ctx } = crearAudioContext();
+      const buf = ctx.createBuffer(1, ctx.sampleRate * duracion, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      return buf;
+    },
+
+    _pulso(freq, duracion) {
+      const { ctx } = crearAudioContext();
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const gan = ctx.createGain();
+      gan.gain.setValueAtTime(0, ctx.currentTime);
+      gan.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.005);
+      gan.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duracion);
+      osc.connect(gan);
+      gan.connect(this.master);
+      osc.start();
+      osc.stop(ctx.currentTime + duracion);
+    },
+
+    _grillo() {
+      if (this.zona !== 'exterior') return;
+      this._pulso(4000 + Math.random() * 2000, 0.04);
+      setTimeout(() => this._grillo(), 600 + Math.random() * 1200);
+    },
+
+    _iniciarViento() {
+      const { ctx } = crearAudioContext();
+      const buf = this._ruidoBlanco(4);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.loop = true;
+
+      const filtro = ctx.createBiquadFilter();
+      filtro.type = 'lowpass';
+      filtro.frequency.value = 500;
+      filtro.Q.value = 0.5;
+
+      const env = ctx.createGain();
+      env.gain.value = 0.25;
+      const gan = this._crearFuente();
+      src.connect(filtro);
+      filtro.connect(env);
+      env.connect(gan);
+      src.start();
+      this.nodos.push(src);
+    },
+
+    _iniciarFlauta() {
+      const { ctx } = crearAudioContext();
+      const osc = ctx.createOscillator();
+      osc.type = 'triangle';
+      osc.frequency.value = 260;
+
+      const gan = ctx.createGain();
+      gan.gain.value = 0;
+
+      const ahora = ctx.currentTime;
+      const melodia = [260, 294, 330, 294, 260, 247, 260];
+      melodia.forEach((f, i) => {
+        osc.frequency.setValueAtTime(f, ahora + i * 3);
+        gan.gain.setValueAtTime(0, ahora + i * 3);
+        gan.gain.linearRampToValueAtTime(0.06, ahora + i * 3 + 0.4);
+        gan.gain.linearRampToValueAtTime(0, ahora + i * 3 + 2.8);
+      });
+
+      osc.connect(gan);
+      gan.connect(this.master);
+      osc.start();
+      osc.stop(ahora + melodia.length * 3);
+      this.nodos.push(osc);
+      this.nodos.push(gan);
+    },
+
+    _iniciarFuego() {
+      const { ctx } = crearAudioContext();
+      const buf = this._ruidoBlanco(2);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.loop = true;
+
+      const filtro = ctx.createBiquadFilter();
+      filtro.type = 'lowpass';
+      filtro.frequency.value = 200;
+      filtro.Q.value = 0.3;
+
+      const gan = this._crearFuente();
+      src.connect(filtro);
+      filtro.connect(gan);
+      src.start();
+      this.nodos.push(src);
+
+      const pop = () => {
+        if (this.zona !== 'interior') return;
+        this._pulso(100 + Math.random() * 300, 0.06);
+        setTimeout(pop, 300 + Math.random() * 700);
+      };
+      pop();
+    },
+
+    cambiarAmbiente(zona) {
+      if (this.zona === zona) return;
+      const anterior = this.zona;
+      this.zona = zona;
+
+      if (!this.activo) {
+        this.init();
+        this.activo = true;
+      }
+
+      this._fadeA(0, 0.8, () => {
+        this._pararNodos();
+        if (zona === 'exterior') {
+          this._iniciarViento();
+          this._iniciarFlauta();
+          this._fadeA(0.7, 1.5);
+        } else if (zona === 'interior') {
+          this._iniciarFuego();
+          this._fadeA(0.7, 1.2);
+        }
+      });
+    },
+  };
+
+  /* ─── NPCS AMBIENTALES ─── */
+
+  const PATRULLAS = [
+    { x: 4, y: 11, dx: 1, pasos: 6, emoji: '🧑' },
+    { x: 12, y: 5, dx: -1, pasos: 4, emoji: '🧑' },
+    { x: 16, y: 12, dx: 1, pasos: 3, emoji: '🧑' },
+  ];
+
+  let npcs = [];
+  let npcTimer = null;
+
+  function iniciarNPCs() {
+    npcs = PATRULLAS.map(p => ({
+      x: p.x, y: p.y, homeX: p.x, dirX: p.dx,
+      pasos: p.pasos, restantes: 0, emoji: p.emoji,
+    }));
+  }
+
+  function actualizarNPCs() {
+    npcs.forEach(n => {
+      if (n.restantes <= 0) {
+        n.dirX *= -1;
+        n.restantes = n.pasos;
+      }
+      n.x += n.dirX;
+      n.restantes--;
+    });
+  }
+
   const CARTEL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
   function getDialogoTakeshi() {
     if (visitadoCasaMadre) {
@@ -767,7 +1022,8 @@
 
   function cerrarEvento() {
     if (eventoTimer) { clearTimeout(eventoTimer); eventoTimer = null; }
-    if (modalEventoTitulo.textContent === 'Tu madre' && !madreDioItems) {
+    const eraMadre = modalEventoTitulo.textContent === 'Tu madre';
+    if (eraMadre && !madreDioItems) {
       madreDioItems = true;
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/arroz_con_ciruelas.png', nombre: 'Ración de Arroz', descripcion: 'Recupera energía' },
@@ -779,6 +1035,7 @@
     movimientoBloqueado = false;
     modalEventoImg.classList.add('modal-imagen-hidden');
     modalEvento.classList.add('modal-hidden');
+    actualizarObjetivo();
   }
 
   function mostrarAnimRecoger(items) {
@@ -867,10 +1124,19 @@
     if (mapaActivo !== MAP) setMapa(MAP);
     mapContainer.style.backgroundColor = '';
 
-      buildGrid();
-      render();
-      updateCamera();
-      mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    buildGrid();
+    render();
+    updateCamera();
+    mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    actualizarObjetivo();
+    audioAmbiente.cambiarAmbiente('exterior');
+    if (!npcTimer) {
+      iniciarNPCs();
+      npcTimer = setInterval(() => {
+        actualizarNPCs();
+        if (mapaActivo === MAP) render();
+      }, 1200);
+    }
   }
 
   /* ─── EVENTOS ─── */
