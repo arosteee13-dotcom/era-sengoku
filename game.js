@@ -5,14 +5,14 @@
   const MAP = [
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🛖','🛖','🛖','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🏠','🏠','🟩','🟩','🌲'],
-    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🌸','🟫','🌸','🟫','🟩','🟩','🟩','🟫','🌸','🟫','🌸','🏠','🏠','🟩','🟩','🌲'],
+    ['🌲','🟩','🛖','🛖','🛖','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🛖','🛖','🛖','🟩','🌲'],
+    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🌸','🟫','🌸','🟫','🟩','🟩','🟩','🟫','🌸','🟫','🌸','⬜️','🚪','⬜️','🟩','🌲'],
     ['🌲','🟩','🪧','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🛖','🛖','🛖','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
@@ -23,12 +23,63 @@
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
   ];
 
-  const ROWS = MAP.length;
-  const COLS = MAP[0].length;
+  const INTERIORES = [
+    {
+      mapa: [
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','📚','📚','⬜️'],
+        ['⬜️','🟫','🟫','🪑','📦','🪑','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🧓','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+      ],
+      entrada: { x: 4, y: 5 },
+    },
+    {
+      mapa: [
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','📚','📚','⬜️'],
+        ['⬜️','🟫','🟫','🪑','🟫','🟫','🟫','👴','⬜️'],
+        ['⬜️','🟫','🟫','📦','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🪑','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+      ],
+      entrada: { x: 4, y: 5 },
+    },
+    {
+      mapa: [
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','📚','📚','🟫','⬜️'],
+        ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','📦','🟫','🟫','🟫','👴','🟫','⬜️'],
+        ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+      ],
+      entrada: { x: 4, y: 5 },
+    },
+  ];
 
-  const OBSTACLES = new Set(['🌲', '🏠', '⬜️', '🏔️', '🪧', '👦']);
+  let mapaActivo = MAP;
+  let ROWS = MAP.length;
+  let COLS = MAP[0].length;
+  let exteriorState = null;
 
-  const CARTEL_COORDS = { row: 10, col: 2 };
+  function setMapa(mapa) {
+    mapaActivo = mapa;
+    ROWS = mapa.length;
+    COLS = mapa[0].length;
+  }
+
+  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '📚', '📦', '🚪']);
+
+  const ENTRADAS = { "4,3": 0, "4,18": 1, "10,3": 2 };
+
   const MODAL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
 
   const TILE_IMAGES = {
@@ -41,6 +92,10 @@
     '🌲': 'img/arbol.png',
     '👦': 'img/personajes/takeshi.png',
     '🌸': 'img/flores.png',
+    '🪑': 'img/cojin.png',
+    '📚': 'img/estanteria.png',
+    '📦': 'img/mesa.png',
+    '🧓': 'img/personajes/abuelo_1.png',
   };
 
   const PATTERNS = [
@@ -62,6 +117,14 @@
   let tileSize = 0;
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
+  let habladoConTakeshi = false;
+
+  const GENJI_DIALOGOS = [
+    "El tiempo pasa incluso para las piedras, joven guerrero. He visto crecer este pueblo desde que era solo unas chozas. Cuida de él cuando yo ya no esté.",
+    "Mis rodillas ya no son las que eran, pero mis ojos aún ven claro. La guerra se acerca desde el oeste. Escucha bien los consejos de los veteranos.",
+    "Cada mañana riego mis flores y pienso en los que se fueron. La vida es un ciclo, como las estaciones. No temas al cambio, joven.",
+  ];
+  const GENJI_TRAS_TAKESHI = "Ese muchacho, mi nieto Takeshi, te ha contado historias de zorros, ¿verdad? Es joven y cree en leyendas. Yo, en cambio, solo creo en lo que se marchita. Pero si el bosque ha empezado a susurrar... entonces incluso los viejos como yo debemos empezar a escuchar.";
 
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
@@ -145,7 +208,7 @@
 
   function isWalkable(col, row) {
     if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return false;
-    return !OBSTACLES.has(MAP[row][col]);
+    return !OBSTACLES.has(mapaActivo[row][col]);
   }
 
   function buildGrid() {
@@ -178,7 +241,7 @@
           let match = true;
           for (let pr = 0; pr < h && match; pr++)
             for (let pc = 0; pc < w && match; pc++)
-              if (MAP[r + pr][c + pc] !== pattern.tiles[pr][pc])
+              if (mapaActivo[r + pr][c + pc] !== pattern.tiles[pr][pc])
                 match = false;
 
           if (match) {
@@ -210,12 +273,16 @@
       for (let c = 0; c < COLS; c++) {
         const idx = r * COLS + c;
         const cell = cells[idx];
-        const tile = MAP[r][c];
+        const tile = mapaActivo[r][c];
         cell.className = 'tile';
         cell.style.backgroundImage = '';
 
         if (patternCells.has(`${r},${c}`)) {
           cell.textContent = '';
+        } else if (tile === '🟫' && mapaActivo !== MAP) {
+          cell.textContent = '';
+          cell.style.backgroundImage = 'url(img/suelo_casa_aldea.png)';
+          cell.classList.add('tile-image');
         } else if (TILE_IMAGES[tile]) {
           cell.textContent = '';
           cell.style.backgroundImage = `url(${TILE_IMAGES[tile]})`;
@@ -251,18 +318,17 @@
     px.style.top = (playerY * tileSize) + 'px';
     px.style.width = tileSize + 'px';
     px.style.height = tileSize + 'px';
-    px.style.display = 'flex';
-    px.style.alignItems = 'center';
-    px.style.justifyContent = 'center';
-    px.style.fontSize = (tileSize * 0.78) + 'px';
-    px.style.lineHeight = '1';
-    px.style.zIndex = '10';
+    px.style.backgroundImage = 'url(img/personajes/personaje_principal.png)';
+    px.style.backgroundSize = 'cover';
+    px.style.backgroundPosition = 'center';
+    px.style.backgroundRepeat = 'no-repeat';
+    px.style.imageRendering = 'pixelated';
+    px.style.zIndex = '15';
     px.style.pointerEvents = 'none';
     px.style.filter = 'drop-shadow(0 0 6px rgba(197,155,39,0.8))';
     px.style.animation = jugadorCaminando
       ? 'player-walk 0.2s ease-out'
       : 'pulse-player 1.2s ease-in-out infinite';
-    px.textContent = '🥷';
     mapGrid.appendChild(px);
   }
 
@@ -276,10 +342,18 @@
     let ox = viewW / 2 - (playerX * ts + ts / 2);
     let oy = viewH / 2 - (playerY * ts + ts / 2);
 
-    const minOx = Math.min(0, viewW - mapW);
-    const minOy = Math.min(0, viewH - mapH);
-    ox = Math.max(minOx, Math.min(0, ox));
-    oy = Math.max(minOy, Math.min(0, oy));
+    if (mapW < viewW) {
+      const centro = (viewW - mapW) / 2;
+      ox = Math.max(-mapW + centro, Math.min(centro, ox));
+    } else {
+      ox = Math.max(Math.min(0, viewW - mapW), Math.min(0, ox));
+    }
+    if (mapH < viewH) {
+      const centro = (viewH - mapH) / 2;
+      oy = Math.max(-mapH + centro, Math.min(centro, oy));
+    } else {
+      oy = Math.max(Math.min(0, viewH - mapH), Math.min(0, oy));
+    }
 
     mapGrid.style.transform = `translate(${ox}px, ${oy}px)`;
   }
@@ -289,15 +363,59 @@
     playerDir = { dx, dy };
     const nx = playerX + dx;
     const ny = playerY + dy;
-    if (isWalkable(nx, ny)) {
-      playerX = nx;
-      playerY = ny;
-      pasoEnCasilla(playerX, playerY);
-      jugadorCaminando = true;
-      render();
-      updateCamera();
-      setTimeout(() => { jugadorCaminando = false; }, 200);
+
+    if (mapaActivo === MAP && dy === -1) {
+      const key = playerY + ',' + playerX;
+      if (ENTRADAS[key] !== undefined) {
+        entrarCasa();
+        return;
+      }
     }
+
+    if (mapaActivo !== MAP && mapaActivo[ny] && mapaActivo[ny][nx] === '🚪') {
+      salirCasa();
+      return;
+    }
+
+    if (!isWalkable(nx, ny)) return;
+
+    playerX = nx;
+    playerY = ny;
+
+    pasoEnCasilla(playerX, playerY);
+    jugadorCaminando = true;
+    render();
+    updateCamera();
+    setTimeout(() => { jugadorCaminando = false; }, 200);
+  }
+
+  function entrarCasa() {
+    const key = playerY + ',' + playerX;
+    const idx = ENTRADAS[key];
+    if (idx === undefined) return;
+    exteriorState = { px: playerX, py: playerY, dir: playerDir };
+    const casa = INTERIORES[idx];
+    setMapa(casa.mapa);
+    mapContainer.style.backgroundColor = '#1a1410';
+    playerX = casa.entrada.x;
+    playerY = casa.entrada.y;
+    playerDir = { dx: 0, dy: -1 };
+    buildGrid();
+    render();
+    updateCamera();
+  }
+
+  function salirCasa() {
+    if (!exteriorState) return;
+    setMapa(MAP);
+    mapContainer.style.backgroundColor = '';
+    playerX = exteriorState.px;
+    playerY = exteriorState.py;
+    playerDir = exteriorState.dir;
+    exteriorState = null;
+    buildGrid();
+    render();
+    updateCamera();
   }
 
   /* ─── SONIDOS CON WEB AUDIO API ─── */
@@ -398,7 +516,7 @@
   }
 
   function pasoEnCasilla(x, y) {
-    const tile = MAP[y][x];
+    const tile = mapaActivo[y][x];
     if (tile === '🟫') generarSonidoTierra();
     else generarSonidoHierba();
   }
@@ -442,6 +560,8 @@
 
       buffer += chunk;
       modalEventoTexto.innerHTML = buffer;
+      modalEventoTexto.closest('.modal-evento-body').scrollTop =
+        modalEventoTexto.closest('.modal-evento-body').scrollHeight;
       if (conSonido && chunk.length === 1 && chunk !== '<' && chunk !== '&') {
         reproducirSonidoDialogo();
       }
@@ -482,11 +602,16 @@
       setDialogue('No hay nada en esa dirección.');
       return;
     }
-    const tile = MAP[ty][tx];
+    const tile = mapaActivo[ty][tx];
     if (tile === '🪧') {
       abrirEvento('Letrero', CARTEL_TEXTO, null, false);
     } else if (tile === '👦') {
+      habladoConTakeshi = true;
       abrirEvento('Takeshi', TAKESHI_TEXTO, 'img/personajes/takeshi.png', true);
+    } else if (tile === '🧓') {
+      const dialogo = habladoConTakeshi ? GENJI_TRAS_TAKESHI : GENJI_DIALOGOS[Math.floor(Math.random() * GENJI_DIALOGOS.length)];
+      habladoConTakeshi = false;
+      abrirEvento('Genji, el anciano', dialogo, 'img/personajes/abuelo_1.png', true);
     } else {
       setDialogue('No hay nada con lo que interactuar aquí.');
     }
@@ -520,6 +645,8 @@
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
     playerNameDsp.textContent = playerName;
+    if (mapaActivo !== MAP) setMapa(MAP);
+    mapContainer.style.backgroundColor = '';
 
     buildGrid();
     render();

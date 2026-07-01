@@ -269,7 +269,23 @@ html, body {
 
 .player-overlay {
   animation: pulse-player 1.2s ease-in-out infinite;
+  background-color: transparent;
+  image-rendering: pixelated;
+  z-index: 15;
   will-change: transform;
+  pointer-events: none;
+}
+
+.player-overlay::before {
+  content: '🥷';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 @keyframes pulse-player {
@@ -510,6 +526,8 @@ html, body {
   height: 68px;
   border-radius: 50%;
   object-fit: cover;
+  background-color: transparent;
+  image-rendering: pixelated;
   border: 3px solid #C59B27;
   box-shadow: 0 0 16px rgba(197,155,39,0.35);
   z-index: 10;
@@ -549,11 +567,12 @@ html, body {
 .modal-evento-body {
   color: #D1C7BD;
   font-size: 0.8rem;
-  line-height: 1.5;
-  padding: 8px 14px 2px;
+  line-height: 1.6;
+  padding: 8px 14px 6px;
   text-align: left;
   flex: 1;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .modal-evento-continuar {
