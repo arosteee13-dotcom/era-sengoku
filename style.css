@@ -596,3 +596,52 @@ html, body {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 0; }
 }
+
+/* ───── FUNDIDO A NEGRO ───── */
+
+#fade-overlay {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.4s ease;
+}
+
+/* ───── BANNER DE UBICACIÓN ───── */
+
+#banner-ubicacion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9998;
+  text-align: center;
+  padding: 10px 14px 20px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.banner-oculto {
+  opacity: 0 !important;
+  transform: translateY(-24px) !important;
+}
+
+.banner-principal {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin-bottom: 2px;
+}
+
+.banner-secundario {
+  color: #D1C7BD;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  opacity: 0.85;
+}

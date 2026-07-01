@@ -26,42 +26,39 @@
   const INTERIORES = [
     {
       mapa: [
-        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','📚','📚','⬜️'],
-        ['⬜️','🟫','🟫','🪑','📦','🪑','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','🧓','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
-        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','📚','📚','⬜️'],
+        ['⬜️','🟫','🪑','📦','🪑','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','👴','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
       ],
-      entrada: { x: 4, y: 5 },
+      entrada: { x: 3, y: 4 },
     },
     {
       mapa: [
-        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','📚','📚','⬜️'],
-        ['⬜️','🟫','🟫','🪑','🟫','🟫','🟫','👴','⬜️'],
-        ['⬜️','🟫','🟫','📦','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🪑','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
-        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','🟫','🟫','🟫','📚','📚','🟫','⬜️'],
+        ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','📦','🟫','🟫','🧓','🟫','⬜️'],
+        ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
       ],
-      entrada: { x: 4, y: 5 },
+      entrada: { x: 3, y: 4 },
     },
     {
       mapa: [
-        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','📚','📚','🟫','⬜️'],
-        ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','📦','🟫','🟫','🟫','👴','🟫','⬜️'],
-        ['⬜️','🟫','🪑','🟫','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
-        ['⬜️','🟫','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
-        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','📚','📚','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','👩','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🪑','📦','🪑','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
       ],
-      entrada: { x: 4, y: 5 },
+      entrada: { x: 3, y: 4 },
     },
   ];
 
@@ -69,6 +66,8 @@
   let ROWS = MAP.length;
   let COLS = MAP[0].length;
   let exteriorState = null;
+  let transicionActiva = false;
+  let fadeOverlay = null;
 
   function setMapa(mapa) {
     mapaActivo = mapa;
@@ -76,7 +75,7 @@
     COLS = mapa[0].length;
   }
 
-  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '📚', '📦', '🚪']);
+  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪']);
 
   const ENTRADAS = { "4,3": 0, "4,18": 1, "10,3": 2 };
 
@@ -95,7 +94,8 @@
     '🪑': 'img/cojin.png',
     '📚': 'img/estanteria.png',
     '📦': 'img/mesa.png',
-    '🧓': 'img/personajes/abuelo_1.png',
+    '🧓': 'img/personajes/hana.png',
+    '👴': 'img/personajes/genji.png',
   };
 
   const PATTERNS = [
@@ -118,6 +118,9 @@
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
   let habladoConTakeshi = false;
+  let progresoTakeshi = 0;
+  let habladoConGenji = false;
+  let visitadoCasaMadre = false;
 
   const GENJI_DIALOGOS = [
     "El tiempo pasa incluso para las piedras, joven guerrero. He visto crecer este pueblo desde que era solo unas chozas. Cuida de él cuando yo ya no esté.",
@@ -125,6 +128,12 @@
     "Cada mañana riego mis flores y pienso en los que se fueron. La vida es un ciclo, como las estaciones. No temas al cambio, joven.",
   ];
   const GENJI_TRAS_TAKESHI = "Ese muchacho, mi nieto Takeshi, te ha contado historias de zorros, ¿verdad? Es joven y cree en leyendas. Yo, en cambio, solo creo en lo que se marchita. Pero si el bosque ha empezado a susurrar... entonces incluso los viejos como yo debemos empezar a escuchar.";
+  const HANA_DIALOGOS = [
+    "He visto muchas lunas, joven. La aldea ha cambiado, pero el monte Fuji sigue igual. Cuida de tu honor como cuidas de tu espada.",
+    "Mi abuelo decía que el camino del samurái es solitario. Pero aquí, en Owari, nunca estamos solos. La familia es el verdadero tesoro.",
+    "Cuando era joven, conocí a un guerrero que venía del norte. Me enseñó que la verdadera fuerza está en la compasión. No lo olvides.",
+  ];
+  const MADRE_TEXTO = "Hijo mío, ten cuidado ahí fuera. He preparado algo de comida para tu viaje. <b>Arroz con ciruelas</b> y un poco de té. Vuelve a casa cuando puedas.";
 
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
@@ -143,6 +152,10 @@
   const modalEventoImg  = $('modal-evento-imagen');
   const modalEventoTexto = $('modal-evento-texto');
   const modalEventoTitulo = $('modal-evento-titulo');
+  fadeOverlay = $('fade-overlay');
+  const bannerUbicacion = $('banner-ubicacion');
+  const bannerTitulo    = $('banner-titulo');
+  const bannerSubtitulo = $('banner-subtitulo');
 
   /* ─── GESTIÓN DE PANTALLAS ─── */
   function showScreen(id) {
@@ -389,33 +402,81 @@
     setTimeout(() => { jugadorCaminando = false; }, 200);
   }
 
+  function hacerTransicion(callback) {
+    if (transicionActiva) return;
+    transicionActiva = true;
+    movimientoBloqueado = true;
+
+    fadeOverlay.style.transition = 'opacity 0.35s ease';
+    fadeOverlay.style.opacity = '1';
+
+    setTimeout(() => {
+      callback();
+
+      setTimeout(() => {
+        fadeOverlay.style.opacity = '0';
+        setTimeout(() => {
+          fadeOverlay.style.transition = '';
+          transicionActiva = false;
+          movimientoBloqueado = false;
+        }, 350);
+      }, 50);
+    }, 350);
+  }
+
+  let bannerTimer = null;
+
+  function mostrarUbicacion(titulo, subtitulo) {
+    if (bannerTimer) clearTimeout(bannerTimer);
+    bannerTitulo.textContent = titulo;
+    bannerSubtitulo.textContent = subtitulo || '';
+    bannerUbicacion.classList.remove('banner-oculto');
+    bannerTimer = setTimeout(() => {
+      bannerUbicacion.classList.add('banner-oculto');
+    }, 3000);
+  }
+
+  const UBICACIONES = {
+    0: { titulo: 'Cabaña del Maestro', sub: 'Biblioteca de los Recuerdos' },
+    1: { titulo: 'Casa de Té de Hana', sub: 'El aroma del hogar' },
+    2: { titulo: 'Refugio del Ronin', sub: 'Tu hogar' },
+  };
+
   function entrarCasa() {
     const key = playerY + ',' + playerX;
     const idx = ENTRADAS[key];
     if (idx === undefined) return;
-    exteriorState = { px: playerX, py: playerY, dir: playerDir };
-    const casa = INTERIORES[idx];
-    setMapa(casa.mapa);
-    mapContainer.style.backgroundColor = '#1a1410';
-    playerX = casa.entrada.x;
-    playerY = casa.entrada.y;
-    playerDir = { dx: 0, dy: -1 };
-    buildGrid();
-    render();
-    updateCamera();
+    if (idx === 2) visitadoCasaMadre = true;
+    hacerTransicion(() => {
+      exteriorState = { px: playerX, py: playerY, dir: playerDir };
+      const casa = INTERIORES[idx];
+      setMapa(casa.mapa);
+      mapContainer.style.backgroundColor = '#1a1410';
+      playerX = casa.entrada.x;
+      playerY = casa.entrada.y;
+      playerDir = { dx: 0, dy: -1 };
+      buildGrid();
+      render();
+      updateCamera();
+      const u = UBICACIONES[idx];
+      if (u) mostrarUbicacion(u.titulo, u.sub);
+    });
   }
 
   function salirCasa() {
     if (!exteriorState) return;
-    setMapa(MAP);
-    mapContainer.style.backgroundColor = '';
-    playerX = exteriorState.px;
-    playerY = exteriorState.py;
-    playerDir = exteriorState.dir;
-    exteriorState = null;
-    buildGrid();
-    render();
-    updateCamera();
+    hacerTransicion(() => {
+      setMapa(MAP);
+      mapContainer.style.backgroundColor = '';
+      playerX = exteriorState.px;
+      playerY = exteriorState.py;
+      playerDir = exteriorState.dir;
+      exteriorState = null;
+      buildGrid();
+      render();
+      updateCamera();
+      mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+    });
   }
 
   /* ─── SONIDOS CON WEB AUDIO API ─── */
@@ -522,7 +583,19 @@
   }
 
   const CARTEL_TEXTO = "Aldea de Owari — Provincia de Owari, año 1560. La guerra se acerca.";
-  const TAKESHI_TEXTO = "¡Hola! Soy <b>Takeshi</b>. Mi padre dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?";
+  function getDialogoTakeshi() {
+    const d0 = '¡Hola! Soy <b>Takeshi</b>. Mi abuelo dice que más allá del cartel hay un bosque encantado. ¿Has visto alguna vez un <b>zorro de fuego</b>?';
+    const d1 = '¿Ya has hablado con el abuelo <b>Genji</b>? Me ha dicho que tienes "mucho peso en los hombros". ¡Yo no sé qué significa eso, pero dice que si me porto bien y te ayudo, quizás me enseñes a desenvainar la katana sin cortarme los dedos! ¿Es verdad que las katanas brillan cuando hay peligro?';
+    const d2 = '¡He visto que has estado en tu casa! Mi abuelo dice que tu madre es una mujer muy fuerte. Me alegra que no estés siempre solo por ahí fuera, con los rumores de guerra que trae el viento. A veces, tener un hogar al que volver es la mejor armadura, ¿a que sí, Kenji?';
+
+    if (progresoTakeshi === 0) {
+      return habladoConGenji ? d1 : d0;
+    }
+    if (progresoTakeshi === 1) {
+      return visitadoCasaMadre ? d2 : d1;
+    }
+    return d2;
+  }
 
   let eventoTimer = null;
   let eventoConSonido = false;
@@ -589,6 +662,10 @@
 
   function cerrarEvento() {
     if (eventoTimer) { clearTimeout(eventoTimer); eventoTimer = null; }
+    if (modalEventoTitulo.textContent === 'Takeshi') {
+      if (progresoTakeshi === 0 && habladoConGenji) progresoTakeshi = 1;
+      else if (progresoTakeshi === 1 && visitadoCasaMadre) progresoTakeshi = 2;
+    }
     movimientoBloqueado = false;
     modalEventoImg.classList.add('modal-imagen-hidden');
     modalEvento.classList.add('modal-hidden');
@@ -607,11 +684,19 @@
       abrirEvento('Letrero', CARTEL_TEXTO, null, false);
     } else if (tile === '👦') {
       habladoConTakeshi = true;
-      abrirEvento('Takeshi', TAKESHI_TEXTO, 'img/personajes/takeshi.png', true);
-    } else if (tile === '🧓') {
+      abrirEvento('Takeshi', getDialogoTakeshi(), 'img/personajes/takeshi.png', true);
+    } else if (tile === '👴') {
+      habladoConGenji = true;
       const dialogo = habladoConTakeshi ? GENJI_TRAS_TAKESHI : GENJI_DIALOGOS[Math.floor(Math.random() * GENJI_DIALOGOS.length)];
       habladoConTakeshi = false;
-      abrirEvento('Genji, el anciano', dialogo, 'img/personajes/abuelo_1.png', true);
+      abrirEvento('Genji, el anciano', dialogo, 'img/personajes/genji.png', true);
+    } else if (tile === '🧓') {
+      abrirEvento('Hana, la sabia', HANA_DIALOGOS[Math.floor(Math.random() * HANA_DIALOGOS.length)], 'img/personajes/hana.png', true);
+    } else if (tile === '👩') {
+      abrirEvento('Tu madre', MADRE_TEXTO, null, true);
+    } else if (tile === '👩') {
+      visitadoCasaMadre = true;
+      abrirEvento('Tu madre', MADRE_TEXTO, null, true);
     } else {
       setDialogue('No hay nada con lo que interactuar aquí.');
     }
@@ -648,9 +733,11 @@
     if (mapaActivo !== MAP) setMapa(MAP);
     mapContainer.style.backgroundColor = '';
 
-    buildGrid();
-    render();
-    updateCamera();
+      buildGrid();
+      render();
+      updateCamera();
+      const u = UBICACIONES[idx];
+      if (u) mostrarUbicacion(u.titulo, u.sub);
 
     setDialogue('Bienvenido a la <span class="highlight">Aldea de Owari</span>, ' + playerName + '. El destino te espera.');
   }
