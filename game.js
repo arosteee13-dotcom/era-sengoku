@@ -23,6 +23,27 @@
     ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
   ];
 
+  const MAPA_BOSQUE = [
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟫','🟫','🟫','🟫','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🌲','🌲','🟩','🟩','🌲','🟩','🟩','🌲','🟩','🌲','🌲','🟩','🌲'],
+    ['🌲','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🌲','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🟩','🟩','🟫','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌸','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🌸','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+  ];
+
   const INTERIORES = [
     {
       mapa: [
@@ -135,6 +156,9 @@
   let madreDioItems = false;
   let textoEscribiendo = null;
   let callbackTextoCompleto = null;
+  let misionAldeanosCompletada = false;
+  let aldeanosHablados = new Set();
+  let mapaActual = 'aldea';
 
   const DIALOGOS_AMBIENTE = {
     '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
@@ -341,6 +365,9 @@
     visitadoCasaGenji = false;
     visitadoCasaMadre = false;
     habladoConTakeshi = false;
+    misionAldeanosCompletada = false;
+    aldeanosHablados = new Set();
+    mapaActual = 'aldea';
     localStorage.setItem('sengoku_playerName', 'Kenji');
     if (mapaActivo !== MAP) setMapa(MAP);
     mapContainer.style.backgroundColor = '';
@@ -580,6 +607,7 @@
     playerX = nx;
     playerY = ny;
 
+    verificarTransicion(playerX, playerY);
     pasoEnCasilla(playerX, playerY);
     jugadorCaminando = true;
     render();
@@ -623,6 +651,16 @@
   }
 
   function actualizarObjetivo() {
+    if (mapaActual === 'bosque') {
+      objetivoTexto.textContent = 'Explora el bosque. Busca el camino de regreso a la aldea.';
+      objetivoTexto.style.opacity = '1';
+      return;
+    }
+    if (misionAldeanosCompletada) {
+      objetivoTexto.textContent = 'Has hablado con todos los aldeanos. El camino al bosque de Aokigahara está abierto hacia el este.';
+      objetivoTexto.style.opacity = '1';
+      return;
+    }
     let texto = 'Observa tu entorno. El camino se revelará.';
     if (visitadoCasaMadre) {
       texto = 'Tienes provisiones para el viaje. Habla con los aldeanos antes de partir.';
@@ -636,6 +674,61 @@
       objetivoTexto.textContent = texto;
       objetivoTexto.style.opacity = '1';
     }, 500);
+  }
+
+  function verificarTransicion(x, y) {
+    if (mapaActual === 'aldea' && x === 21 && y === 9) {
+      if (!misionAldeanosCompletada) {
+        objetivoTexto.textContent = 'El Mercader dice que el camino es peligroso… debería hablar con los demás aldeanos primero.';
+        objetivoTexto.style.opacity = '1';
+        setTimeout(actualizarObjetivo, 3000);
+        return;
+      }
+      cargarMapaBosque();
+    } else if (mapaActual === 'bosque' && x === 20 && y === 11) {
+      mapaActual = 'aldea';
+      hacerTransicion(() => {
+        setMapa(MAP);
+        mapContainer.style.backgroundColor = '';
+        playerX = 21; playerY = 9;
+        playerDir = { dx: 1, dy: 0 };
+        buildGrid();
+        render();
+        updateCamera();
+        mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
+        actualizarObjetivo();
+        audioAmbiente.cambiarAmbiente('exterior');
+        iniciarNPCs();
+        if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
+        npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
+      }, () => {
+    movimientoBloqueado = true;
+    misionAldeanosCompletada = data.mision || false;
+    aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
+    mapaActual = data.mapa || 'aldea';
+        setTimeout(() => { movimientoBloqueado = false; }, 2000);
+      });
+    }
+  }
+
+  function cargarMapaBosque() {
+    mapaActual = 'bosque';
+    if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
+    hacerTransicion(() => {
+      setMapa(MAPA_BOSQUE);
+      mapContainer.style.backgroundColor = '#1a2a1a';
+      playerX = 1; playerY = 10;
+      playerDir = { dx: 1, dy: 0 };
+      buildGrid();
+      render();
+      updateCamera();
+      mostrarUbicacion('Los Claros del Bosque Susurrante', '');
+      actualizarObjetivo();
+      audioAmbiente.cambiarAmbiente('exterior');
+    }, () => {
+      movimientoBloqueado = true;
+      setTimeout(() => { movimientoBloqueado = false; }, 2000);
+    });
   }
 
   const UBICACIONES = {
@@ -1087,7 +1180,8 @@
 
   function cerrarEvento() {
     if (eventoTimer) { clearTimeout(eventoTimer); eventoTimer = null; }
-    const eraMadre = modalEventoTitulo.textContent === 'Tu madre';
+    const titulo = modalEventoTitulo.textContent;
+    const eraMadre = titulo === 'Tu madre';
     if (eraMadre && !madreDioItems) {
       madreDioItems = true;
       setTimeout(() => mostrarAnimRecoger([
@@ -1096,6 +1190,17 @@
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/cantimplora_de_te.png', nombre: 'Té de ciruela', descripcion: 'Bebida reconfortante' },
       ]), 2400);
+    }
+    const mapaNPC = {
+      'Takeshi':'takeshi','Genji, el anciano':'genji','Hana, la sabia':'hana',
+      'Tu madre':'madre','Leñador':'lenador','Mercader':'mercader','Campesino':'campesino',
+    };
+    if (mapaNPC[titulo]) {
+      aldeanosHablados.add(mapaNPC[titulo]);
+      if (aldeanosHablados.size >= 7 && !misionAldeanosCompletada) {
+        misionAldeanosCompletada = true;
+        actualizarObjetivo();
+      }
     }
     movimientoBloqueado = false;
     modalEventoImg.classList.add('modal-imagen-hidden');
@@ -1270,6 +1375,9 @@
         takeshi: habladoConTakeshi,
         dioItems: madreDioItems,
         inv: inventory,
+        mision: misionAldeanosCompletada,
+        aldeanos: [...aldeanosHablados],
+        mapa: mapaActual,
       };
       localStorage.setItem('sengoku_save', JSON.stringify(data));
       localStorage.setItem('sengoku_playerName', playerName);
