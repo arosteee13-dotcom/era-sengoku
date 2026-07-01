@@ -12,7 +12,7 @@
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🛖','🛖','🛖','🟫','🟩','🟩','🟩','🟩','🟩','⛲️','⛲️','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
-    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
+    ['🌲','🟩','⬜️','🚪','⬜️','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟩','🟩','🟫','🟩','🟩','🟩','🟩','💰','🌲'],
     ['🌲','🟩','🟩','🟩','🟩','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🟩','🟩','🌲'],
     ['🌲','🟩','🟩','🧑‍🌾','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
@@ -133,10 +133,21 @@
   let visitadoCasaGenji = false;
   let visitadoCasaMadre = false;
   let madreDioItems = false;
+  let textoEscribiendo = null;
+  let callbackTextoCompleto = null;
 
   const DIALOGOS_AMBIENTE = {
     '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
-    '💰': { titulo: 'Mercader', texto: 'Vengo de tierras lejanas. Mis sedas son finas, pero mis noticias son mejores. ¿Te interesa saber qué se dice sobre los extranjeros en la capital?', img: 'img/personajes/mercader.png' },
+    '💰': {
+      titulo: 'Mercader',
+      texto: 'Vengo de tierras lejanas. Mis sedas son finas, pero mis noticias son mejores. ¿Te interesa saber qué se dice sobre los extranjeros en la capital?',
+      img: 'img/personajes/mercader.png',
+      opciones: [
+        { texto: 'Cuéntame más sobre esos extranjeros.', respuesta: 'Se dice que portan armas nunca vistas, de fuego y trueno. He visto a uno en la frontera, con armadura roja y un casco con cuernos. No me gustó su mirada.' },
+        { texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?', respuesta: 'Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en 10 monedas de cobre el rollo. Un precio justo.' },
+        { texto: 'No me interesan tus noticias ni tus sedas.', respuesta: 'Como quieras, Ronin. Pero el mundo se mueve rápido, y los que ignoran las noticias suelen ser los primeros en caer. Cuídate.' },
+      ],
+    },
     '🧑‍🌾': { titulo: 'Campesino', texto: 'El arroz crece lento este año, Kenji. Si buscas el zorro de fuego, dicen que se vio una luz roja hacia el bosque al anochecer.', img: 'img/personajes/campesino.png' },
   };
 
@@ -187,7 +198,7 @@
 
   /* ─── COMPROBAR PARTIDA GUARDADA ─── */
   function checkSavedGame() {
-    const saved = localStorage.getItem('sengoku_playerName');
+    const saved = localStorage.getItem('sengoku_save');
     if (saved) {
       btnContinue.classList.remove('hidden');
     } else {
@@ -197,9 +208,19 @@
 
   /* ─── MANEJADORES DEL MENÚ ─── */
   function onContinue() {
-    const saved = localStorage.getItem('sengoku_playerName');
-    if (!saved) return;
-    playerName = saved;
+    const raw = localStorage.getItem('sengoku_save');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    playerName = data.name || 'Kenji';
+    playerX = data.px || 11;
+    playerY = data.py || 9;
+    playerDir = { dx: data.dirX || 0, dy: data.dirY || -1 };
+    visitadoCasaGenji = data.genji || false;
+    visitadoCasaMadre = data.madre || false;
+    habladoConTakeshi = data.takeshi || false;
+    madreDioItems = data.dioItems || false;
+    inventory = data.inv || [];
+
     movimientoBloqueado = true;
     fadeOverlay.style.transition = 'opacity 0.5s ease';
     fadeOverlay.style.opacity = '1';
@@ -980,8 +1001,10 @@
   let eventoTimer = null;
   let eventoConSonido = false;
 
-  function escribirEvento(html, velocidad, conSonido) {
+  function escribirEvento(html, velocidad, conSonido, callback) {
     velocidad = velocidad || 20;
+    textoEscribiendo = html;
+    callbackTextoCompleto = callback || null;
     modalEventoTexto.innerHTML = '';
     document.querySelectorAll('#modal-evento-texto + .modal-evento-cursor').forEach(el => el.remove());
     const chars = Array.from(html);
@@ -997,6 +1020,7 @@
       if (idx >= chars.length) {
         if (cursorSpan.parentNode) cursorSpan.remove();
         eventoTimer = null;
+        if (callbackTextoCompleto) { callbackTextoCompleto(); callbackTextoCompleto = null; }
         return;
       }
 
@@ -1024,10 +1048,12 @@
     tipear();
   }
 
-  function abrirEvento(titulo, texto, imagen, esPersonaje) {
+  function abrirEvento(titulo, texto, imagen, esPersonaje, opciones) {
     movimientoBloqueado = true;
     modalEventoTitulo.textContent = titulo;
     modalEventoTexto.innerHTML = '';
+    document.getElementById('modal-opciones').classList.add('modal-opciones-oculto');
+    document.getElementById('modal-opciones').innerHTML = '';
 
     if (imagen) {
       modalEventoImg.src = imagen;
@@ -1036,7 +1062,26 @@
       modalEventoImg.classList.add('modal-imagen-hidden');
     }
 
-    escribirEvento(texto, 20, esPersonaje);
+    escribirEvento(texto, 20, esPersonaje, opciones ? () => {
+      const cont = document.querySelector('.modal-evento-continuar');
+      if (cont) cont.style.display = 'none';
+      const contenedor = document.getElementById('modal-opciones');
+      contenedor.classList.remove('modal-opciones-oculto');
+      opciones.forEach((op, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'opcion-btn';
+        btn.textContent = (i + 1) + '. ' + op.texto;
+        btn.addEventListener('click', () => {
+          contenedor.classList.add('modal-opciones-oculto');
+          if (cont) cont.style.display = '';
+          modalEventoTexto.innerHTML = '';
+          const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
+          if (cursor) cursor.remove();
+          escribirEvento(op.respuesta, 20, true);
+        });
+        contenedor.appendChild(btn);
+      });
+    } : null);
     modalEvento.classList.remove('modal-hidden');
   }
 
@@ -1055,7 +1100,21 @@
     movimientoBloqueado = false;
     modalEventoImg.classList.add('modal-imagen-hidden');
     modalEvento.classList.add('modal-hidden');
+    const cont = document.querySelector('.modal-evento-continuar');
+    if (cont) cont.style.display = '';
+    document.getElementById('modal-opciones').classList.add('modal-opciones-oculto');
+    document.getElementById('modal-opciones').innerHTML = '';
     actualizarObjetivo();
+  }
+
+  function completarTexto() {
+    if (!eventoTimer && !textoEscribiendo) return;
+    if (textoEscribiendo) {
+      if (eventoTimer) { clearTimeout(eventoTimer); eventoTimer = null; }
+      modalEventoTexto.innerHTML = textoEscribiendo;
+      document.querySelectorAll('#modal-evento-texto + .modal-evento-cursor').forEach(el => el.remove());
+      if (callbackTextoCompleto) { callbackTextoCompleto(); callbackTextoCompleto = null; }
+    }
   }
 
   function mostrarAnimRecoger(items) {
@@ -1071,7 +1130,10 @@
   }
 
   function interact() {
-    if (movimientoBloqueado) { cerrarEvento(); return; }
+    if (movimientoBloqueado) {
+      if (eventoTimer) { completarTexto(); return; }
+      cerrarEvento(); return;
+    }
     const tx = playerX + playerDir.dx;
     const ty = playerY + playerDir.dy;
       if (ty < 0 || ty >= ROWS || tx < 0 || tx >= COLS) {
@@ -1094,7 +1156,7 @@
       abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
     } else if (DIALOGOS_AMBIENTE[tile]) {
       const d = DIALOGOS_AMBIENTE[tile];
-      abrirEvento(d.titulo, d.texto, d.img, true);
+      abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
     } else if (mapaActivo === MAP) {
       const cerca = [...PATRULLAS, ...npcsRutina.filter(n => n.activo)].find(n => {
         const dx = Math.abs(n.x - playerX);
@@ -1103,7 +1165,7 @@
       });
       if (cerca && DIALOGOS_AMBIENTE[cerca.emoji]) {
         const d = DIALOGOS_AMBIENTE[cerca.emoji];
-        abrirEvento(d.titulo, d.texto, d.img, true);
+        abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
       }
     }
   }
@@ -1195,12 +1257,36 @@
     bagBtn.addEventListener('touchstart', bagH, { passive: false });
     bagBtn.addEventListener('mousedown', bagH);
 
+    const saveBtn = $('btn-save');
+    const saveH = (e) => {
+      e.preventDefault();
+      if (mapaActivo !== MAP) return;
+      const data = {
+        name: playerName,
+        px: playerX, py: playerY,
+        dirX: playerDir.dx, dirY: playerDir.dy,
+        genji: visitadoCasaGenji,
+        madre: visitadoCasaMadre,
+        takeshi: habladoConTakeshi,
+        dioItems: madreDioItems,
+        inv: inventory,
+      };
+      localStorage.setItem('sengoku_save', JSON.stringify(data));
+      localStorage.setItem('sengoku_playerName', playerName);
+      objetivoTexto.textContent = 'Partida guardada.';
+      objetivoTexto.style.opacity = '1';
+      setTimeout(actualizarObjetivo, 2000);
+    };
+    saveBtn.addEventListener('touchstart', saveH, { passive: false });
+    saveBtn.addEventListener('mousedown', saveH);
+
     document.addEventListener('keydown', (e) => {
       if (screenGame.classList.contains('hidden')) return;
       if (movimientoBloqueado) {
         if (e.key === ' ' || e.key === 'e' || e.key === 'E' || e.key === 'Enter') {
           e.preventDefault();
-          if (!modalEvento.classList.contains('modal-hidden')) cerrarEvento();
+          if (eventoTimer) { completarTexto(); }
+          else if (!modalEvento.classList.contains('modal-hidden')) cerrarEvento();
           else if (!modalInventario.classList.contains('modal-hidden')) cerrarInventario();
         }
         if (e.key === 'i' || e.key === 'I') {

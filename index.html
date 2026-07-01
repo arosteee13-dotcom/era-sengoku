@@ -42,7 +42,6 @@
             <div class="modal-evento-body">
               <span id="modal-evento-texto"></span>
             </div>
-            <div id="modal-opciones" class="modal-opciones-oculto"></div>
             <div class="modal-evento-continuar">Continuar ▼</div>
           </div>
         </div>
@@ -55,6 +54,7 @@
         <div class="objetivo-texto" id="objetivo-texto">Observa tu entorno. El camino se revelará.</div>
       </div>
       <div id="control-panel">
+        <div id="modal-opciones" class="modal-opciones-oculto"></div>
         <div id="controls">
           <div id="dpad">
             <div class="dpad-center"></div>
@@ -64,8 +64,11 @@
             <button id="btn-down" class="dpad-btn" data-dir="down">▼</button>
           </div>
           <div id="action-buttons">
-            <button id="btn-bag">◇</button>
-            <button id="btn-action">A</button>
+            <div class="action-row">
+              <button id="btn-bag">◇</button>
+              <button id="btn-action">A</button>
+            </div>
+            <button id="btn-save">Guardar</button>
         </div>
       </div>
     </div>
