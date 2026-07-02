@@ -156,6 +156,10 @@
     '🪓': 'img/personajes/lenador.png',
     '💰': 'img/personajes/mercader.png',
     '🧑‍🌾': 'img/personajes/campesino.png',
+    '🙍': 'img/personajes/mrc_puesto_01.PNG',
+    '🙎': 'img/personajes/mrc_puesto_02.PNG',
+    '🙋': 'img/personajes/mrc_puesto_03.PNG',
+    '🙇': 'img/personajes/mrc_puesto_04.PNG',
     '🗿': 'img/estatua_jizo.png',
     '🏮': 'img/farolillo.png',
   };
@@ -881,9 +885,10 @@
       fog.classList.add('fog-oculto');
     }
 
-    const npcsVisibles = mapaActivo === MAP
-      ? [...npcsRutina.filter(n => n.activo), ...npcs]
-      : npcsRutina.filter(n => n.activo && n.tipo === 'interior');
+    const npcsVisibles = [
+      ...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo),
+      ...(mapaActivo === MAP ? npcs : []),
+    ];
     npcsVisibles.forEach(n => {
       const el = document.createElement('div');
       el.className = 'ambient-npc';
@@ -1195,6 +1200,7 @@
       mostrarUbicacion('Ciudad de los Mercaderes', 'Puesto comercial de las tierras del este');
       actualizarObjetivo();
       audioAmbiente.cambiarAmbiente('ciudad');
+      npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
     }, () => {
       movimientoBloqueado = true;
       setTimeout(() => { movimientoBloqueado = false; }, 2000);
@@ -1947,6 +1953,22 @@
     { id: 'madre', x: 2, y: 3, emoji: '👩', activo: false, mapa: INTERIORES[2].mapa },
     'interior', { area: 3 }
   );
+  asignarRutina(
+    { id: 'mrc_puesto_01', x: 3, y: 4, emoji: '🙍', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 3, pausaFin: 1 }
+  );
+  asignarRutina(
+    { id: 'mrc_puesto_02', x: 8, y: 4, emoji: '🙎', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: -1, pasos: 2, pausaFin: 1 }
+  );
+  asignarRutina(
+    { id: 'mrc_puesto_03', x: 13, y: 14, emoji: '🙋', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 3, pausaFin: 1 }
+  );
+  asignarRutina(
+    { id: 'mrc_puesto_04', x: 18, y: 14, emoji: '🙇', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: -1, pasos: 4, pausaFin: 1 }
+  );
 
   /* ─── NPCS AMBIENTALES ─── */
 
@@ -2198,7 +2220,10 @@
       abrirEvento(d.titulo, d.texto, d.img, true, typeof d.opciones === 'function' ? d.opciones() : d.opciones);
     } else {
       // Detección por proximidad (adyacente)
-      const cerca = [...npcsRutina.filter(n => n.activo), ...PATRULLAS].find(n => {
+      const cerca = [
+        ...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo),
+        ...(mapaActivo === MAP ? npcs : []),
+      ].find(n => {
         const dx = Math.abs(n.x - playerX);
         const dy = Math.abs(n.y - playerY);
         return (dx === 1 && dy === 0) || (dx === 0 && dy === 1);
