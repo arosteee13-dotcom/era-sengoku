@@ -158,6 +158,10 @@
     '🧑‍🌾': 'img/personajes/campesino.png',
     '🗿': 'img/estatua_jizo.png',
     '🏮': 'img/farolillo.png',
+    '🏪': 'img/personajes/mrc_puesto_01.png',
+    '🏬': 'img/personajes/mrc_puesto_02.png',
+    '🏫': 'img/personajes/mrc_puesto_03.png',
+    '🏣': 'img/personajes/mrc_puesto_04.png',
   };
 
   const PATTERNS = [
@@ -182,6 +186,16 @@
         ['🏘️','🚪','🏘️'],
       ],
       image: 'img/casa_clase_media.png',
+    },
+    {
+      tiles: [
+        ['🏰','🏰','🏰','🏰'],
+        ['🏰','🏰','🏰','🏰'],
+        ['🏰','🏰','🏰','🏰'],
+        ['🏰','🏰','🏰','🏰'],
+        ['🏰','🚪','🚪','🏰'],
+      ],
+      image: 'img/templo_ciudad_mercaderes.png',
     },
   ];
 
@@ -218,6 +232,10 @@
       ],
     },
     '🧑‍🌾': { titulo: 'Campesino', texto: 'El arroz crece lento este año, Kenji. Si buscas el zorro de fuego, dicen que se vio una luz roja hacia el bosque al anochecer.', img: 'img/personajes/campesino.png' },
+    '🏪': { titulo: 'Puesto de Tejidos', texto: 'Llegaron telas del norte, de colores que nunca has visto. Si buscas algo que abrigue el alma y el cuerpo, aquí encontrarás lo mejor de la ruta comercial.', img: 'img/personajes/mrc_puesto_01.png' },
+    '🏬': { titulo: 'Puesto de Especias', texto: 'Azafrán, canela y jengibre recién llegados de las montañas. Un puñado de especias puede convertir un plato sencillo en un festín digno de un daimio.', img: 'img/personajes/mrc_puesto_02.png' },
+    '🏫': { titulo: 'Puesto de Armaduras', texto: 'El acero del este es el mejor, forjado con técnicas que pocos conocen. Una buena armadura te salvará la vida cuando el camino se vuelva peligroso.', img: 'img/personajes/mrc_puesto_03.png' },
+    '🏣': { titulo: 'Puesto de Antigüedades', texto: 'Objetos de tiempos pasados, anteriores incluso a los primeros shogunes. Esta caja guarda un secreto que ni yo misma he logrado descifrar.', img: 'img/personajes/mrc_puesto_04.png' },
   };
 
   const GENJI_DIALOGOS = [
@@ -482,7 +500,7 @@
   }
 
   const OBJECT_TILES = new Set(['🏔️', '🏠']);
-  const CAPA2_TILES = new Set(['💰', '🪓', '🧑‍🌾', '🪧', '👦', '👴', '🧓', '👩', '🗿', '🏮']);
+  const CAPA2_TILES = new Set(['💰', '🪓', '🧑‍🌾', '🪧', '👦', '👴', '🧓', '👩', '🗿', '🏮', '🏪', '🏬', '🏫', '🏣']);
 
   function scanPatterns() {
     const found = [];
@@ -631,7 +649,7 @@
 
     const npcsVisibles = mapaActivo === MAP
       ? [...npcsRutina.filter(n => n.activo), ...npcs]
-      : npcsRutina.filter(n => n.activo && n.tipo === 'interior');
+      : npcsRutina.filter(n => n.activo && (n.tipo === 'interior' || (n.tipo === 'patrulla' && n.mapa === mapaActivo)));
     npcsVisibles.forEach(n => {
       const el = document.createElement('div');
       el.className = 'ambient-npc';
@@ -943,6 +961,8 @@
       mostrarUbicacion('Ciudad de los Mercaderes', 'Puesto comercial de las tierras del este');
       actualizarObjetivo();
       audioAmbiente.cambiarAmbiente('ciudad');
+      if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
+      npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
     }, () => {
       movimientoBloqueado = true;
       setTimeout(() => { movimientoBloqueado = false; }, 2000);
@@ -1696,6 +1716,25 @@
     'interior', { area: 3 }
   );
 
+  /* ─── NPCS DE LA CIUDAD ─── */
+
+  asignarRutina(
+    { id: 'mrc_01', x: 8, y: 1, emoji: '🏪', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 3, pausaFin: 3 }
+  );
+  asignarRutina(
+    { id: 'mrc_02', x: 4, y: 7, emoji: '🏬', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 3, pausaFin: 3 }
+  );
+  asignarRutina(
+    { id: 'mrc_03', x: 11, y: 7, emoji: '🏫', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: -1, pasos: 3, pausaFin: 3 }
+  );
+  asignarRutina(
+    { id: 'mrc_04', x: 8, y: 12, emoji: '🏣', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 3, pausaFin: 3 }
+  );
+
   /* ─── NPCS AMBIENTALES ─── */
 
   const PATRULLAS = [
@@ -2005,7 +2044,7 @@
       abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
     } else {
       // Detección por proximidad (adyacente)
-      const cerca = [...npcsRutina.filter(n => n.activo), ...PATRULLAS].find(n => {
+      const cerca = [...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo), ...PATRULLAS].find(n => {
         const dx = Math.abs(n.x - playerX);
         const dy = Math.abs(n.y - playerY);
         return (dx === 1 && dy === 0) || (dx === 0 && dy === 1);
