@@ -607,7 +607,7 @@ html, body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(33.33% + 16px);
+  bottom: calc(45% + 12px);
   width: 68px;
   height: 68px;
   border-radius: 50%;
@@ -625,7 +625,7 @@ html, body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: calc(100% / 2.8);
+  height: 45%;
   background: linear-gradient(180deg, rgba(34,26,21,0.95) 0%, #221A15 14px);
   border-radius: 0 0 16px 16px;
   border-top: 2px solid rgba(197,155,39,0.2);
@@ -746,6 +746,15 @@ html, body {
 .opcion-btn:active {
   background: linear-gradient(135deg, #3a3020, #4a3a28);
   border-color: #C59B27;
+}
+
+.opcion-elegida {
+  display: block;
+  color: #C59B27;
+  font-style: italic;
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+  opacity: 0.9;
 }
 
 /* ───── FUNDIDO A NEGRO ───── */
