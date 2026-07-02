@@ -187,25 +187,58 @@
 
   /* ─── ESTADO ─── */
   const ECONOMY = window.SengokuCurrency || {
-    MON_PER_RYO: 4000,
-    MON_PER_BU: 1000,
-    toMon({ ryo = 0, bu = 0, mon = 0 } = {}) {
+    MON_PER_SHU: 100,
+    MON_PER_RYO: 10000,
+    toMon({ ryo = 0, shu = 0, mon = 0 } = {}) {
       const safeRyo = Math.max(0, Math.floor(Number(ryo) || 0));
-      const safeBu = Math.max(0, Math.floor(Number(bu) || 0));
+      const safeShu = Math.max(0, Math.floor(Number(shu) || 0));
       const safeMon = Math.max(0, Math.floor(Number(mon) || 0));
-      return (safeRyo * 4000) + (safeBu * 1000) + safeMon;
+      return (safeRyo * 10000) + (safeShu * 100) + safeMon;
     },
     fromMon(totalMon = 0) {
       const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
-      const ryo = Math.floor(safeTotal / 4000);
-      const remAfterRyo = safeTotal % 4000;
-      const bu = Math.floor(remAfterRyo / 1000);
-      const mon = remAfterRyo % 1000;
-      return { ryo, bu, mon };
+      const ryo = Math.floor(safeTotal / 10000);
+      const remAfterRyo = safeTotal % 10000;
+      const shu = Math.floor(remAfterRyo / 100);
+      const mon = remAfterRyo % 100;
+      return { ryo, shu, mon };
     },
     formatCurrency(totalMon = 0) {
       const parts = this.fromMon(totalMon);
-      return `${parts.ryo} ryō | ${parts.bu} bu | ${parts.mon} mon`;
+      return `${parts.ryo} ryo | ${parts.shu} shu | ${parts.mon} mon`;
+    },
+    normalizeWallet(walletData = {}) {
+      const safeWallet = walletData || {};
+      return {
+        mon: Math.max(0, Math.floor(Number(safeWallet.mon) || 0)),
+        shu: Math.max(0, Math.floor(Number(safeWallet.shu) || 0)),
+        ryo: Math.max(0, Math.floor(Number(safeWallet.ryo) || 0)),
+      };
+    },
+    addToWallet(walletData = {}, amount = 0, denomination = 'mon') {
+      const safeWallet = this.normalizeWallet(walletData);
+      if (!Object.prototype.hasOwnProperty.call(safeWallet, denomination)) return safeWallet;
+      const safeAmount = Math.max(0, Math.floor(Number(amount) || 0));
+      return { ...safeWallet, [denomination]: safeWallet[denomination] + safeAmount };
+    },
+    canAffordDenomination(walletData = {}, price = {}) {
+      const safeWallet = this.normalizeWallet(walletData);
+      const denomination = ['mon', 'shu', 'ryo'].includes(price.denomination) ? price.denomination : 'mon';
+      const amount = Math.max(0, Math.floor(Number(price.amount) || 0));
+      return safeWallet[denomination] >= amount;
+    },
+    spendDenomination(walletData = {}, price = {}) {
+      const safeWallet = this.normalizeWallet(walletData);
+      const denomination = ['mon', 'shu', 'ryo'].includes(price.denomination) ? price.denomination : 'mon';
+      const amount = Math.max(0, Math.floor(Number(price.amount) || 0));
+      if (amount === 0) return { success: true, wallet: safeWallet };
+      if (!this.canAffordDenomination(safeWallet, { denomination, amount })) {
+        return { success: false, wallet: safeWallet };
+      }
+      return {
+        success: true,
+        wallet: { ...safeWallet, [denomination]: safeWallet[denomination] - amount },
+      };
     },
     addCurrency(totalMon = 0, amountMon = 0) {
       const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
@@ -233,7 +266,7 @@
   let playerDir = { dx: 0, dy: -1 };
   let ultimaDirX = 1;
   let inventory = [];
-  let wallet = { totalMon: 0 };
+  let wallet = { mon: 0, shu: 0, ryo: 0 };
   let tileSize = 0;
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
@@ -247,8 +280,8 @@
   let aldeanosHablados = new Set();
   let mapaActual = 'aldea';
   const RECOMPENSA_MON_MADRE = 12;
-  const PRECIO_SEDA_MON = 10;
-  const PRECIO_POSADA_MON = 8;
+  const PRECIO_SEDA = { amount: 1, denomination: 'shu' };
+  const PRECIO_POSADA = { amount: 8, denomination: 'mon' };
 
   const DIALOGOS_AMBIENTE = {
     '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
@@ -284,8 +317,23 @@
     },
   ];
 
+  function getCurrencyLabel(denomination) {
+    if (denomination === 'ryo') return 'Ryo';
+    if (denomination === 'shu') return 'Shu';
+    return 'Mon';
+  }
+
+  function formatPrice(price) {
+    return `${price.amount} ${getCurrencyLabel(price.denomination)}`;
+  }
+
+  function formatWalletText() {
+    const walletData = getWallet();
+    return `${walletData.ryo} ryo | ${walletData.shu} shu | ${walletData.mon} mon`;
+  }
+
   function getOpcionesMercader() {
-    const saldoTexto = ECONOMY.formatCurrency(getWalletMon());
+    const saldoTexto = formatWalletText();
     return [
       {
         texto: 'Cuéntame más sobre esos extranjeros.',
@@ -293,22 +341,22 @@
       },
       {
         texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?',
-        respuesta: `Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en ${PRECIO_SEDA_MON} mon el rollo. Tu saldo: ${saldoTexto}.`,
+        respuesta: `Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en ${formatPrice(PRECIO_SEDA)} el rollo. Tu saldo: ${saldoTexto}.`,
         opciones: [
           {
-            texto: `Comprar un rollo por ${PRECIO_SEDA_MON} mon (Saldo: ${saldoTexto}).`,
+            texto: `Comprar un rollo por ${formatPrice(PRECIO_SEDA)} (Saldo: ${saldoTexto}).`,
             respuesta: () => {
-              if (!canAfford(PRECIO_SEDA_MON)) {
-                return `No te alcanza, Ronin. Necesitas ${PRECIO_SEDA_MON} mon. Tu saldo: ${ECONOMY.formatCurrency(getWalletMon())}.`;
+              if (!canAfford(PRECIO_SEDA)) {
+                return `No te alcanza, Ronin. Necesitas ${formatPrice(PRECIO_SEDA)}. En tu cartera tienes ${getWallet()[PRECIO_SEDA.denomination]} ${getCurrencyLabel(PRECIO_SEDA.denomination)}.`;
               }
-              spendCurrency(PRECIO_SEDA_MON);
+              spendCurrency(PRECIO_SEDA);
               inventory.push({
                 icono: '🧵',
                 nombre: 'Rollo de Seda',
                 descripcion: 'Seda del norte, tejida con hilos de plata.',
               });
-              mostrarMensajeMon(-PRECIO_SEDA_MON);
-              return `Trato hecho. Te llevas un rollo de seda por ${PRECIO_SEDA_MON} mon. Saldo actual: ${ECONOMY.formatCurrency(getWalletMon())}.`;
+              mostrarMensajeMon(-ECONOMY.toMon({ [PRECIO_SEDA.denomination]: PRECIO_SEDA.amount }));
+              return `Trato hecho. Te llevas un rollo de seda por ${formatPrice(PRECIO_SEDA)}. Saldo actual: ${formatWalletText()}.`;
             },
           },
           {
@@ -325,17 +373,17 @@
   }
 
   function getOpcionesPosada() {
-    const saldoTexto = ECONOMY.formatCurrency(getWalletMon());
+    const saldoTexto = formatWalletText();
     return [
       {
-        texto: `Dormir por ${PRECIO_POSADA_MON} mon (Saldo: ${saldoTexto}).`,
+        texto: `Dormir por ${formatPrice(PRECIO_POSADA)} (Saldo: ${saldoTexto}).`,
         respuesta: () => {
-          if (!canAfford(PRECIO_POSADA_MON)) {
-            return `No tienes suficientes monedas para la posada. Necesitas ${PRECIO_POSADA_MON} mon. Tu saldo: ${ECONOMY.formatCurrency(getWalletMon())}.`;
+          if (!canAfford(PRECIO_POSADA)) {
+            return `No tienes suficientes monedas para la posada. Necesitas ${formatPrice(PRECIO_POSADA)}. En tu cartera tienes ${getWallet()[PRECIO_POSADA.denomination]} ${getCurrencyLabel(PRECIO_POSADA.denomination)}.`;
           }
-          spendCurrency(PRECIO_POSADA_MON);
-          mostrarMensajeMon(-PRECIO_POSADA_MON);
-          return `Has descansado en la posada por ${PRECIO_POSADA_MON} mon. Saldo actual: ${ECONOMY.formatCurrency(getWalletMon())}.`;
+          spendCurrency(PRECIO_POSADA);
+          mostrarMensajeMon(-ECONOMY.toMon({ [PRECIO_POSADA.denomination]: PRECIO_POSADA.amount }));
+          return `Has descansado en la posada por ${formatPrice(PRECIO_POSADA)}. Saldo actual: ${formatWalletText()}.`;
         },
       },
       {
@@ -373,27 +421,35 @@
   const animIcono       = $('anim-icono');
   const animTexto        = $('anim-texto');
 
-  function getWalletMon() {
-    return ECONOMY.clampMon(wallet && wallet.totalMon);
+  function getWallet() {
+    return ECONOMY.normalizeWallet(wallet);
   }
 
-  function setWalletMon(totalMon) {
-    wallet.totalMon = ECONOMY.clampMon(totalMon);
+  function getWalletMon() {
+    return ECONOMY.toMon(getWallet());
+  }
+
+  function setWallet(walletData) {
+    wallet = ECONOMY.normalizeWallet(walletData);
     actualizarWalletUI();
   }
 
+  function setWalletMon(totalMon) {
+    setWallet(ECONOMY.fromMon(ECONOMY.clampMon(totalMon)));
+  }
+
   function addCurrency(mon) {
-    setWalletMon(ECONOMY.addCurrency(getWalletMon(), mon));
+    setWallet(ECONOMY.addToWallet(getWallet(), mon, 'mon'));
     return getWalletMon();
   }
 
-  function canAfford(mon) {
-    return ECONOMY.canAfford(getWalletMon(), mon);
+  function canAfford(price) {
+    return ECONOMY.canAffordDenomination(getWallet(), price);
   }
 
-  function spendCurrency(mon) {
-    const result = ECONOMY.spendCurrency(getWalletMon(), mon);
-    if (result.success) setWalletMon(result.totalMon);
+  function spendCurrency(price) {
+    const result = ECONOMY.spendDenomination(getWallet(), price);
+    if (result.success) setWallet(result.wallet);
     return result.success;
   }
 
@@ -407,17 +463,16 @@
 
   function actualizarWalletUI() {
     const totalMon = getWalletMon();
-    const desglose = ECONOMY.fromMon(totalMon);
-    const textoMonedero = ECONOMY.formatCurrency(totalMon);
+    const desglose = getWallet();
+    const textoMonedero = formatWalletText();
     if (walletHud) {
       walletHud.textContent = `💰 ${textoMonedero}`;
     }
     if (invWallet) {
       invWallet.innerHTML =
-        '<div class="inv-wallet-title">Monedero</div>'
-        + '<div class="inv-wallet-grid">'
-        + `<div>Ryō: <b>${desglose.ryo}</b></div>`
-        + `<div>Bu: <b>${desglose.bu}</b></div>`
+        '<div class="inv-wallet-grid">'
+        + `<div>Ryo: <b>${desglose.ryo}</b></div>`
+        + `<div>Shu: <b>${desglose.shu}</b></div>`
         + `<div>Mon: <b>${desglose.mon}</b></div>`
         + '</div>'
         + `<div class="inv-wallet-total">Total: ${totalMon} mon</div>`;
@@ -454,8 +509,16 @@
     habladoConTakeshi = data.takeshi || false;
     madreDioItems = data.dioItems || false;
     inventory = data.inv || [];
-    const savedWalletMon = data.walletMon ?? (data.wallet && data.wallet.totalMon) ?? data.mon;
-    setWalletMon(savedWalletMon || 0);
+    const hasStructuredWallet = !!(
+      data.walletCoins
+      || (data.wallet && (data.wallet.mon !== undefined || data.wallet.shu !== undefined || data.wallet.ryo !== undefined))
+    );
+    if (hasStructuredWallet) {
+      setWallet(data.walletCoins || data.wallet);
+    } else {
+      const savedWalletMon = data.walletMon ?? (data.wallet && data.wallet.totalMon) ?? data.mon;
+      setWalletMon(savedWalletMon || 0);
+    }
     misionAldeanosCompletada = data.mision || false;
     aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
     mapaActual = data.mapa || 'aldea';
@@ -2104,7 +2167,7 @@
     } else if (tile === '🏮' && mapaActual === 'ciudad') {
       abrirEvento(
         'Posadero',
-        `Bienvenido a la posada. Una noche cuesta ${PRECIO_POSADA_MON} mon. Tu saldo: ${ECONOMY.formatCurrency(getWalletMon())}.`,
+        `Bienvenido a la posada. Una noche cuesta ${formatPrice(PRECIO_POSADA)}. Tu saldo: ${formatWalletText()}.`,
         null,
         true,
         getOpcionesPosada()
@@ -2232,6 +2295,7 @@
     const saveBtn = $('btn-save');
     const saveH = (e) => {
       e.preventDefault();
+      const walletData = getWallet();
       const data = {
         name: playerName,
         px: playerX, py: playerY,
@@ -2243,7 +2307,8 @@
         inv: inventory,
         mon: getWalletMon(),
         walletMon: getWalletMon(),
-        wallet: { totalMon: getWalletMon() },
+        walletCoins: walletData,
+        wallet: walletData,
         mision: misionAldeanosCompletada,
         aldeanos: [...aldeanosHablados],
         mapa: mapaActual,
