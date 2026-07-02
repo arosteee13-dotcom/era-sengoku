@@ -46,14 +46,14 @@
 
   const MAPA_CIUDAD = [
   ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
-  ['🌲','🟫','🟩','🌲','🏘️','🏘️','🏘️','🟩','🟫','🟫','🟫','🟫','🟫','🌲','🌲','🏰','🏰','🌲','🏮','🟫','🌲','🌲'],
-  ['🌲','🟫','🟩','🌲','🏘️','🏘️','🏘️','🟩','🟫','🟩','🟩','🟩','🟫','🌲','🌲','🏰','🏰','🌲','🟩','🟫','🌲','🌲'],
-  ['🌲','🟫','🟩','🌲','🏘️','🚪','🏘️','🏮','🟫','🟩','🟩','🟩','🟫','🌲','🌲','🌲','🌲','🌲','🏮','🟫','🌲','🌲'],
-  ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲','🌲'],
-  ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
-  ['🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🌲','🌲'],
-  ['🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🌲','🌲'],
-  ['🌲','🏘️','🚪','🏘️','🏮','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏘️','🚪','🏘️','🏮','🟩','🟩','🌲','🌲'],
+  ['🌲','🟫','🟩','🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🌲','🌲','🏰','🏰','🏰','🏰','🌲'],
+  ['🌲','🟫','🟩','🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🌲','🌲','🏰','🏰','🏰','🏰','🌲'],
+  ['🌲','🟫','🟩','🌲','🏘️','🚪','🏘️','🏮','🟩','🟩','🟩','🟩','🟩','🌲','🌲','🌲','🌲','🏰','🏰','🏰','🏰','🌲'],
+  ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟩','🟩','🟩','🌲','🌲','🌲','🌲','🏰','🏰','🏰','🏰','🌲'],
+  ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🏰','🚪','🚪','🏰','🌲'],
+  ['🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+  ['🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟩','🌲'],
+  ['🌲','🏘️','🚪','🏘️','🏮','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🏘️','🚪','🏘️','🏮','🟩','🟩','🟩','🟩','🟩','🌲'],
   ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🪧','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
   ['🌲','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
   ['🌲','🟫','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟫','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
@@ -156,13 +156,8 @@
     '🪓': 'img/personajes/lenador.png',
     '💰': 'img/personajes/mercader.png',
     '🧑‍🌾': 'img/personajes/campesino.png',
-    '🙍': 'img/personajes/mrc_puesto_01.PNG',
-    '🙎': 'img/personajes/mrc_puesto_02.PNG',
-    '🙋': 'img/personajes/mrc_puesto_03.PNG',
-    '🙇': 'img/personajes/mrc_puesto_04.PNG',
     '🗿': 'img/estatua_jizo.png',
     '🏮': 'img/farolillo.png',
-    '💂': 'img/personajes/gdr_ciudad_01.png',
   };
 
   const PATTERNS = [
@@ -191,87 +186,12 @@
   ];
 
   /* ─── ESTADO ─── */
-  const ECONOMY = window.SengokuCurrency || {
-    MON_PER_SHU: 100,
-    MON_PER_RYO: 10000,
-    toMon({ ryo = 0, shu = 0, mon = 0 } = {}) {
-      const safeRyo = Math.max(0, Math.floor(Number(ryo) || 0));
-      const safeShu = Math.max(0, Math.floor(Number(shu) || 0));
-      const safeMon = Math.max(0, Math.floor(Number(mon) || 0));
-      return (safeRyo * 10000) + (safeShu * 100) + safeMon;
-    },
-    fromMon(totalMon = 0) {
-      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
-      const ryo = Math.floor(safeTotal / 10000);
-      const remAfterRyo = safeTotal % 10000;
-      const shu = Math.floor(remAfterRyo / 100);
-      const mon = remAfterRyo % 100;
-      return { ryo, shu, mon };
-    },
-    formatCurrency(totalMon = 0) {
-      const parts = this.fromMon(totalMon);
-      return `${parts.ryo} ryo | ${parts.shu} shu | ${parts.mon} mon`;
-    },
-    normalizeWallet(walletData = {}) {
-      const safeWallet = walletData || {};
-      return {
-        mon: Math.max(0, Math.floor(Number(safeWallet.mon) || 0)),
-        shu: Math.max(0, Math.floor(Number(safeWallet.shu) || 0)),
-        ryo: Math.max(0, Math.floor(Number(safeWallet.ryo) || 0)),
-      };
-    },
-    addToWallet(walletData = {}, amount = 0, denomination = 'mon') {
-      const safeWallet = this.normalizeWallet(walletData);
-      if (!Object.prototype.hasOwnProperty.call(safeWallet, denomination)) return safeWallet;
-      const safeAmount = Math.max(0, Math.floor(Number(amount) || 0));
-      return { ...safeWallet, [denomination]: safeWallet[denomination] + safeAmount };
-    },
-    canAffordDenomination(walletData = {}, price = {}) {
-      const safeWallet = this.normalizeWallet(walletData);
-      const denomination = ['mon', 'shu', 'ryo'].includes(price.denomination) ? price.denomination : 'mon';
-      const amount = Math.max(0, Math.floor(Number(price.amount) || 0));
-      return safeWallet[denomination] >= amount;
-    },
-    spendDenomination(walletData = {}, price = {}) {
-      const safeWallet = this.normalizeWallet(walletData);
-      const denomination = ['mon', 'shu', 'ryo'].includes(price.denomination) ? price.denomination : 'mon';
-      const amount = Math.max(0, Math.floor(Number(price.amount) || 0));
-      if (amount === 0) return { success: true, wallet: safeWallet };
-      if (!this.canAffordDenomination(safeWallet, { denomination, amount })) {
-        return { success: false, wallet: safeWallet };
-      }
-      return {
-        success: true,
-        wallet: { ...safeWallet, [denomination]: safeWallet[denomination] - amount },
-      };
-    },
-    addCurrency(totalMon = 0, amountMon = 0) {
-      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
-      const safeAmount = Math.max(0, Math.floor(Number(amountMon) || 0));
-      return safeTotal + safeAmount;
-    },
-    canAfford(totalMon = 0, costMon = 0) {
-      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
-      const safeCost = Math.max(0, Math.floor(Number(costMon) || 0));
-      return safeTotal >= safeCost;
-    },
-    spendCurrency(totalMon = 0, costMon = 0) {
-      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
-      const safeCost = Math.max(0, Math.floor(Number(costMon) || 0));
-      if (safeTotal < safeCost) return { success: false, totalMon: safeTotal };
-      return { success: true, totalMon: safeTotal - safeCost };
-    },
-    clampMon(value = 0) {
-      return Math.max(0, Math.floor(Number(value) || 0));
-    },
-  };
   let playerName = '';
   let playerX = 11;
   let playerY = 9;
   let playerDir = { dx: 0, dy: -1 };
   let ultimaDirX = 1;
   let inventory = [];
-  let wallet = { mon: 0, shu: 0, ryo: 0 };
   let tileSize = 0;
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
@@ -284,9 +204,6 @@
   let misionAldeanosCompletada = false;
   let aldeanosHablados = new Set();
   let mapaActual = 'aldea';
-  const RECOMPENSA_MON_MADRE = 12;
-  const PRECIO_SEDA = { amount: 1, denomination: 'shu' };
-  const PRECIO_POSADA = { amount: 8, denomination: 'mon' };
 
   const DIALOGOS_AMBIENTE = {
     '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
@@ -294,10 +211,13 @@
       titulo: 'Mercader',
       texto: 'Vengo de tierras lejanas. Mis sedas son finas, pero mis noticias son mejores. ¿Te interesa saber qué se dice sobre los extranjeros en la capital?',
       img: 'img/personajes/mercader.png',
-      opciones: getOpcionesMercader,
+      opciones: [
+        { texto: 'Cuéntame más sobre esos extranjeros.', respuesta: 'Se dice que portan armas nunca vistas, de fuego y trueno. He visto a uno en la frontera, con armadura roja y un casco con cuernos. No me gustó su mirada.' },
+        { texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?', respuesta: 'Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en 10 monedas de cobre el rollo. Un precio justo.' },
+        { texto: 'No me interesan tus noticias ni tus sedas.', respuesta: 'Como quieras, Ronin. Pero el mundo se mueve rápido, y los que ignoran las noticias suelen ser los primeros en caer. Cuídate.' },
+      ],
     },
     '🧑‍🌾': { titulo: 'Campesino', texto: 'El arroz crece lento este año, Kenji. Si buscas el zorro de fuego, dicen que se vio una luz roja hacia el bosque al anochecer.', img: 'img/personajes/campesino.png' },
-    '💂': { titulo: 'Guardia del Castillo', texto: 'Alto ahí, Ronin. Nadie entra al castillo sin permiso del señor. Sigue tu camino.', img: 'img/personajes/gdr_ciudad_01.png' },
   };
 
   const GENJI_DIALOGOS = [
@@ -312,108 +232,6 @@
     "Cuando era joven, conocí a un guerrero que venía del norte. Me enseñó que la verdadera fuerza está en la compasión. No lo olvides.",
   ];
   const MADRE_TEXTO = "Hijo mío, ten cuidado ahí fuera. He preparado algo de comida para tu viaje. <b>Arroz con ciruelas</b> y un poco de té. Vuelve a casa cuando puedas.";
-  const MADRE_OPCIONES = [
-    {
-      texto: 'Gracias, madre. ¿Puedo llevar también algo de Mon?',
-      respuesta: `Claro, hijo. Llévate comida y también <b>${RECOMPENSA_MON_MADRE} Mon</b> para el camino. No quiero que te falte de nada.`,
-    },
-    {
-      texto: 'Con la comida me basta. Volveré pronto.',
-      respuesta: `Si cambias de idea, aquí te esperaré. Aun así, toma <b>${RECOMPENSA_MON_MADRE} Mon</b> y cuídate.`,
-    },
-  ];
-
-  const CURRENCY_META = {
-    ryo: { label: 'Ryo', src: 'img/ryo.png', alt: 'Moneda ryo' },
-    shu: { label: 'Shu', src: 'img/shu.png', alt: 'Moneda shu' },
-    mon: { label: 'Mon', src: 'img/mon.png', alt: 'Moneda mon' },
-  };
-
-  function getCurrencyMeta(denomination) {
-    return CURRENCY_META[denomination] || CURRENCY_META.mon;
-  }
-
-  function getCurrencyLabel(denomination) {
-    return getCurrencyMeta(denomination).label;
-  }
-
-  function formatPrice(price) {
-    return `${price.amount} ${getCurrencyLabel(price.denomination)}`;
-  }
-
-  function formatWalletText() {
-    const walletData = getWallet();
-    return `${walletData.ryo} ryo | ${walletData.shu} shu | ${walletData.mon} mon`;
-  }
-
-  function renderCurrencyAmount(denomination, amount, compact = false) {
-    const currency = getCurrencyMeta(denomination);
-    return '<span class="currency-amount' + (compact ? ' currency-amount-compact' : '') + '">'
-      + `<img src="${currency.src}" alt="${currency.alt}" class="currency-amount-icon">`
-      + `<span>${currency.label}: <b>${amount}</b></span>`
-      + '</span>';
-  }
-
-  function getOpcionesMercader() {
-    const saldoTexto = formatWalletText();
-    return [
-      {
-        texto: 'Cuéntame más sobre esos extranjeros.',
-        respuesta: 'Se dice que portan armas nunca vistas, de fuego y trueno. He visto a uno en la frontera, con armadura roja y un casco con cuernos. No me gustó su mirada.',
-      },
-      {
-        texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?',
-        respuesta: `Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en ${formatPrice(PRECIO_SEDA)} el rollo. Tu saldo: ${saldoTexto}.`,
-        opciones: [
-          {
-            texto: `Comprar un rollo por ${formatPrice(PRECIO_SEDA)} (Saldo: ${saldoTexto}).`,
-            respuesta: () => {
-              if (!canAfford(PRECIO_SEDA)) {
-                return `No te alcanza, Ronin. Necesitas ${formatPrice(PRECIO_SEDA)}. En tu cartera tienes ${getWallet()[PRECIO_SEDA.denomination]} ${getCurrencyLabel(PRECIO_SEDA.denomination)}.`;
-              }
-              spendCurrency(PRECIO_SEDA);
-              inventory.push({
-                icono: '🧵',
-                nombre: 'Rollo de Seda',
-                descripcion: 'Seda del norte, tejida con hilos de plata.',
-              });
-              mostrarMensajeMon(-ECONOMY.toMon({ [PRECIO_SEDA.denomination]: PRECIO_SEDA.amount }));
-              return `Trato hecho. Te llevas un rollo de seda por ${formatPrice(PRECIO_SEDA)}. Saldo actual: ${formatWalletText()}.`;
-            },
-          },
-          {
-            texto: 'Tal vez después.',
-            respuesta: 'Como gustes, Ronin. La seda no espera eternamente, pero aún tienes tiempo.',
-          },
-        ],
-      },
-      {
-        texto: 'No me interesan tus noticias ni tus sedas.',
-        respuesta: 'Como quieras, Ronin. Pero el mundo se mueve rápido, y los que ignoran las noticias suelen ser los primeros en caer. Cuídate.',
-      },
-    ];
-  }
-
-  function getOpcionesPosada() {
-    const saldoTexto = formatWalletText();
-    return [
-      {
-        texto: `Dormir por ${formatPrice(PRECIO_POSADA)} (Saldo: ${saldoTexto}).`,
-        respuesta: () => {
-          if (!canAfford(PRECIO_POSADA)) {
-            return `No tienes suficientes monedas para la posada. Necesitas ${formatPrice(PRECIO_POSADA)}. En tu cartera tienes ${getWallet()[PRECIO_POSADA.denomination]} ${getCurrencyLabel(PRECIO_POSADA.denomination)}.`;
-          }
-          spendCurrency(PRECIO_POSADA);
-          mostrarMensajeMon(-ECONOMY.toMon({ [PRECIO_POSADA.denomination]: PRECIO_POSADA.amount }));
-          return `Has descansado en la posada por ${formatPrice(PRECIO_POSADA)}. Saldo actual: ${formatWalletText()}.`;
-        },
-      },
-      {
-        texto: 'No pasaré la noche aquí.',
-        respuesta: 'Como desees, viajero. La puerta de la posada seguirá abierta.',
-      },
-    ];
-  }
 
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
@@ -422,7 +240,6 @@
   const btnContinue   = $('btn-continue');
   const btnNewGame    = $('btn-new-game');
   const playerNameDsp = $('player-name-display');
-  const walletHud     = $('wallet-hud');
   const mapContainer  = $('map-container');
   const mapGrid       = $('map-grid');
   const modalEvento     = $('modal-evento');
@@ -434,7 +251,6 @@
   const bannerTitulo    = $('banner-titulo');
   const bannerSubtitulo = $('banner-subtitulo');
   const modalInventario = $('modal-inventario');
-  const invWallet       = $('inv-wallet');
   const invLista        = $('inv-lista');
   const objetivoTexto   = $('objetivo-texto');
   const screenNarrativa = $('screen-narrativa');
@@ -442,69 +258,6 @@
   const animRecoger     = $('anim-recoger');
   const animIcono       = $('anim-icono');
   const animTexto        = $('anim-texto');
-
-  function getWallet() {
-    return ECONOMY.normalizeWallet(wallet);
-  }
-
-  function getWalletMon() {
-    return ECONOMY.toMon(getWallet());
-  }
-
-  function setWallet(walletData) {
-    wallet = ECONOMY.normalizeWallet(walletData);
-    actualizarWalletUI();
-  }
-
-  function setWalletMon(totalMon) {
-    setWallet(ECONOMY.fromMon(ECONOMY.clampMon(totalMon)));
-  }
-
-  function addCurrency(mon) {
-    setWallet(ECONOMY.addToWallet(getWallet(), mon, 'mon'));
-    return getWalletMon();
-  }
-
-  function canAfford(price) {
-    return ECONOMY.canAffordDenomination(getWallet(), price);
-  }
-
-  function spendCurrency(price) {
-    const result = ECONOMY.spendDenomination(getWallet(), price);
-    if (result.success) setWallet(result.wallet);
-    return result.success;
-  }
-
-  function mostrarMensajeMon(deltaMon) {
-    if (!deltaMon) return;
-    const signo = deltaMon > 0 ? '+' : '-';
-    objetivoTexto.textContent = `${signo}${Math.abs(deltaMon)} mon`;
-    objetivoTexto.style.opacity = '1';
-    setTimeout(actualizarObjetivo, 1800);
-  }
-
-  function actualizarWalletUI() {
-    const totalMon = getWalletMon();
-    const desglose = getWallet();
-    const textoMonedero = formatWalletText();
-    if (walletHud) {
-      walletHud.innerHTML =
-        '<span class="wallet-hud-label">💰</span>'
-        + renderCurrencyAmount('ryo', desglose.ryo, true)
-        + renderCurrencyAmount('shu', desglose.shu, true)
-        + renderCurrencyAmount('mon', desglose.mon, true);
-      walletHud.setAttribute('aria-label', textoMonedero);
-    }
-    if (invWallet) {
-      invWallet.innerHTML =
-        '<div class="inv-wallet-grid">'
-        + `<div>${renderCurrencyAmount('ryo', desglose.ryo)}</div>`
-        + `<div>${renderCurrencyAmount('shu', desglose.shu)}</div>`
-        + `<div>${renderCurrencyAmount('mon', desglose.mon)}</div>`
-        + '</div>'
-        + `<div class="inv-wallet-total">Total: ${totalMon} mon</div>`;
-    }
-  }
 
   /* ─── GESTIÓN DE PANTALLAS ─── */
   function showScreen(id) {
@@ -536,16 +289,6 @@
     habladoConTakeshi = data.takeshi || false;
     madreDioItems = data.dioItems || false;
     inventory = data.inv || [];
-    const hasStructuredWallet = !!(
-      data.walletCoins
-      || (data.wallet && (data.wallet.mon !== undefined || data.wallet.shu !== undefined || data.wallet.ryo !== undefined))
-    );
-    if (hasStructuredWallet) {
-      setWallet(data.walletCoins || data.wallet);
-    } else {
-      const savedWalletMon = data.walletMon ?? (data.wallet && data.wallet.totalMon) ?? data.mon;
-      setWalletMon(savedWalletMon || 0);
-    }
     misionAldeanosCompletada = data.mision || false;
     aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
     mapaActual = data.mapa || 'aldea';
@@ -671,7 +414,6 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
-    setWalletMon(0);
     madreDioItems = false;
     visitadoCasaGenji = false;
     visitadoCasaMadre = false;
@@ -887,10 +629,9 @@
       fog.classList.add('fog-oculto');
     }
 
-    const npcsVisibles = [
-      ...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo),
-      ...(mapaActivo === MAP ? npcs : []),
-    ];
+    const npcsVisibles = mapaActivo === MAP
+      ? [...npcsRutina.filter(n => n.activo), ...npcs]
+      : npcsRutina.filter(n => n.activo && n.tipo === 'interior');
     npcsVisibles.forEach(n => {
       const el = document.createElement('div');
       el.className = 'ambient-npc';
@@ -1202,7 +943,6 @@
       mostrarUbicacion('Ciudad de los Mercaderes', 'Puesto comercial de las tierras del este');
       actualizarObjetivo();
       audioAmbiente.cambiarAmbiente('ciudad');
-      npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
     }, () => {
       movimientoBloqueado = true;
       setTimeout(() => { movimientoBloqueado = false; }, 2000);
@@ -1955,36 +1695,6 @@
     { id: 'madre', x: 2, y: 3, emoji: '👩', activo: false, mapa: INTERIORES[2].mapa },
     'interior', { area: 3 }
   );
-  asignarRutina(
-    { id: 'mrc_puesto_01', x: 4, y: 7, emoji: '🙍', activo: true, mapa: MAPA_CIUDAD },
-    'patrulla', { dirX: 1, pasos: 2, pausaFin: 1 }
-  );
-  asignarRutina(
-    { id: 'mrc_puesto_02', x: 13, y: 7, emoji: '🙎', activo: true, mapa: MAPA_CIUDAD },
-    'patrulla', { dirX: -1, pasos: 2, pausaFin: 1 }
-  );
-  asignarRutina(
-    { id: 'mrc_puesto_03', x: 8, y: 12, emoji: '🙋', activo: true, mapa: MAPA_CIUDAD },
-    'patrulla', { dirX: 1, pasos: 2, pausaFin: 1 }
-  );
-  asignarRutina(
-    { id: 'mrc_puesto_04', x: 11, y: 12, emoji: '🙇', activo: true, mapa: MAPA_CIUDAD },
-    'patrulla', { dirX: -1, pasos: 1, pausaFin: 1 }
-  );
-
-  /* ─── GUARDIAS DEL CASTILLO (estáticos) ─── */
-  asignarRutina(
-    { id: 'guardia_castillo_01', x: 19, y: 2, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
-    'estatico', {}
-  );
-  asignarRutina(
-    { id: 'guardia_castillo_02', x: 19, y: 3, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
-    'estatico', {}
-  );
-  asignarRutina(
-    { id: 'guardia_castillo_03', x: 17, y: 4, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
-    'estatico', {}
-  );
 
   /* ─── NPCS AMBIENTALES ─── */
 
@@ -2005,10 +1715,6 @@
 
   function actualizarNPCs() {
     if (movimientoBloqueado) return;
-
-    // Fase 1: calcular propuestas de movimiento sin aplicarlas todavía
-    const propuestas = [];
-
     npcsRutina.forEach(n => {
       if (!n.activo) return;
       if (n.mapa !== mapaActivo) return;
@@ -2018,13 +1724,8 @@
         const sigX = n.x + n.dirX;
         if (sigX === playerX && n.y === playerY) { n.pausando = true; n.timerPausa = 800; return; }
         const t = n.mapa[n.y] ? n.mapa[n.y][sigX] : null;
-        if (t === '🟩' || t === '🟫') {
-          propuestas.push({
-            id: n.id, x: n.x, y: n.y, nextX: sigX, nextY: n.y,
-            _onPermitido() { n.x = sigX; n.restantes--; },
-            _onBloqueado() { n.pausando = true; n.timerPausa = 500; },
-          });
-        } else { n.pausando = true; n.timerPausa = 500; }
+        if (t === '🟩' || t === '🟫') { n.x = sigX; n.restantes--; }
+        else { n.pausando = true; n.timerPausa = 500; }
       } else if (n.tipo === 'interior') {
         n.timer += 1800;
         if (n.timer >= n.pausa) {
@@ -2038,41 +1739,17 @@
             if (obstaculos.includes(nx+','+ny)) return false;
             return n.mapa && n.mapa[ny] && n.mapa[ny][nx]==='🟫';
           });
-          if (v.length) {
-            const m = v[Math.floor(Math.random() * v.length)];
-            propuestas.push({
-              id: n.id, x: n.x, y: n.y, nextX: n.x + m.dx, nextY: n.y + m.dy,
-              _onPermitido() { n.x += m.dx; n.y += m.dy; },
-              _onBloqueado() {},
-            });
-          }
+          if (v.length) { const m=v[Math.floor(Math.random()*v.length)]; n.x+=m.dx; n.y+=m.dy; }
         }
       }
     });
-
-    npcs.forEach((n, i) => {
-      if (n.restantes <= 0) { n.dirX *= -1; n.restantes = n.pasos; }
+    npcs.forEach(n => {
+      if (n.restantes <= 0) { n.dirX*=-1; n.restantes=n.pasos; }
       const sigX = n.x + n.dirX;
       if (sigX === playerX && n.y === playerY) { n.restantes = 0; return; }
-      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX] === '🟩' || mapaActivo[n.y][sigX] === '🟫')) {
-        propuestas.push({
-          id: '__npc_' + i, x: n.x, y: n.y, nextX: sigX, nextY: n.y,
-          _onPermitido() { n.x = sigX; n.restantes--; },
-          _onBloqueado() { n.restantes--; },
-        });
-      } else { n.restantes = 0; n.restantes--; }
-    });
-
-    // Fase 2: resolver colisiones entre agentes (incluye la posición del jugador como fija)
-    const todasPropuestas = [
-      ...propuestas,
-      { id: '__player__', x: playerX, y: playerY, nextX: playerX, nextY: playerY },
-    ];
-    const permitidos = SengokuCollision.resolverColisiones(todasPropuestas);
-
-    // Fase 3: aplicar solo los movimientos permitidos
-    propuestas.forEach(p => {
-      if (permitidos.has(p.id)) { p._onPermitido(); } else { p._onBloqueado(); }
+      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX]==='🟩'||mapaActivo[n.y][sigX]==='🟫')) n.x = sigX;
+      else n.restantes = 0;
+      n.restantes--;
     });
   }
 
@@ -2137,28 +1814,6 @@
     tipear();
   }
 
-  function mostrarOpcionesDialogo(opciones) {
-    const cont = document.querySelector('.modal-evento-continuar');
-    if (cont) cont.style.display = 'none';
-    const contenedor = document.getElementById('modal-opciones');
-    contenedor.classList.remove('modal-opciones-oculto');
-    opciones.forEach((op, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'opcion-btn';
-      btn.textContent = (i + 1) + '. ' + op.texto;
-      btn.addEventListener('click', () => {
-        contenedor.classList.add('modal-opciones-oculto');
-        if (cont) cont.style.display = '';
-        modalEventoTexto.innerHTML = '';
-        const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
-        if (cursor) cursor.remove();
-        const respuesta = typeof op.respuesta === 'function' ? op.respuesta() : op.respuesta;
-        escribirEvento(respuesta, 20, true, op.opciones ? () => mostrarOpcionesDialogo(op.opciones) : null);
-      });
-      contenedor.appendChild(btn);
-    });
-  }
-
   function abrirEvento(titulo, texto, imagen, esPersonaje, opciones) {
     movimientoBloqueado = true;
     modalEventoTitulo.textContent = titulo;
@@ -2173,7 +1828,26 @@
       modalEventoImg.classList.add('modal-imagen-hidden');
     }
 
-    escribirEvento(texto, 20, esPersonaje, opciones ? () => mostrarOpcionesDialogo(opciones) : null);
+    escribirEvento(texto, 20, esPersonaje, opciones ? () => {
+      const cont = document.querySelector('.modal-evento-continuar');
+      if (cont) cont.style.display = 'none';
+      const contenedor = document.getElementById('modal-opciones');
+      contenedor.classList.remove('modal-opciones-oculto');
+      opciones.forEach((op, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'opcion-btn';
+        btn.textContent = (i + 1) + '. ' + op.texto;
+        btn.addEventListener('click', () => {
+          contenedor.classList.add('modal-opciones-oculto');
+          if (cont) cont.style.display = '';
+          modalEventoTexto.innerHTML = '';
+          const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
+          if (cursor) cursor.remove();
+          escribirEvento(op.respuesta, 20, true);
+        });
+        contenedor.appendChild(btn);
+      });
+    } : null);
     modalEvento.classList.remove('modal-hidden');
   }
 
@@ -2183,16 +1857,12 @@
     const eraMadre = titulo === 'Tu madre';
     if (eraMadre && !madreDioItems) {
       madreDioItems = true;
-      addCurrency(RECOMPENSA_MON_MADRE);
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/arroz_con_ciruelas.png', nombre: 'Ración de Arroz', descripcion: 'Recupera energía' },
       ]), 200);
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/cantimplora_de_te.png', nombre: 'Té de ciruela', descripcion: 'Bebida reconfortante' },
       ]), 2400);
-      objetivoTexto.textContent = `Recibiste comida y +${RECOMPENSA_MON_MADRE} mon de tu madre.`;
-      objetivoTexto.style.opacity = '1';
-      setTimeout(() => mostrarMensajeMon(RECOMPENSA_MON_MADRE), 1200);
     }
     const mapaNPC = {
       'Takeshi':'takeshi','Genji, el anciano':'genji','Hana, la sabia':'hana',
@@ -2256,23 +1926,12 @@
     // Detección por tile fijo (🪧, 💰, 🪓, 🧑‍🌾 en MAP)
     if (tile === '🪧') {
       abrirEvento('Letrero', CARTEL_TEXTO, null, true);
-    } else if (tile === '🏮' && mapaActual === 'ciudad') {
-      abrirEvento(
-        'Posadero',
-        `Bienvenido a la posada. Una noche cuesta ${formatPrice(PRECIO_POSADA)}. Tu saldo: ${formatWalletText()}.`,
-        null,
-        true,
-        getOpcionesPosada()
-      );
     } else if (DIALOGOS_AMBIENTE[tile]) {
       const d = DIALOGOS_AMBIENTE[tile];
-      abrirEvento(d.titulo, d.texto, d.img, true, typeof d.opciones === 'function' ? d.opciones() : d.opciones);
+      abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
     } else {
       // Detección por proximidad (adyacente)
-      const cerca = [
-        ...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo),
-        ...(mapaActivo === MAP ? npcs : []),
-      ].find(n => {
+      const cerca = [...npcsRutina.filter(n => n.activo), ...PATRULLAS].find(n => {
         const dx = Math.abs(n.x - playerX);
         const dy = Math.abs(n.y - playerY);
         return (dx === 1 && dy === 0) || (dx === 0 && dy === 1);
@@ -2289,17 +1948,16 @@
           abrirEvento('Hana, la sabia', HANA_DIALOGOS[Math.floor(Math.random() * HANA_DIALOGOS.length)], 'img/personajes/hana.png', true);
         } else if (cerca.id === 'madre') {
           visitadoCasaMadre = true;
-          abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true, MADRE_OPCIONES);
+          abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
         } else if (DIALOGOS_AMBIENTE[cerca.emoji]) {
           const d = DIALOGOS_AMBIENTE[cerca.emoji];
-          abrirEvento(d.titulo, d.texto, d.img, true, typeof d.opciones === 'function' ? d.opciones() : d.opciones);
+          abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
         }
       }
     }
   }
 
   function abrirInventario() {
-    actualizarWalletUI();
     invLista.innerHTML = '';
     if (inventory.length === 0) {
       invLista.innerHTML = '<div class="inv-vacio">Tu zurrón está vacío, busca provisiones.</div>';
@@ -2343,7 +2001,6 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
-    setWalletMon(0);
     madreDioItems = false;
     playerNameDsp.textContent = playerName;
     if (mapaActivo !== MAP) setMapa(MAP);
@@ -2390,7 +2047,6 @@
     const saveBtn = $('btn-save');
     const saveH = (e) => {
       e.preventDefault();
-      const walletData = getWallet();
       const data = {
         name: playerName,
         px: playerX, py: playerY,
@@ -2400,10 +2056,6 @@
         takeshi: habladoConTakeshi,
         dioItems: madreDioItems,
         inv: inventory,
-        mon: getWalletMon(),
-        walletMon: getWalletMon(),
-        walletCoins: walletData,
-        wallet: walletData,
         mision: misionAldeanosCompletada,
         aldeanos: [...aldeanosHablados],
         mapa: mapaActual,
