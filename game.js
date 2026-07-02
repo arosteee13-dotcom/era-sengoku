@@ -160,6 +160,9 @@
     '🙎': 'img/personajes/mrc_puesto_02.PNG',
     '🙋': 'img/personajes/mrc_puesto_03.PNG',
     '🙇': 'img/personajes/mrc_puesto_04.PNG',
+    '💂': 'img/personajes/gdr_ciudad_01.png',
+    '🥷': 'img/personajes/gdr_ciudad_02.png',
+    '⚔️': 'img/personajes/gdr_ciudad_03.png.png',
     '🗿': 'img/estatua_jizo.png',
     '🏮': 'img/farolillo.png',
   };
@@ -1968,6 +1971,18 @@
   asignarRutina(
     { id: 'mrc_puesto_04', x: 19, y: 16, emoji: '🙇', activo: true, mapa: MAPA_CIUDAD },
     'patrulla', { dirX: -1, pasos: 1, pausaFin: 1 }
+  );
+  asignarRutina(
+    { id: 'gdr_ciudad_01', x: 10, y: 3, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 1, pausaFin: 2 }
+  );
+  asignarRutina(
+    { id: 'gdr_ciudad_02', x: 11, y: 3, emoji: '🥷', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: -1, pasos: 1, pausaFin: 2 }
+  );
+  asignarRutina(
+    { id: 'gdr_ciudad_03', x: 12, y: 3, emoji: '⚔️', activo: true, mapa: MAPA_CIUDAD },
+    'patrulla', { dirX: 1, pasos: 1, pausaFin: 2 }
   );
 
   /* ─── NPCS AMBIENTALES ─── */
