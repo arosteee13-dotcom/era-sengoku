@@ -1989,6 +1989,10 @@
 
   function actualizarNPCs() {
     if (movimientoBloqueado) return;
+
+    // Fase 1: calcular propuestas de movimiento sin aplicarlas todavía
+    const propuestas = [];
+
     npcsRutina.forEach(n => {
       if (!n.activo) return;
       if (n.mapa !== mapaActivo) return;
@@ -1998,8 +2002,13 @@
         const sigX = n.x + n.dirX;
         if (sigX === playerX && n.y === playerY) { n.pausando = true; n.timerPausa = 800; return; }
         const t = n.mapa[n.y] ? n.mapa[n.y][sigX] : null;
-        if (t === '🟩' || t === '🟫') { n.x = sigX; n.restantes--; }
-        else { n.pausando = true; n.timerPausa = 500; }
+        if (t === '🟩' || t === '🟫') {
+          propuestas.push({
+            id: n.id, x: n.x, y: n.y, nextX: sigX, nextY: n.y,
+            _onPermitido() { n.x = sigX; n.restantes--; },
+            _onBloqueado() { n.pausando = true; n.timerPausa = 500; },
+          });
+        } else { n.pausando = true; n.timerPausa = 500; }
       } else if (n.tipo === 'interior') {
         n.timer += 1800;
         if (n.timer >= n.pausa) {
@@ -2013,17 +2022,41 @@
             if (obstaculos.includes(nx+','+ny)) return false;
             return n.mapa && n.mapa[ny] && n.mapa[ny][nx]==='🟫';
           });
-          if (v.length) { const m=v[Math.floor(Math.random()*v.length)]; n.x+=m.dx; n.y+=m.dy; }
+          if (v.length) {
+            const m = v[Math.floor(Math.random() * v.length)];
+            propuestas.push({
+              id: n.id, x: n.x, y: n.y, nextX: n.x + m.dx, nextY: n.y + m.dy,
+              _onPermitido() { n.x += m.dx; n.y += m.dy; },
+              _onBloqueado() {},
+            });
+          }
         }
       }
     });
-    npcs.forEach(n => {
-      if (n.restantes <= 0) { n.dirX*=-1; n.restantes=n.pasos; }
+
+    npcs.forEach((n, i) => {
+      if (n.restantes <= 0) { n.dirX *= -1; n.restantes = n.pasos; }
       const sigX = n.x + n.dirX;
       if (sigX === playerX && n.y === playerY) { n.restantes = 0; return; }
-      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX]==='🟩'||mapaActivo[n.y][sigX]==='🟫')) n.x = sigX;
-      else n.restantes = 0;
-      n.restantes--;
+      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX] === '🟩' || mapaActivo[n.y][sigX] === '🟫')) {
+        propuestas.push({
+          id: '__npc_' + i, x: n.x, y: n.y, nextX: sigX, nextY: n.y,
+          _onPermitido() { n.x = sigX; n.restantes--; },
+          _onBloqueado() { n.restantes--; },
+        });
+      } else { n.restantes = 0; n.restantes--; }
+    });
+
+    // Fase 2: resolver colisiones entre agentes (incluye la posición del jugador como fija)
+    const todasPropuestas = [
+      ...propuestas,
+      { id: '__player__', x: playerX, y: playerY, nextX: playerX, nextY: playerY },
+    ];
+    const permitidos = SengokuCollision.resolverColisiones(todasPropuestas);
+
+    // Fase 3: aplicar solo los movimientos permitidos
+    propuestas.forEach(p => {
+      if (permitidos.has(p.id)) { p._onPermitido(); } else { p._onBloqueado(); }
     });
   }
 
