@@ -374,6 +374,7 @@ html, body {
   gap: 4px;
   min-height: 0;
   justify-content: flex-end;
+  position: relative;
 }
 
 #controls {
@@ -719,10 +720,19 @@ html, body {
 /* ───── OPCIONES DE DIÁLOGO ───── */
 
 #modal-opciones {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  right: 10px;
+  z-index: 50;
+  background: linear-gradient(180deg, #1e1812 0%, #181512 100%);
+  border: 1px solid #3a3020;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 2px 0 4px;
+  padding: 6px 8px;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.5);
 }
 
 .modal-opciones-oculto { display: none !important; }
