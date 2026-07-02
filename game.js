@@ -1280,15 +1280,16 @@
   let eventoTimer = null;
   let eventoConSonido = false;
 
-  function escribirEvento(html, velocidad, conSonido, callback) {
+  function escribirEvento(html, velocidad, conSonido, callback, prefijo) {
     velocidad = velocidad || 20;
-    textoEscribiendo = html;
+    const textoCompleto = (prefijo || '') + html;
+    textoEscribiendo = textoCompleto;
     callbackTextoCompleto = callback || null;
-    modalEventoTexto.innerHTML = '';
     document.querySelectorAll('#modal-evento-texto + .modal-evento-cursor').forEach(el => el.remove());
     const chars = Array.from(html);
     let idx = 0;
-    let buffer = '';
+    let buffer = prefijo || '';
+    modalEventoTexto.innerHTML = buffer;
 
     const cursorSpan = document.createElement('span');
     cursorSpan.className = 'modal-evento-cursor';
@@ -1352,11 +1353,12 @@
         btn.textContent = (i + 1) + '. ' + op.texto;
         btn.addEventListener('click', () => {
           contenedor.classList.add('modal-opciones-oculto');
-          if (cont) cont.style.display = '';
-          modalEventoTexto.innerHTML = '';
           const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
           if (cursor) cursor.remove();
-          escribirEvento(op.respuesta, 20, true);
+          const prefijo = '<span class="opcion-elegida">» ' + op.texto + '</span><br>';
+          escribirEvento(op.respuesta, 20, true, () => {
+            if (cont) cont.style.display = '';
+          }, prefijo);
         });
         contenedor.appendChild(btn);
       });
