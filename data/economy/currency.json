@@ -4,20 +4,20 @@
     {
       "id": "ryo",
       "name": "Ryo",
-      "displayName": "Ryō",
+      "displayName": "Ryo",
       "material": "gold",
       "tier": 3,
-      "valueInMon": 4000,
+      "valueInMon": 10000,
       "symbol": "両"
     },
     {
-      "id": "bu",
-      "name": "Bu",
-      "displayName": "Bu",
+      "id": "shu",
+      "name": "Shu",
+      "displayName": "Shu",
       "material": "silver",
       "tier": 2,
-      "valueInMon": 1000,
-      "symbol": "分"
+      "valueInMon": 100,
+      "symbol": "朱"
     },
     {
       "id": "mon",
@@ -30,19 +30,19 @@
     }
   ],
   "conversions": {
-    "ryoToBu": 4,
-    "buToMon": 1000,
-    "ryoToMon": 4000
+    "ryoToShu": 100,
+    "shuToMon": 100,
+    "ryoToMon": 10000
   },
-  "displayOrder": ["ryo", "bu", "mon"],
+  "displayOrder": ["ryo", "shu", "mon"],
   "rounding": {
     "shopPrices": "floor",
     "questRewards": "nearest_5_mon"
   },
   "examples": {
     "merchantSilkRoll": {
-      "price": 10,
-      "currency": "mon",
+      "price": 1,
+      "currency": "shu",
       "description": "Rollo de seda del mercader"
     }
   }

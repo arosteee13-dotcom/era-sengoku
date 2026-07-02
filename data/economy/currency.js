@@ -1,8 +1,8 @@
 (function (globalScope) {
   'use strict';
 
-  const MON_PER_RYO = 4000;
-  const MON_PER_BU = 1000;
+  const MON_PER_SHU = 100;
+  const MON_PER_RYO = 10000;
 
   function normalizeMon(value) {
     const parsed = Number(value);
@@ -13,23 +13,71 @@
   function toMon(parts) {
     const safeParts = parts || {};
     const ryo = normalizeMon(safeParts.ryo);
-    const bu = normalizeMon(safeParts.bu);
+    const shu = normalizeMon(safeParts.shu);
     const mon = normalizeMon(safeParts.mon);
-    return (ryo * MON_PER_RYO) + (bu * MON_PER_BU) + mon;
+    return (ryo * MON_PER_RYO) + (shu * MON_PER_SHU) + mon;
   }
 
   function fromMon(totalMon) {
     const safeTotal = normalizeMon(totalMon);
     const ryo = Math.floor(safeTotal / MON_PER_RYO);
     const remAfterRyo = safeTotal % MON_PER_RYO;
-    const bu = Math.floor(remAfterRyo / MON_PER_BU);
-    const mon = remAfterRyo % MON_PER_BU;
-    return { ryo, bu, mon };
+    const shu = Math.floor(remAfterRyo / MON_PER_SHU);
+    const mon = remAfterRyo % MON_PER_SHU;
+    return { ryo, shu, mon };
   }
 
   function formatCurrency(totalMon) {
     const parts = fromMon(totalMon);
-    return `${parts.ryo} ryō | ${parts.bu} bu | ${parts.mon} mon`;
+    return `${parts.ryo} ryo | ${parts.shu} shu | ${parts.mon} mon`;
+  }
+
+  function normalizeWallet(wallet) {
+    const safeWallet = wallet || {};
+    return {
+      mon: normalizeMon(safeWallet.mon),
+      shu: normalizeMon(safeWallet.shu),
+      ryo: normalizeMon(safeWallet.ryo),
+    };
+  }
+
+  function addToWallet(wallet, amount = 0, denomination = 'mon') {
+    const safeWallet = normalizeWallet(wallet);
+    const safeAmount = normalizeMon(amount);
+    if (!safeWallet.hasOwnProperty(denomination)) return safeWallet;
+    return { ...safeWallet, [denomination]: safeWallet[denomination] + safeAmount };
+  }
+
+  function normalizePrice(price) {
+    const safePrice = price || {};
+    const denomination = safePrice.denomination || 'mon';
+    const amount = normalizeMon(safePrice.amount);
+    if (!['mon', 'shu', 'ryo'].includes(denomination)) {
+      return { denomination: 'mon', amount };
+    }
+    return { denomination, amount };
+  }
+
+  function canAffordDenomination(wallet, price) {
+    const safeWallet = normalizeWallet(wallet);
+    const safePrice = normalizePrice(price);
+    return safeWallet[safePrice.denomination] >= safePrice.amount;
+  }
+
+  function spendDenomination(wallet, price) {
+    const safeWallet = normalizeWallet(wallet);
+    const safePrice = normalizePrice(price);
+    if (safePrice.amount === 0) return { success: true, wallet: safeWallet };
+    if (!canAffordDenomination(safeWallet, safePrice)) {
+      return { success: false, wallet: safeWallet };
+    }
+    return {
+      success: true,
+      wallet: {
+        ...safeWallet,
+        [safePrice.denomination]: safeWallet[safePrice.denomination] - safePrice.amount,
+      },
+    };
   }
 
   function addCurrency(totalMon, amountMon) {
@@ -49,11 +97,16 @@
   }
 
   const api = {
+    MON_PER_SHU,
     MON_PER_RYO,
-    MON_PER_BU,
+    MON_PER_BU: MON_PER_SHU,
     toMon,
     fromMon,
     formatCurrency,
+    normalizeWallet,
+    addToWallet,
+    canAffordDenomination,
+    spendDenomination,
     addCurrency,
     canAfford,
     spendCurrency,

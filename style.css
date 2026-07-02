@@ -895,6 +895,15 @@ html, body {
   opacity: 0.5;
 }
 
+.inv-section-title {
+  margin: 8px 16px 0;
+  font-size: 0.72rem;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #5a4a38;
+  font-weight: 700;
+}
+
 .inv-lista {
   flex: 1;
   padding: 8px 16px;
