@@ -157,11 +157,21 @@ html, body {
   padding: 6px 14px 2px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   flex-shrink: 0;
   color: #f0e6d8;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 1px;
+}
+
+#wallet-hud {
+  color: #f5d37c;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
 }
 
 /* ───── PANTALLA NARRATIVA ───── */
@@ -893,6 +903,34 @@ html, body {
   color: #3a2818;
   font-size: 0.82rem;
   line-height: 1.6;
+}
+
+.inv-wallet {
+  margin: 10px 16px 2px;
+  padding: 8px 10px;
+  border: 1px solid rgba(60,40,20,0.2);
+  border-radius: 8px;
+  background: rgba(255, 248, 232, 0.75);
+  color: #3a2818;
+  font-size: 0.75rem;
+}
+
+.inv-wallet-title {
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.inv-wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.inv-wallet-total {
+  margin-top: 5px;
+  font-size: 0.72rem;
+  color: #5a4a38;
 }
 
 .inv-lista::-webkit-scrollbar {

@@ -186,13 +186,54 @@
   ];
 
   /* ─── ESTADO ─── */
+  const ECONOMY = window.SengokuCurrency || {
+    MON_PER_RYO: 4000,
+    MON_PER_BU: 1000,
+    toMon({ ryo = 0, bu = 0, mon = 0 } = {}) {
+      const safeRyo = Math.max(0, Math.floor(Number(ryo) || 0));
+      const safeBu = Math.max(0, Math.floor(Number(bu) || 0));
+      const safeMon = Math.max(0, Math.floor(Number(mon) || 0));
+      return (safeRyo * 4000) + (safeBu * 1000) + safeMon;
+    },
+    fromMon(totalMon = 0) {
+      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
+      const ryo = Math.floor(safeTotal / 4000);
+      const remAfterRyo = safeTotal % 4000;
+      const bu = Math.floor(remAfterRyo / 1000);
+      const mon = remAfterRyo % 1000;
+      return { ryo, bu, mon };
+    },
+    formatCurrency(totalMon = 0) {
+      const parts = this.fromMon(totalMon);
+      return `${parts.ryo} ryō | ${parts.bu} bu | ${parts.mon} mon`;
+    },
+    addCurrency(totalMon = 0, amountMon = 0) {
+      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
+      const safeAmount = Math.max(0, Math.floor(Number(amountMon) || 0));
+      return safeTotal + safeAmount;
+    },
+    canAfford(totalMon = 0, costMon = 0) {
+      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
+      const safeCost = Math.max(0, Math.floor(Number(costMon) || 0));
+      return safeTotal >= safeCost;
+    },
+    spendCurrency(totalMon = 0, costMon = 0) {
+      const safeTotal = Math.max(0, Math.floor(Number(totalMon) || 0));
+      const safeCost = Math.max(0, Math.floor(Number(costMon) || 0));
+      if (safeTotal < safeCost) return { success: false, totalMon: safeTotal };
+      return { success: true, totalMon: safeTotal - safeCost };
+    },
+    clampMon(value = 0) {
+      return Math.max(0, Math.floor(Number(value) || 0));
+    },
+  };
   let playerName = '';
   let playerX = 11;
   let playerY = 9;
   let playerDir = { dx: 0, dy: -1 };
   let ultimaDirX = 1;
   let inventory = [];
-  let playerMon = 0;
+  let wallet = { totalMon: 0 };
   let tileSize = 0;
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
@@ -207,6 +248,7 @@
   let mapaActual = 'aldea';
   const RECOMPENSA_MON_MADRE = 12;
   const PRECIO_SEDA_MON = 10;
+  const PRECIO_POSADA_MON = 8;
 
   const DIALOGOS_AMBIENTE = {
     '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
@@ -243,6 +285,7 @@
   ];
 
   function getOpcionesMercader() {
+    const saldoTexto = ECONOMY.formatCurrency(getWalletMon());
     return [
       {
         texto: 'Cuéntame más sobre esos extranjeros.',
@@ -250,21 +293,22 @@
       },
       {
         texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?',
-        respuesta: 'Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en 10 monedas de cobre el rollo. Un precio justo.',
+        respuesta: `Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en ${PRECIO_SEDA_MON} mon el rollo. Tu saldo: ${saldoTexto}.`,
         opciones: [
           {
-            texto: `Comprar un rollo por ${PRECIO_SEDA_MON} Mon.`,
+            texto: `Comprar un rollo por ${PRECIO_SEDA_MON} mon (Saldo: ${saldoTexto}).`,
             respuesta: () => {
-              if (playerMon < PRECIO_SEDA_MON) {
-                return `No te alcanza, Ronin. Vuelve con al menos ${PRECIO_SEDA_MON} Mon y la seda será tuya.`;
+              if (!canAfford(PRECIO_SEDA_MON)) {
+                return `No te alcanza, Ronin. Necesitas ${PRECIO_SEDA_MON} mon. Tu saldo: ${ECONOMY.formatCurrency(getWalletMon())}.`;
               }
-              playerMon -= PRECIO_SEDA_MON;
+              spendCurrency(PRECIO_SEDA_MON);
               inventory.push({
                 icono: '🧵',
                 nombre: 'Rollo de Seda',
                 descripcion: 'Seda del norte, tejida con hilos de plata.',
               });
-              return `Trato hecho. Te llevas un rollo de seda por ${PRECIO_SEDA_MON} Mon. Mon restantes: ${playerMon}.`;
+              mostrarMensajeMon(-PRECIO_SEDA_MON);
+              return `Trato hecho. Te llevas un rollo de seda por ${PRECIO_SEDA_MON} mon. Saldo actual: ${ECONOMY.formatCurrency(getWalletMon())}.`;
             },
           },
           {
@@ -280,6 +324,27 @@
     ];
   }
 
+  function getOpcionesPosada() {
+    const saldoTexto = ECONOMY.formatCurrency(getWalletMon());
+    return [
+      {
+        texto: `Dormir por ${PRECIO_POSADA_MON} mon (Saldo: ${saldoTexto}).`,
+        respuesta: () => {
+          if (!canAfford(PRECIO_POSADA_MON)) {
+            return `No tienes suficientes monedas para la posada. Necesitas ${PRECIO_POSADA_MON} mon. Tu saldo: ${ECONOMY.formatCurrency(getWalletMon())}.`;
+          }
+          spendCurrency(PRECIO_POSADA_MON);
+          mostrarMensajeMon(-PRECIO_POSADA_MON);
+          return `Has descansado en la posada por ${PRECIO_POSADA_MON} mon. Saldo actual: ${ECONOMY.formatCurrency(getWalletMon())}.`;
+        },
+      },
+      {
+        texto: 'No pasaré la noche aquí.',
+        respuesta: 'Como desees, viajero. La puerta de la posada seguirá abierta.',
+      },
+    ];
+  }
+
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
   const screenMenu    = $('screen-menu');
@@ -287,6 +352,7 @@
   const btnContinue   = $('btn-continue');
   const btnNewGame    = $('btn-new-game');
   const playerNameDsp = $('player-name-display');
+  const walletHud     = $('wallet-hud');
   const mapContainer  = $('map-container');
   const mapGrid       = $('map-grid');
   const modalEvento     = $('modal-evento');
@@ -298,6 +364,7 @@
   const bannerTitulo    = $('banner-titulo');
   const bannerSubtitulo = $('banner-subtitulo');
   const modalInventario = $('modal-inventario');
+  const invWallet       = $('inv-wallet');
   const invLista        = $('inv-lista');
   const objetivoTexto   = $('objetivo-texto');
   const screenNarrativa = $('screen-narrativa');
@@ -305,6 +372,57 @@
   const animRecoger     = $('anim-recoger');
   const animIcono       = $('anim-icono');
   const animTexto        = $('anim-texto');
+
+  function getWalletMon() {
+    return ECONOMY.clampMon(wallet && wallet.totalMon);
+  }
+
+  function setWalletMon(totalMon) {
+    wallet.totalMon = ECONOMY.clampMon(totalMon);
+    actualizarWalletUI();
+  }
+
+  function addCurrency(mon) {
+    setWalletMon(ECONOMY.addCurrency(getWalletMon(), mon));
+    return getWalletMon();
+  }
+
+  function canAfford(mon) {
+    return ECONOMY.canAfford(getWalletMon(), mon);
+  }
+
+  function spendCurrency(mon) {
+    const result = ECONOMY.spendCurrency(getWalletMon(), mon);
+    if (result.success) setWalletMon(result.totalMon);
+    return result.success;
+  }
+
+  function mostrarMensajeMon(deltaMon) {
+    if (!deltaMon) return;
+    const signo = deltaMon > 0 ? '+' : '-';
+    objetivoTexto.textContent = `${signo}${Math.abs(deltaMon)} mon`;
+    objetivoTexto.style.opacity = '1';
+    setTimeout(actualizarObjetivo, 1800);
+  }
+
+  function actualizarWalletUI() {
+    const totalMon = getWalletMon();
+    const desglose = ECONOMY.fromMon(totalMon);
+    const textoMonedero = ECONOMY.formatCurrency(totalMon);
+    if (walletHud) {
+      walletHud.textContent = `💰 ${textoMonedero}`;
+    }
+    if (invWallet) {
+      invWallet.innerHTML =
+        '<div class="inv-wallet-title">Monedero</div>'
+        + '<div class="inv-wallet-grid">'
+        + `<div>Ryō: <b>${desglose.ryo}</b></div>`
+        + `<div>Bu: <b>${desglose.bu}</b></div>`
+        + `<div>Mon: <b>${desglose.mon}</b></div>`
+        + '</div>'
+        + `<div class="inv-wallet-total">Total: ${totalMon} mon</div>`;
+    }
+  }
 
   /* ─── GESTIÓN DE PANTALLAS ─── */
   function showScreen(id) {
@@ -336,7 +454,8 @@
     habladoConTakeshi = data.takeshi || false;
     madreDioItems = data.dioItems || false;
     inventory = data.inv || [];
-    playerMon = data.mon || 0;
+    const savedWalletMon = data.walletMon ?? (data.wallet && data.wallet.totalMon) ?? data.mon;
+    setWalletMon(savedWalletMon || 0);
     misionAldeanosCompletada = data.mision || false;
     aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
     mapaActual = data.mapa || 'aldea';
@@ -462,7 +581,7 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
-    playerMon = 0;
+    setWalletMon(0);
     madreDioItems = false;
     visitadoCasaGenji = false;
     visitadoCasaMadre = false;
@@ -1909,15 +2028,16 @@
     const eraMadre = titulo === 'Tu madre';
     if (eraMadre && !madreDioItems) {
       madreDioItems = true;
-      playerMon += RECOMPENSA_MON_MADRE;
+      addCurrency(RECOMPENSA_MON_MADRE);
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/arroz_con_ciruelas.png', nombre: 'Ración de Arroz', descripcion: 'Recupera energía' },
       ]), 200);
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/cantimplora_de_te.png', nombre: 'Té de ciruela', descripcion: 'Bebida reconfortante' },
       ]), 2400);
-      objetivoTexto.textContent = `Recibiste comida y ${RECOMPENSA_MON_MADRE} Mon de tu madre.`;
+      objetivoTexto.textContent = `Recibiste comida y +${RECOMPENSA_MON_MADRE} mon de tu madre.`;
       objetivoTexto.style.opacity = '1';
+      setTimeout(() => mostrarMensajeMon(RECOMPENSA_MON_MADRE), 1200);
     }
     const mapaNPC = {
       'Takeshi':'takeshi','Genji, el anciano':'genji','Hana, la sabia':'hana',
@@ -1981,6 +2101,14 @@
     // Detección por tile fijo (🪧, 💰, 🪓, 🧑‍🌾 en MAP)
     if (tile === '🪧') {
       abrirEvento('Letrero', CARTEL_TEXTO, null, true);
+    } else if (tile === '🏮' && mapaActual === 'ciudad') {
+      abrirEvento(
+        'Posadero',
+        `Bienvenido a la posada. Una noche cuesta ${PRECIO_POSADA_MON} mon. Tu saldo: ${ECONOMY.formatCurrency(getWalletMon())}.`,
+        null,
+        true,
+        getOpcionesPosada()
+      );
     } else if (DIALOGOS_AMBIENTE[tile]) {
       const d = DIALOGOS_AMBIENTE[tile];
       abrirEvento(d.titulo, d.texto, d.img, true, typeof d.opciones === 'function' ? d.opciones() : d.opciones);
@@ -2013,6 +2141,7 @@
   }
 
   function abrirInventario() {
+    actualizarWalletUI();
     invLista.innerHTML = '';
     if (inventory.length === 0) {
       invLista.innerHTML = '<div class="inv-vacio">Tu zurrón está vacío, busca provisiones.</div>';
@@ -2056,7 +2185,7 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
-    playerMon = 0;
+    setWalletMon(0);
     madreDioItems = false;
     playerNameDsp.textContent = playerName;
     if (mapaActivo !== MAP) setMapa(MAP);
@@ -2112,7 +2241,9 @@
         takeshi: habladoConTakeshi,
         dioItems: madreDioItems,
         inv: inventory,
-        mon: playerMon,
+        mon: getWalletMon(),
+        walletMon: getWalletMon(),
+        wallet: { totalMon: getWalletMon() },
         mision: misionAldeanosCompletada,
         aldeanos: [...aldeanosHablados],
         mapa: mapaActual,
