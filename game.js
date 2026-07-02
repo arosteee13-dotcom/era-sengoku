@@ -45,25 +45,25 @@
   ];
 
   const MAPA_CIUDAD = [
-    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
-    ['🌲','🟫','🏮','🌲','🏠','🏠','🌲','🏮','🟫','🟫','🟫','🟫','🟫','🏮','🌲','🏠','🏠','🌲','🏮','🟫','🌲','🌲'],
-    ['🌲','🟫','🟩','🌲','🏠','🌲','🌲','🏮','🟫','🟩','🟩','🟩','🟫','🏮','🌲','🌲','🏠','🌲','🟩','🟫','🌲','🌲'],
-    ['🌲','🟫','🏮','🌲','🌲','🌲','🌲','🏮','🟫','🟩','🟩','🟩','🟫','🏮','🌲','🌲','🌲','🌲','🏮','🟫','🌲','🌲'],
-    ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲','🌲'],
-    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
-    ['🌲','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🌲','🌲'],
-    ['🌲','🟩','🟩','🏠','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🏠','🟩','🟩','🟩','🌲','🌲'],
-    ['🌲','🏮','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🏮','🌲','🌲'],
-    ['🌲','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟫','🟫'],
-    ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🪧','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫'],
-    ['🌲','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
-    ['🌲','🏮','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🏮','🌲','🌲'],
-    ['🌲','🟩','🟩','🏠','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🏠','🟩','🟩','🟩','🌲','🌲'],
-    ['🌲','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏠','🏠','🟩','🟩','🟩','🌲','🌲'],
-    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
-    ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
-    ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲'],
-  ];
+  ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+  ['🌲','🟫','🟩','🌲','🏘️','🏘️','🏘️','🟩','🟫','🟫','🟫','🟫','🟫','🌲','🌲','🏰','🏰','🌲','🏮','🟫','🌲','🌲'],
+  ['🌲','🟫','🟩','🌲','🏘️','🏘️','🏘️','🟩','🟫','🟩','🟩','🟩','🟫','🌲','🌲','🏰','🏰','🌲','🟩','🟫','🌲','🌲'],
+  ['🌲','🟫','🟩','🌲','🏘️','🚪','🏘️','🏮','🟫','🟩','🟩','🟩','🟫','🌲','🌲','🌲','🌲','🌲','🏮','🟫','🌲','🌲'],
+  ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲','🌲'],
+  ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+  ['🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🌲','🌲'],
+  ['🌲','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🌲','🌲'],
+  ['🌲','🏘️','🚪','🏘️','🏮','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🏘️','🚪','🏘️','🏮','🟩','🟩','🌲','🌲'],
+  ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🪧','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
+  ['🌲','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
+  ['🌲','🟫','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟫','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
+  ['🌲','🟫','🟩','🟩','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟫','🟩','🏘️','🏘️','🏘️','🟩','🟩','🟩','🟩','🟫','🌲','🌲'],
+  ['🌲','🟫','🟩','🟩','🟩','🏘️','🚪','🏘️','🏮','🟩','🟫','🟩','🏘️','🚪','🏘️','🏮','🟩','🟩','🟩','🟫','🌲','🌲'],
+  ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲','🌲'],
+  ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲'],
+  ['🌲','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🟫','🌲'],
+  ['🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🌲','🟫','🌲'],
+];
 
   const INTERIORES = [
     {
@@ -102,6 +102,19 @@
       ],
       entrada: { x: 3, y: 4 },
     },
+    {
+      id: 'casa_clase_media',
+      mapa: [
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟪','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🟫','🟫','🟫','🟫','⬜️'],
+        ['⬜️','🟫','🟫','🚪','🟫','🟫','🟫','⬜️'],
+        ['⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️','⬜️'],
+      ],
+      entrada: { x: 3, y: 4 },
+    },
   ];
 
   let mapaActivo = MAP;
@@ -110,6 +123,7 @@
   let exteriorState = null;
   let transicionActiva = false;
   let fadeOverlay = null;
+  let PUERTAS_EDIFICIOS = new Set();
 
   function setMapa(mapa) {
     mapaActivo = mapa;
@@ -117,7 +131,7 @@
     COLS = mapa[0].length;
   }
 
-  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️', '🗿', '🏮', '🪓', '💰', '🧑‍🌾']);
+  const OBSTACLES = new Set(['🌲', '🏠', '🛖', '⬜️', '🏔️', '🪧', '👦', '👴', '🧓', '👩', '📚', '📦', '🚪', '⛲️', '🗿', '🏮', '🪓', '💰', '🧑‍🌾', '🏘️']);
 
   const ENTRADAS = { "4,3": 0, "4,18": 1, "10,3": 2 };
 
@@ -160,6 +174,14 @@
         ['⛲️','⛲️'],
       ],
       image: 'img/estanque.png',
+    },
+    {
+      tiles: [
+        ['🏘️','🏘️','🏘️'],
+        ['🏘️','🏘️','🏘️'],
+        ['🏘️','🚪','🏘️'],
+      ],
+      image: 'img/casa_clase_media.png',
     },
   ];
 
@@ -408,7 +430,7 @@
     updateCamera();
     mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
     actualizarObjetivo();
-    audioAmbiente.cambiarAmbiente('exterior');
+    audioAmbiente.cambiarAmbiente('aldea');
     if (!npcTimer) {
       iniciarNPCs();
       npcTimer = setInterval(() => {
@@ -437,7 +459,8 @@
 
   function isWalkable(col, row) {
     if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return false;
-    if (OBSTACLES.has(mapaActivo[row][col])) return false;
+    const tile = mapaActivo[row][col];
+    if (OBSTACLES.has(tile) && !(tile === '🚪' && PUERTAS_EDIFICIOS.has(`${row},${col}`))) return false;
     const npcsMapa = [
       ...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo),
       ...(mapaActivo === MAP ? npcs : []),
@@ -498,11 +521,16 @@
 
     const patterns = scanPatterns();
     const patternCells = new Set();
+    const nuevasPuertas = new Set();
     patterns.forEach(p => {
       for (let pr = 0; pr < p.h; pr++)
         for (let pc = 0; pc < p.w; pc++)
           patternCells.add(`${p.row + pr},${p.col + pc}`);
+      if (p.pattern.image === 'img/casa_clase_media.png') {
+        nuevasPuertas.add(`${p.row + p.h - 1},${p.col + Math.floor(p.w / 2)}`);
+      }
     });
+    PUERTAS_EDIFICIOS = nuevasPuertas;
 
     const cells = mapGrid.children;
     for (let r = 0; r < ROWS; r++) {
@@ -780,7 +808,7 @@
         updateCamera();
         mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
         actualizarObjetivo();
-        audioAmbiente.cambiarAmbiente('exterior');
+        audioAmbiente.cambiarAmbiente('aldea');
         iniciarNPCs();
         if (npcTimer) { clearInterval(npcTimer); npcTimer = null; }
         npcTimer = setInterval(() => { actualizarNPCs(); render(); }, 1800);
@@ -789,12 +817,10 @@
       });
     } else if (mapaActual === 'bosque' && x === 20 && y === 0) {
       cargarMapaCiudad(20, 17);
-    } else if (mapaActual === 'ciudad' && x === 21 && y === 9) {
-      cargarMapaBosque(21, 0);
     } else if (mapaActual === 'bosque' && x === 20 && y === 17) {
       cargarMapaCiudad(20, 17);
     } else if (mapaActual === 'ciudad' && x === 20 && y === 17) {
-      cargarMapaBosque(20, 17);
+      cargarMapaBosque(20, 1);
     }
   }
 
@@ -811,7 +837,7 @@
       updateCamera();
       mostrarUbicacion('Los Claros del Bosque Susurrante', '');
       actualizarObjetivo();
-      audioAmbiente.cambiarAmbiente('exterior');
+      audioAmbiente.cambiarAmbiente('bosque');
     }, () => {
       movimientoBloqueado = true;
       setTimeout(() => { movimientoBloqueado = false; }, 2000);
@@ -840,7 +866,7 @@
     }
 
     hacerTransicion(() => {
-      exteriorState = { px: playerX, py: playerY, dir: playerDir };
+      exteriorState = { px: playerX, py: playerY, dir: playerDir, mapa: mapaActivo, nombreMapa: mapaActual };
       const casa = INTERIORES[idx];
       setMapa(casa.mapa);
       mapContainer.style.backgroundColor = '#1a1410';
@@ -862,10 +888,30 @@
     });
   }
 
+  function entrarEdificio(id) {
+    const casa = INTERIORES.find(c => c.id === id);
+    if (!casa) return;
+    hacerTransicion(() => {
+      exteriorState = { px: playerX, py: playerY, dir: playerDir, mapa: mapaActivo, nombreMapa: mapaActual };
+      setMapa(casa.mapa);
+      mapContainer.style.backgroundColor = '#1a1410';
+      playerX = casa.entrada.x;
+      playerY = casa.entrada.y;
+      playerDir = { dx: 0, dy: -1 };
+      buildGrid();
+      render();
+      updateCamera();
+      mostrarUbicacion('Casa de Clase Media', 'Una vivienda acomodada de la ciudad');
+      actualizarObjetivo();
+      audioAmbiente.cambiarAmbiente('interior');
+    });
+  }
+
   function salirCasa() {
     if (!exteriorState) return;
     hacerTransicion(() => {
-      setMapa(MAP);
+      setMapa(exteriorState.mapa || MAP);
+      mapaActual = exteriorState.nombreMapa || 'aldea';
       mapContainer.style.backgroundColor = '';
       playerX = exteriorState.px;
       playerY = exteriorState.py;
@@ -875,9 +921,11 @@
       buildGrid();
       render();
       updateCamera();
-    mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
-    actualizarObjetivo();
-    audioAmbiente.cambiarAmbiente('exterior');
+      const ubiExterior = { 'aldea': ['Aldea de Owari', 'Provincia de Owari - 1560'], 'ciudad': ['Ciudad de los Mercaderes', 'Puesto comercial de las tierras del este'], 'bosque': ['Los Claros del Bosque Susurrante', ''] };
+      const u = ubiExterior[mapaActual] || ['Aldea de Owari', 'Provincia de Owari - 1560'];
+      mostrarUbicacion(u[0], u[1]);
+      actualizarObjetivo();
+      audioAmbiente.cambiarAmbiente(mapaActual);
     });
   }
 
@@ -894,7 +942,7 @@
       updateCamera();
       mostrarUbicacion('Ciudad de los Mercaderes', 'Puesto comercial de las tierras del este');
       actualizarObjetivo();
-      audioAmbiente.cambiarAmbiente('exterior');
+      audioAmbiente.cambiarAmbiente('ciudad');
     }, () => {
       movimientoBloqueado = true;
       setTimeout(() => { movimientoBloqueado = false; }, 2000);
@@ -1004,13 +1052,15 @@
     else generarSonidoHierba();
   }
 
-  /* ─── AMBIENTE SONORO ─── */
+  /* ─── AMBIENTE SONORO DINÁMICO ─── */
 
   const audioAmbiente = {
     activo: false,
     nodos: [],
     zona: null,
     master: null,
+    _timers: [],
+    _timersBosque: [],
 
     init() {
       const { ctx, master } = crearAudioContext();
@@ -1037,9 +1087,14 @@
     },
 
     _pararNodos() {
+      this._timers.forEach(t => { try { clearTimeout(t); clearInterval(t); } catch(e) {} });
+      this._timers = [];
+      this._timersBosque.forEach(t => { try { clearTimeout(t); clearInterval(t); } catch(e) {} });
+      this._timersBosque = [];
       this.nodos.forEach(n => {
         try { n.disconnect(); } catch(e) {}
       });
+      this._jizoTimer = null;
       this.nodos = [];
     },
 
@@ -1051,14 +1106,15 @@
       return buf;
     },
 
-    _pulso(freq, duracion) {
+    _pulso(freq, duracion, volumen) {
       const { ctx } = crearAudioContext();
       const osc = ctx.createOscillator();
       osc.type = 'sine';
       osc.frequency.value = freq;
       const gan = ctx.createGain();
+      const vol = volumen || 0.3;
       gan.gain.setValueAtTime(0, ctx.currentTime);
-      gan.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.005);
+      gan.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.005);
       gan.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duracion);
       osc.connect(gan);
       gan.connect(this.master);
@@ -1066,59 +1122,382 @@
       osc.stop(ctx.currentTime + duracion);
     },
 
-    _grillo() {
-      if (this.zona !== 'exterior') return;
-      this._pulso(4000 + Math.random() * 2000, 0.04);
-      setTimeout(() => this._grillo(), 600 + Math.random() * 1200);
+    /* ─── ALDEA ─── */
+
+    _iniciarAvesAldea() {
+      const chirp = () => {
+        if (this.zona !== 'aldea') return;
+        const { ctx } = crearAudioContext();
+        const freq = 2000 + Math.random() * 2000;
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        const gan = ctx.createGain();
+        const now = ctx.currentTime;
+        gan.gain.setValueAtTime(0, now);
+        gan.gain.linearRampToValueAtTime(0.03, now + 0.01);
+        gan.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+        osc.connect(gan);
+        gan.connect(this.master);
+        osc.start(now);
+        osc.stop(now + 0.1);
+        const t = setTimeout(chirp, 5000 + Math.random() * 8000);
+        this._timers.push(t);
+      };
+      chirp();
     },
 
-    _iniciarViento() {
+    _iniciarMurmullo() {
       const { ctx } = crearAudioContext();
-      const buf = this._ruidoBlanco(4);
+      const buf = this._ruidoBlanco(6);
       const src = ctx.createBufferSource();
       src.buffer = buf;
       src.loop = true;
-
-      const filtro = ctx.createBiquadFilter();
-      filtro.type = 'lowpass';
-      filtro.frequency.value = 500;
-      filtro.Q.value = 0.5;
-
+      const bp = ctx.createBiquadFilter();
+      bp.type = 'bandpass';
+      bp.frequency.value = 1000;
+      bp.Q.value = 0.4;
       const env = ctx.createGain();
-      env.gain.value = 0.25;
+      env.gain.value = 0.04;
       const gan = this._crearFuente();
-      src.connect(filtro);
-      filtro.connect(env);
+      src.connect(bp);
+      bp.connect(env);
       env.connect(gan);
       src.start();
       this.nodos.push(src);
     },
 
-    _iniciarFlauta() {
+    _iniciarKoto() {
       const { ctx } = crearAudioContext();
-      const osc = ctx.createOscillator();
-      osc.type = 'triangle';
-      osc.frequency.value = 260;
-
-      const gan = ctx.createGain();
-      gan.gain.value = 0;
-
-      const ahora = ctx.currentTime;
-      const melodia = [260, 294, 330, 294, 260, 247, 260];
-      melodia.forEach((f, i) => {
-        osc.frequency.setValueAtTime(f, ahora + i * 3);
-        gan.gain.setValueAtTime(0, ahora + i * 3);
-        gan.gain.linearRampToValueAtTime(0.06, ahora + i * 3 + 0.4);
-        gan.gain.linearRampToValueAtTime(0, ahora + i * 3 + 2.8);
-      });
-
-      osc.connect(gan);
-      gan.connect(this.master);
-      osc.start();
-      osc.stop(ahora + melodia.length * 3);
-      this.nodos.push(osc);
-      this.nodos.push(gan);
+      const melodia = [294, 330, 392, 440, 494, 440, 392, 330, 294];
+      const tocar = (i) => {
+        if (this.zona !== 'aldea') return;
+        const f = melodia[i % melodia.length];
+        for (let h = 1; h <= 3; h++) {
+          const osc = ctx.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.value = f * h;
+          const gan = ctx.createGain();
+          const now = ctx.currentTime;
+          const vol = h === 1 ? 0.04 : 0.015 / h;
+          gan.gain.setValueAtTime(0, now);
+          gan.gain.linearRampToValueAtTime(vol, now + 0.03);
+          gan.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+          osc.connect(gan);
+          gan.connect(this.master);
+          osc.start(now);
+          osc.stop(now + 1.5);
+          this.nodos.push(osc);
+          this.nodos.push(gan);
+        }
+        const t = setTimeout(() => tocar(i + 1), 2000);
+        this._timers.push(t);
+      };
+      tocar(0);
     },
+
+    /* ─── BOSQUE ─── */
+
+    _iniciarVientoBosque() {
+      const { ctx } = crearAudioContext();
+      const buf = this._ruidoBlanco(8);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.loop = true;
+      const lp = ctx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.value = 300;
+      lp.Q.value = 0.6;
+      const lfo = ctx.createOscillator();
+      lfo.frequency.value = 0.15;
+      const lfoGan = ctx.createGain();
+      lfoGan.gain.value = 200;
+      lfo.connect(lfoGan);
+      lfoGan.connect(lp.frequency);
+      lfo.start();
+      const env = ctx.createGain();
+      env.gain.value = 0.3;
+      const gan = this._crearFuente();
+      src.connect(lp);
+      lp.connect(env);
+      env.connect(gan);
+      src.start();
+      this.nodos.push(src);
+      this.nodos.push(lfo);
+    },
+
+    _randomForestSFX() {
+      const programar = () => {
+        if (this.zona !== 'bosque') return;
+        const intervalo = 30000 + Math.random() * 10000;
+        const t = setTimeout(() => {
+          if (this.zona !== 'bosque') return;
+          const { ctx } = crearAudioContext();
+          if (Math.random() < 0.5) {
+            const buf = this._ruidoBlanco(0.15);
+            const src = ctx.createBufferSource();
+            src.buffer = buf;
+            const lp = ctx.createBiquadFilter();
+            lp.type = 'lowpass';
+            lp.frequency.value = 200;
+            lp.Q.value = 1;
+            const env = ctx.createGain();
+            const now = ctx.currentTime;
+            env.gain.setValueAtTime(0.06, now);
+            env.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+            src.connect(lp);
+            lp.connect(env);
+            env.connect(this.master);
+            src.start(now);
+            src.stop(now + 0.2);
+            this.nodos.push(src);
+          } else {
+            const osc = ctx.createOscillator();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(800, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.1);
+            osc.frequency.linearRampToValueAtTime(700, ctx.currentTime + 0.2);
+            const bp = ctx.createBiquadFilter();
+            bp.type = 'bandpass';
+            bp.frequency.value = 1200;
+            bp.Q.value = 2;
+            const env = ctx.createGain();
+            const now = ctx.currentTime;
+            env.gain.setValueAtTime(0, now);
+            env.gain.linearRampToValueAtTime(0.04, now + 0.02);
+            env.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+            osc.connect(bp);
+            bp.connect(env);
+            env.connect(this.master);
+            osc.start(now);
+            osc.stop(now + 0.5);
+            this.nodos.push(osc);
+          }
+          programar();
+        }, intervalo);
+        this._timersBosque.push(t);
+      };
+      programar();
+    },
+
+    _iniciarCuerdasBosque() {
+      const { ctx } = crearAudioContext();
+      const freqs = [220, 261, 330, 392];
+      freqs.forEach(f => {
+        for (let d = -1; d <= 1; d += 2) {
+          const osc = ctx.createOscillator();
+          osc.type = 'sine';
+          osc.frequency.value = f * (1 + d * 0.002);
+          const env = ctx.createGain();
+          env.gain.value = 0.02;
+          const now = ctx.currentTime;
+          env.gain.setValueAtTime(0, now);
+          env.gain.linearRampToValueAtTime(0.025, now + 3);
+          const vibrato = ctx.createOscillator();
+          vibrato.frequency.value = 4;
+          const vibGan = ctx.createGain();
+          vibGan.gain.value = 2;
+          vibrato.connect(vibGan);
+          vibGan.connect(osc.frequency);
+          vibrato.start();
+          osc.connect(env);
+          env.connect(this.master);
+          osc.start();
+          this.nodos.push(osc);
+          this.nodos.push(vibrato);
+        }
+      });
+    },
+
+    /* ─── CIUDAD ─── */
+
+    _iniciarCiudad() {
+      const { ctx } = crearAudioContext();
+
+      /* Ambiente: murmullo lejano */
+      const bufMur = this._ruidoBlanco(6);
+      const srcMur = ctx.createBufferSource();
+      srcMur.buffer = bufMur;
+      srcMur.loop = true;
+      const bpMur = ctx.createBiquadFilter();
+      bpMur.type = 'bandpass';
+      bpMur.frequency.value = 1000;
+      bpMur.Q.value = 0.3;
+      const envMur = ctx.createGain();
+      envMur.gain.value = 0.04;
+      const ganMur = this._crearFuente();
+      srcMur.connect(bpMur);
+      bpMur.connect(envMur);
+      envMur.connect(ganMur);
+      srcMur.start();
+      this.nodos.push(srcMur);
+
+      /* Geta — sandalias de madera sobre piedra */
+      const geta = () => {
+        if (this.zona !== 'ciudad') return;
+        const osc = ctx.createOscillator();
+        osc.type = 'square';
+        osc.frequency.value = 600;
+        const now = ctx.currentTime;
+        const gan = ctx.createGain();
+        gan.gain.setValueAtTime(0.02, now);
+        gan.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+        osc.connect(gan);
+        gan.connect(this.master);
+        osc.start(now);
+        osc.stop(now + 0.05);
+        this.nodos.push(osc);
+        this.nodos.push(gan);
+        const t = setTimeout(geta, 4000 + Math.random() * 6000);
+        this._timers.push(t);
+      };
+      geta();
+
+      /* Campanada de templo / monedas */
+      const templeBell = () => {
+        if (this.zona !== 'ciudad') return;
+        const now = ctx.currentTime;
+        const freqs = [800, 1200, 1600];
+        freqs.forEach((f, i) => {
+          const osc = ctx.createOscillator();
+          osc.type = 'sine';
+          osc.frequency.value = f;
+          const gan = ctx.createGain();
+          const inicio = now + i * 0.01;
+          gan.gain.setValueAtTime(0, inicio);
+          gan.gain.linearRampToValueAtTime(0.015, inicio + 0.005);
+          gan.gain.exponentialRampToValueAtTime(0.001, inicio + 0.8);
+          osc.connect(gan);
+          gan.connect(this.master);
+          osc.start(inicio);
+          osc.stop(inicio + 1);
+          this.nodos.push(osc);
+          this.nodos.push(gan);
+        });
+        const t = setTimeout(templeBell, 15000 + Math.random() * 20000);
+        this._timers.push(t);
+      };
+      templeBell();
+
+      /* Taiko suave — pulso constante y lejano */
+      const taiko = () => {
+        if (this.zona !== 'ciudad') return;
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = 60;
+        const now = ctx.currentTime;
+        const gan = ctx.createGain();
+        gan.gain.setValueAtTime(0, now);
+        gan.gain.linearRampToValueAtTime(0.06, now + 0.05);
+        gan.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        osc.connect(gan);
+        gan.connect(this.master);
+        osc.start(now);
+        osc.stop(now + 0.4);
+        this.nodos.push(osc);
+        this.nodos.push(gan);
+        const t = setTimeout(taiko, 2000);
+        this._timers.push(t);
+      };
+      taiko();
+
+      /* Koto — base armónica limpia (pentatónica) */
+      const acordes = [
+        [294, 392, 494],
+        [330, 440, 554],
+        [261, 330, 392],
+        [294, 392, 494],
+        [330, 392, 494],
+        [261, 330, 440],
+      ];
+      let idxAcorde = 0;
+      const koto = () => {
+        if (this.zona !== 'ciudad') return;
+        const notas = acordes[idxAcorde % acordes.length];
+        idxAcorde++;
+        notas.forEach((f, i) => {
+          const osc = ctx.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.value = f;
+          const osc2 = ctx.createOscillator();
+          osc2.type = 'sine';
+          osc2.frequency.value = f * 2;
+          const now = ctx.currentTime;
+          const delay = i * 0.15;
+          const gan = ctx.createGain();
+          gan.gain.setValueAtTime(0, now + delay);
+          gan.gain.linearRampToValueAtTime(0.035, now + delay + 0.04);
+          gan.gain.exponentialRampToValueAtTime(0.001, now + delay + 2);
+          osc.connect(gan);
+          osc2.connect(gan);
+          gan.connect(this.master);
+          osc.start(now + delay);
+          osc.stop(now + delay + 2.5);
+          osc2.start(now + delay);
+          osc2.stop(now + delay + 2.5);
+          this.nodos.push(osc);
+          this.nodos.push(osc2);
+          this.nodos.push(gan);
+        });
+        const t = setTimeout(koto, 4000);
+        this._timers.push(t);
+      };
+      koto();
+
+      /* Shakuhachi — melodía melancólica pero majestuosa */
+      const melodia = [
+        294, 330, 392, 440, 494, 440, 392, 330,
+        294, 247, 294, 330, 392, 440, 494, 440,
+        330, 392, 330, 294, 247, 294,
+      ];
+      let idxNota = 0;
+      const shaku = () => {
+        if (this.zona !== 'ciudad') return;
+        const f = melodia[idxNota % melodia.length];
+        idxNota++;
+
+        const osc = ctx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.value = f;
+
+        const vibrato = ctx.createOscillator();
+        vibrato.frequency.value = 4;
+        const vibGan = ctx.createGain();
+        vibGan.gain.value = 5;
+        vibrato.connect(vibGan);
+        vibGan.connect(osc.frequency);
+        vibrato.start();
+        this.nodos.push(vibrato);
+
+        const bp = ctx.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.value = f * 2;
+        bp.Q.value = 3;
+
+        const now = ctx.currentTime;
+        const gan = ctx.createGain();
+        gan.gain.setValueAtTime(0, now);
+        gan.gain.linearRampToValueAtTime(0.04, now + 0.3);
+        gan.gain.setValueAtTime(0.04, now + 0.8);
+        gan.gain.linearRampToValueAtTime(0.03, now + 1.2);
+        gan.gain.exponentialRampToValueAtTime(0.001, now + 2.5);
+
+        osc.connect(bp);
+        bp.connect(gan);
+        gan.connect(this.master);
+        osc.start(now);
+        osc.stop(now + 3);
+        this.nodos.push(osc);
+        this.nodos.push(bp);
+        this.nodos.push(gan);
+
+        const t = setTimeout(shaku, 3500 + Math.random() * 1000);
+        this._timers.push(t);
+      };
+      shaku();
+    },
+
+    /* ─── INTERIOR ─── */
 
     _iniciarFuego() {
       const { ctx } = crearAudioContext();
@@ -1140,14 +1519,69 @@
 
       const pop = () => {
         if (this.zona !== 'interior') return;
-        this._pulso(100 + Math.random() * 300, 0.06);
-        setTimeout(pop, 300 + Math.random() * 700);
+        this._pulso(100 + Math.random() * 300, 0.06, 0.15);
+        const t = setTimeout(pop, 300 + Math.random() * 700);
+        this._timers.push(t);
       };
       pop();
     },
 
+    /* ─── SUZU (campanilla jizo) ─── */
+
+    _suzuBell() {
+      const { ctx } = crearAudioContext();
+      const now = ctx.currentTime;
+      const freqs = [1200, 1800, 2400, 3600];
+      freqs.forEach((f, i) => {
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = f;
+        const gan = ctx.createGain();
+        const inicio = now + i * 0.02;
+        gan.gain.setValueAtTime(0, inicio);
+        gan.gain.linearRampToValueAtTime(0.03, inicio + 0.005);
+        gan.gain.exponentialRampToValueAtTime(0.001, inicio + 1.2);
+        osc.connect(gan);
+        gan.connect(this.master);
+        osc.start(inicio);
+        osc.stop(inicio + 1.5);
+        this.nodos.push(osc);
+        this.nodos.push(gan);
+      });
+    },
+
+    _jizoTimer: null,
+
+    _checkProximidadJizo() {
+      const MAPA_A = mapaActual === 'bosque' ? MAPA_BOSQUE : null;
+      if (!MAPA_A) {
+        if (this._jizoTimer) { clearInterval(this._jizoTimer); this._jizoTimer = null; }
+        return;
+      }
+      if (this._jizoTimer) return;
+      this._jizoTimer = setInterval(() => {
+        if (mapaActual !== 'bosque') {
+          clearInterval(this._jizoTimer);
+          this._jizoTimer = null;
+          return;
+        }
+        const rango = 2;
+        for (let dy = -rango; dy <= rango; dy++) {
+          for (let dx = -rango; dx <= rango; dx++) {
+            const nx = playerX + dx;
+            const ny = playerY + dy;
+            if (MAPA_A[ny] && MAPA_A[ny][nx] === '🗿') {
+              this._suzuBell();
+              return;
+            }
+          }
+        }
+      }, 4000);
+      this._timers.push(this._jizoTimer);
+    },
+
     cambiarAmbiente(zona) {
-      if (this.zona === zona) return;
+      if (this.zona === zona && this.activo) return;
       const anterior = this.zona;
       this.zona = zona;
 
@@ -1156,17 +1590,70 @@
         this.activo = true;
       }
 
-      this._fadeA(0, 0.8, () => {
-        this._pararNodos();
-        if (zona === 'exterior') {
-          this._iniciarViento();
-          this._iniciarFlauta();
-          this._fadeA(0.7, 1.5);
-        } else if (zona === 'interior') {
-          this._iniciarFuego();
-          this._fadeA(0.7, 1.2);
-        }
-      });
+      const esCrossfade = anterior === 'bosque' && zona === 'ciudad';
+      const fadeDuracion = esCrossfade ? 3 : (anterior === 'bosque' ? 2 : 0.8);
+
+      const nodosViejos = [...this.nodos];
+      const timersViejos = [...this._timers, ...this._timersBosque];
+      const jizoTimerViejo = this._jizoTimer;
+      this.nodos = [];
+      this._timers = [];
+      this._timersBosque = [];
+      this._jizoTimer = null;
+
+      if (esCrossfade) {
+        const { ctx, master } = crearAudioContext();
+        const nuevoGain = ctx.createGain();
+        nuevoGain.gain.value = 0;
+        nuevoGain.connect(master);
+
+        const masterOrig = this.master;
+        this.master = nuevoGain;
+        this._iniciarCiudad();
+        this.master = masterOrig;
+
+        const ahora = ctx.currentTime;
+        masterOrig.gain.cancelScheduledValues(ahora);
+        masterOrig.gain.setValueAtTime(masterOrig.gain.value, ahora);
+        masterOrig.gain.linearRampToValueAtTime(0, ahora + fadeDuracion);
+        nuevoGain.gain.cancelScheduledValues(ahora);
+        nuevoGain.gain.setValueAtTime(0, ahora);
+        nuevoGain.gain.linearRampToValueAtTime(0.7, ahora + fadeDuracion);
+
+        setTimeout(() => {
+          nodosViejos.forEach(n => { try { n.disconnect(); } catch(e) {} });
+          timersViejos.forEach(t => { try { clearTimeout(t); clearInterval(t); } catch(e) {} });
+          if (jizoTimerViejo) { try { clearInterval(jizoTimerViejo); } catch(e) {} }
+          nuevoGain.disconnect(master);
+          nuevoGain.connect(this.master);
+          this.master.gain.value = 0.7;
+          nuevoGain.gain.value = 1;
+        }, fadeDuracion * 1000);
+      } else {
+        this._fadeA(0, fadeDuracion, () => {
+          nodosViejos.forEach(n => { try { n.disconnect(); } catch(e) {} });
+          timersViejos.forEach(t => { try { clearTimeout(t); clearInterval(t); } catch(e) {} });
+          if (jizoTimerViejo) { try { clearInterval(jizoTimerViejo); } catch(e) {} }
+          if (zona === 'aldea') {
+            this._iniciarMurmullo();
+            this._iniciarAvesAldea();
+            this._iniciarKoto();
+            this._fadeA(0.6, 1.5);
+          } else if (zona === 'bosque') {
+            this._iniciarVientoBosque();
+            this._randomForestSFX();
+            this._iniciarCuerdasBosque();
+            this._fadeA(0.6, 2);
+            this._checkProximidadJizo();
+          } else if (zona === 'ciudad') {
+            this._iniciarCiudad();
+            this._fadeA(0.7, 1.5);
+          } else if (zona === 'interior') {
+            this._iniciarFuego();
+            this._fadeA(0.7, 1.2);
+          }
+        });
+      }
     },
   };
 
@@ -1280,16 +1767,15 @@
   let eventoTimer = null;
   let eventoConSonido = false;
 
-  function escribirEvento(html, velocidad, conSonido, callback, prefijo) {
+  function escribirEvento(html, velocidad, conSonido, callback) {
     velocidad = velocidad || 20;
-    const textoCompleto = (prefijo || '') + html;
-    textoEscribiendo = textoCompleto;
+    textoEscribiendo = html;
     callbackTextoCompleto = callback || null;
+    modalEventoTexto.innerHTML = '';
     document.querySelectorAll('#modal-evento-texto + .modal-evento-cursor').forEach(el => el.remove());
     const chars = Array.from(html);
     let idx = 0;
-    let buffer = prefijo || '';
-    modalEventoTexto.innerHTML = buffer;
+    let buffer = '';
 
     const cursorSpan = document.createElement('span');
     cursorSpan.className = 'modal-evento-cursor';
@@ -1353,12 +1839,11 @@
         btn.textContent = (i + 1) + '. ' + op.texto;
         btn.addEventListener('click', () => {
           contenedor.classList.add('modal-opciones-oculto');
+          if (cont) cont.style.display = '';
+          modalEventoTexto.innerHTML = '';
           const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
           if (cursor) cursor.remove();
-          const prefijo = '<span class="opcion-elegida">» ' + op.texto + '</span><br>';
-          escribirEvento(op.respuesta, 20, true, () => {
-            if (cont) cont.style.display = '';
-          }, prefijo);
+          escribirEvento(op.respuesta, 20, true);
         });
         contenedor.appendChild(btn);
       });
@@ -1426,6 +1911,10 @@
     if (movimientoBloqueado) {
       if (eventoTimer) { completarTexto(); return; }
       cerrarEvento(); return;
+    }
+    if (PUERTAS_EDIFICIOS.has(`${playerY},${playerX}`) && mapaActivo !== INTERIORES.find(c => c.id === 'casa_clase_media')?.mapa) {
+      entrarEdificio('casa_clase_media');
+      return;
     }
     const tx = playerX + playerDir.dx;
     const ty = playerY + playerDir.dy;
@@ -1522,7 +2011,7 @@
     updateCamera();
     mostrarUbicacion('Aldea de Owari', 'Provincia de Owari - 1560');
     actualizarObjetivo();
-    audioAmbiente.cambiarAmbiente('exterior');
+    audioAmbiente.cambiarAmbiente('aldea');
     if (!npcTimer) {
       iniciarNPCs();
       npcTimer = setInterval(() => {
