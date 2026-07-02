@@ -172,6 +172,38 @@ html, body {
   letter-spacing: 0.5px;
   white-space: nowrap;
   text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wallet-hud-label {
+  flex-shrink: 0;
+}
+
+.currency-amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.currency-amount-compact {
+  gap: 4px;
+}
+
+.currency-amount-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.currency-amount-compact .currency-amount-icon {
+  width: 14px;
+  height: 14px;
 }
 
 /* ───── PANTALLA NARRATIVA ───── */
@@ -934,6 +966,10 @@ html, body {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
+}
+
+.inv-wallet-grid > div {
+  display: flex;
 }
 
 .inv-wallet-total {
