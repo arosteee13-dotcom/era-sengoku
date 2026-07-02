@@ -1954,19 +1954,19 @@
     'interior', { area: 3 }
   );
   asignarRutina(
-    { id: 'mrc_puesto_01', x: 13, y: 14, emoji: '🙍', activo: true, mapa: MAPA_CIUDAD },
+    { id: 'mrc_puesto_01', x: 4, y: 7, emoji: '🙍', activo: true, mapa: MAPA_CIUDAD },
     'patrulla', { dirX: 1, pasos: 2, pausaFin: 1 }
   );
   asignarRutina(
-    { id: 'mrc_puesto_02', x: 18, y: 14, emoji: '🙎', activo: true, mapa: MAPA_CIUDAD },
+    { id: 'mrc_puesto_02', x: 13, y: 7, emoji: '🙎', activo: true, mapa: MAPA_CIUDAD },
     'patrulla', { dirX: -1, pasos: 2, pausaFin: 1 }
   );
   asignarRutina(
-    { id: 'mrc_puesto_03', x: 14, y: 16, emoji: '🙋', activo: true, mapa: MAPA_CIUDAD },
+    { id: 'mrc_puesto_03', x: 8, y: 12, emoji: '🙋', activo: true, mapa: MAPA_CIUDAD },
     'patrulla', { dirX: 1, pasos: 2, pausaFin: 1 }
   );
   asignarRutina(
-    { id: 'mrc_puesto_04', x: 19, y: 16, emoji: '🙇', activo: true, mapa: MAPA_CIUDAD },
+    { id: 'mrc_puesto_04', x: 11, y: 12, emoji: '🙇', activo: true, mapa: MAPA_CIUDAD },
     'patrulla', { dirX: -1, pasos: 1, pausaFin: 1 }
   );
 
