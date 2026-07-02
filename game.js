@@ -162,6 +162,7 @@
     '🙇': 'img/personajes/mrc_puesto_04.PNG',
     '🗿': 'img/estatua_jizo.png',
     '🏮': 'img/farolillo.png',
+    '💂': 'img/personajes/gdr_ciudad_01.png',
   };
 
   const PATTERNS = [
@@ -296,6 +297,7 @@
       opciones: getOpcionesMercader,
     },
     '🧑‍🌾': { titulo: 'Campesino', texto: 'El arroz crece lento este año, Kenji. Si buscas el zorro de fuego, dicen que se vio una luz roja hacia el bosque al anochecer.', img: 'img/personajes/campesino.png' },
+    '💂': { titulo: 'Guardia del Castillo', texto: 'Alto ahí, Ronin. Nadie entra al castillo sin permiso del señor. Sigue tu camino.', img: 'img/personajes/gdr_ciudad_01.png' },
   };
 
   const GENJI_DIALOGOS = [
@@ -1968,6 +1970,20 @@
   asignarRutina(
     { id: 'mrc_puesto_04', x: 11, y: 12, emoji: '🙇', activo: true, mapa: MAPA_CIUDAD },
     'patrulla', { dirX: -1, pasos: 1, pausaFin: 1 }
+  );
+
+  /* ─── GUARDIAS DEL CASTILLO (estáticos) ─── */
+  asignarRutina(
+    { id: 'guardia_castillo_01', x: 19, y: 2, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
+    'estatico', {}
+  );
+  asignarRutina(
+    { id: 'guardia_castillo_02', x: 19, y: 3, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
+    'estatico', {}
+  );
+  asignarRutina(
+    { id: 'guardia_castillo_03', x: 17, y: 4, emoji: '💂', activo: true, mapa: MAPA_CIUDAD },
+    'estatico', {}
   );
 
   /* ─── NPCS AMBIENTALES ─── */
