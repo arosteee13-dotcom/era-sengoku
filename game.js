@@ -317,10 +317,18 @@
     },
   ];
 
+  const CURRENCY_META = {
+    ryo: { label: 'Ryo', src: 'img/ryo.png', alt: 'Moneda ryo' },
+    shu: { label: 'Shu', src: 'img/shu.png', alt: 'Moneda shu' },
+    mon: { label: 'Mon', src: 'img/mon.png', alt: 'Moneda mon' },
+  };
+
+  function getCurrencyMeta(denomination) {
+    return CURRENCY_META[denomination] || CURRENCY_META.mon;
+  }
+
   function getCurrencyLabel(denomination) {
-    if (denomination === 'ryo') return 'Ryo';
-    if (denomination === 'shu') return 'Shu';
-    return 'Mon';
+    return getCurrencyMeta(denomination).label;
   }
 
   function formatPrice(price) {
@@ -330,6 +338,14 @@
   function formatWalletText() {
     const walletData = getWallet();
     return `${walletData.ryo} ryo | ${walletData.shu} shu | ${walletData.mon} mon`;
+  }
+
+  function renderCurrencyAmount(denomination, amount, compact = false) {
+    const currency = getCurrencyMeta(denomination);
+    return '<span class="currency-amount' + (compact ? ' currency-amount-compact' : '') + '">'
+      + `<img src="${currency.src}" alt="${currency.alt}" class="currency-amount-icon">`
+      + `<span>${currency.label}: <b>${amount}</b></span>`
+      + '</span>';
   }
 
   function getOpcionesMercader() {
@@ -466,14 +482,19 @@
     const desglose = getWallet();
     const textoMonedero = formatWalletText();
     if (walletHud) {
-      walletHud.textContent = `💰 ${textoMonedero}`;
+      walletHud.innerHTML =
+        '<span class="wallet-hud-label">💰</span>'
+        + renderCurrencyAmount('ryo', desglose.ryo, true)
+        + renderCurrencyAmount('shu', desglose.shu, true)
+        + renderCurrencyAmount('mon', desglose.mon, true);
+      walletHud.setAttribute('aria-label', textoMonedero);
     }
     if (invWallet) {
       invWallet.innerHTML =
         '<div class="inv-wallet-grid">'
-        + `<div>Ryo: <b>${desglose.ryo}</b></div>`
-        + `<div>Shu: <b>${desglose.shu}</b></div>`
-        + `<div>Mon: <b>${desglose.mon}</b></div>`
+        + `<div>${renderCurrencyAmount('ryo', desglose.ryo)}</div>`
+        + `<div>${renderCurrencyAmount('shu', desglose.shu)}</div>`
+        + `<div>${renderCurrencyAmount('mon', desglose.mon)}</div>`
         + '</div>'
         + `<div class="inv-wallet-total">Total: ${totalMon} mon</div>`;
     }
