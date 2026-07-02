@@ -7,7 +7,7 @@
       "displayName": "Ryō",
       "material": "gold",
       "tier": 3,
-      "valueInMon": 1000,
+      "valueInMon": 4000,
       "symbol": "両"
     },
     {
@@ -16,7 +16,7 @@
       "displayName": "Bu",
       "material": "silver",
       "tier": 2,
-      "valueInMon": 100,
+      "valueInMon": 1000,
       "symbol": "分"
     },
     {
@@ -30,9 +30,9 @@
     }
   ],
   "conversions": {
-    "ryoToBu": 10,
-    "buToMon": 100,
-    "ryoToMon": 1000
+    "ryoToBu": 4,
+    "buToMon": 1000,
+    "ryoToMon": 4000
   },
   "displayOrder": ["ryo", "bu", "mon"],
   "rounding": {

@@ -10,15 +10,15 @@ The game uses a Tokugawa-inspired three-tier currency system based on the Edo pe
 
 | Currency | Material | Symbol | Value in Mon |
 |----------|----------|--------|-------------|
-| Ryō      | Gold     | 両     | 1000 Mon    |
-| Bu       | Silver   | 分     | 100 Mon     |
+| Ryō      | Gold     | 両     | 4000 Mon    |
+| Bu       | Silver   | 分     | 1000 Mon    |
 | Mon      | Copper   | 文     | 1 Mon       |
 
 ### Conversion Rates
 
-- 1 Ryō = 10 Bu
-- 1 Bu = 100 Mon
-- 1 Ryō = 1000 Mon
+- 1 Ryō = 4 Bu
+- 1 Bu = 1000 Mon
+- 1 Ryō = 4000 Mon
 
 ### Gameplay Usage
 
@@ -28,4 +28,4 @@ The game uses a Tokugawa-inspired three-tier currency system based on the Edo pe
 
 ### Configuration
 
-Currency definitions are stored in [`data/economy/currency.json`](data/economy/currency.json).
+Currency conversions and helpers are centralized in [`data/economy/currency.js`](data/economy/currency.js), with reference values in [`data/economy/currency.json`](data/economy/currency.json).
