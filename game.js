@@ -1713,8 +1713,54 @@
     }));
   }
 
+  /* ─── COLISIONES DE CUADRÍCULA ─────────────────────────────────────────── */
+
+  /**
+   * Resolves movement proposals so agents cannot share a tile.
+   *
+   * Handles three conflict types:
+   *  1. Same-target  – two+ agents propose the same destination → none moves.
+   *  2. Swap         – A targets B's tile while B targets A's tile → both blocked.
+   *  3. Occupied     – destination is currently held by another agent → blocked.
+   *
+   * @param {Array<{agent:object, nx:number, ny:number}>} proposals
+   * @param {Map<string,object>} occupiedNow  "col,row" → agent (pre-move snapshot)
+   * @returns {Set<object>} agents whose move is valid this tick
+   */
+  function _resolverColisionesAgentes(proposals, occupiedNow) {
+    const byDest = new Map();
+    for (const p of proposals) {
+      const key = `${p.nx},${p.ny}`;
+      if (!byDest.has(key)) byDest.set(key, []);
+      byDest.get(key).push(p);
+    }
+    const allowed = new Set();
+    for (const p of proposals) {
+      const destKey = `${p.nx},${p.ny}`;
+      if (byDest.get(destKey).length > 1) continue;
+      const occupant = occupiedNow.get(destKey);
+      if (occupant && occupant !== p.agent) {
+        const srcKey = `${p.agent.x},${p.agent.y}`;
+        const occupantProp = proposals.find(q => q.agent === occupant);
+        if (occupantProp && `${occupantProp.nx},${occupantProp.ny}` === srcKey) continue;
+        continue;
+      }
+      allowed.add(p.agent);
+    }
+    return allowed;
+  }
+
+  /* ─── ACTUALIZACIÓN DE NPCs ────────────────────────────────────────────── */
+
   function actualizarNPCs() {
     if (movimientoBloqueado) return;
+
+    // ── Phase 1: gather proposals ──────────────────────────────────────────
+    // Each NPC that wants to move this tick pushes a proposal entry.
+    // State changes unrelated to position (timers, direction flips, pauses)
+    // happen here exactly as before.
+    const proposals = []; // { agent, nx, ny, isAmbient? }
+
     npcsRutina.forEach(n => {
       if (!n.activo) return;
       if (n.mapa !== mapaActivo) return;
@@ -1724,7 +1770,7 @@
         const sigX = n.x + n.dirX;
         if (sigX === playerX && n.y === playerY) { n.pausando = true; n.timerPausa = 800; return; }
         const t = n.mapa[n.y] ? n.mapa[n.y][sigX] : null;
-        if (t === '🟩' || t === '🟫') { n.x = sigX; n.restantes--; }
+        if (t === '🟩' || t === '🟫') { proposals.push({ agent: n, nx: sigX, ny: n.y }); }
         else { n.pausando = true; n.timerPausa = 500; }
       } else if (n.tipo === 'interior') {
         n.timer += 1800;
@@ -1739,17 +1785,45 @@
             if (obstaculos.includes(nx+','+ny)) return false;
             return n.mapa && n.mapa[ny] && n.mapa[ny][nx]==='🟫';
           });
-          if (v.length) { const m=v[Math.floor(Math.random()*v.length)]; n.x+=m.dx; n.y+=m.dy; }
+          if (v.length) { const m=v[Math.floor(Math.random()*v.length)]; proposals.push({ agent: n, nx: n.x+m.dx, ny: n.y+m.dy }); }
         }
       }
     });
+
     npcs.forEach(n => {
       if (n.restantes <= 0) { n.dirX*=-1; n.restantes=n.pasos; }
       const sigX = n.x + n.dirX;
       if (sigX === playerX && n.y === playerY) { n.restantes = 0; return; }
-      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX]==='🟩'||mapaActivo[n.y][sigX]==='🟫')) n.x = sigX;
-      else n.restantes = 0;
-      n.restantes--;
+      if (mapaActivo[n.y] && (mapaActivo[n.y][sigX]==='🟩'||mapaActivo[n.y][sigX]==='🟫')) {
+        proposals.push({ agent: n, nx: sigX, ny: n.y, isAmbient: true });
+      } else {
+        n.restantes = 0;
+        n.restantes--;
+      }
+    });
+
+    // ── Phase 2: collision resolution ─────────────────────────────────────
+    const allActive = [
+      ...npcsRutina.filter(n => n.activo && n.mapa === mapaActivo),
+      ...(mapaActivo === MAP ? npcs : []),
+    ];
+    const occupiedNow = new Map();
+    allActive.forEach(n => occupiedNow.set(`${n.x},${n.y}`, n));
+
+    const allowed = _resolverColisionesAgentes(proposals, occupiedNow);
+
+    // ── Phase 3: apply movements ───────────────────────────────────────────
+    proposals.forEach(p => {
+      if (allowed.has(p.agent)) {
+        p.agent.x = p.nx;
+        p.agent.y = p.ny;
+        if (p.agent.tipo === 'patrulla') p.agent.restantes--;
+        if (p.isAmbient) p.agent.restantes--;
+      } else if (p.isAmbient) {
+        // Collision-blocked ambient NPC still decrements its step counter so
+        // it eventually reverses direction rather than stalling indefinitely.
+        p.agent.restantes--;
+      }
     });
   }
 
