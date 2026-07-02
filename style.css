@@ -379,7 +379,7 @@ html, body {
 
 #controls {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   width: 370px;
   height: 284.5px;
