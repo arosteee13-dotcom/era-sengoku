@@ -192,6 +192,7 @@
   let playerDir = { dx: 0, dy: -1 };
   let ultimaDirX = 1;
   let inventory = [];
+  let playerMon = 0;
   let tileSize = 0;
   let movimientoBloqueado = false;
   let jugadorCaminando = false;
@@ -204,6 +205,8 @@
   let misionAldeanosCompletada = false;
   let aldeanosHablados = new Set();
   let mapaActual = 'aldea';
+  const RECOMPENSA_MON_MADRE = 12;
+  const PRECIO_SEDA_MON = 10;
 
   const DIALOGOS_AMBIENTE = {
     '🪓': { titulo: 'Leñador', texto: 'He dejado de talar cerca del límite del bosque. Los árboles parecen… estar escuchando. Ten cuidado con dónde pisas, Ronin.', img: 'img/personajes/lenador.png' },
@@ -211,11 +214,7 @@
       titulo: 'Mercader',
       texto: 'Vengo de tierras lejanas. Mis sedas son finas, pero mis noticias son mejores. ¿Te interesa saber qué se dice sobre los extranjeros en la capital?',
       img: 'img/personajes/mercader.png',
-      opciones: [
-        { texto: 'Cuéntame más sobre esos extranjeros.', respuesta: 'Se dice que portan armas nunca vistas, de fuego y trueno. He visto a uno en la frontera, con armadura roja y un casco con cuernos. No me gustó su mirada.' },
-        { texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?', respuesta: 'Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en 10 monedas de cobre el rollo. Un precio justo.' },
-        { texto: 'No me interesan tus noticias ni tus sedas.', respuesta: 'Como quieras, Ronin. Pero el mundo se mueve rápido, y los que ignoran las noticias suelen ser los primeros en caer. Cuídate.' },
-      ],
+      opciones: getOpcionesMercader,
     },
     '🧑‍🌾': { titulo: 'Campesino', texto: 'El arroz crece lento este año, Kenji. Si buscas el zorro de fuego, dicen que se vio una luz roja hacia el bosque al anochecer.', img: 'img/personajes/campesino.png' },
   };
@@ -232,6 +231,54 @@
     "Cuando era joven, conocí a un guerrero que venía del norte. Me enseñó que la verdadera fuerza está en la compasión. No lo olvides.",
   ];
   const MADRE_TEXTO = "Hijo mío, ten cuidado ahí fuera. He preparado algo de comida para tu viaje. <b>Arroz con ciruelas</b> y un poco de té. Vuelve a casa cuando puedas.";
+  const MADRE_OPCIONES = [
+    {
+      texto: 'Gracias, madre. ¿Puedo llevar también algo de Mon?',
+      respuesta: `Claro, hijo. Llévate comida y también <b>${RECOMPENSA_MON_MADRE} Mon</b> para el camino. No quiero que te falte de nada.`,
+    },
+    {
+      texto: 'Con la comida me basta. Volveré pronto.',
+      respuesta: `Si cambias de idea, aquí te esperaré. Aun así, toma <b>${RECOMPENSA_MON_MADRE} Mon</b> y cuídate.`,
+    },
+  ];
+
+  function getOpcionesMercader() {
+    return [
+      {
+        texto: 'Cuéntame más sobre esos extranjeros.',
+        respuesta: 'Se dice que portan armas nunca vistas, de fuego y trueno. He visto a uno en la frontera, con armadura roja y un casco con cuernos. No me gustó su mirada.',
+      },
+      {
+        texto: 'Prefiero oírlo de tus sedas, ¿cuánto valen?',
+        respuesta: 'Mis sedas vienen de la ruta del norte, tejidas con hilos de plata. Para ti, Ronin, te las dejo en 10 monedas de cobre el rollo. Un precio justo.',
+        opciones: [
+          {
+            texto: `Comprar un rollo por ${PRECIO_SEDA_MON} Mon.`,
+            respuesta: () => {
+              if (playerMon < PRECIO_SEDA_MON) {
+                return `No te alcanza, Ronin. Vuelve con al menos ${PRECIO_SEDA_MON} Mon y la seda será tuya.`;
+              }
+              playerMon -= PRECIO_SEDA_MON;
+              inventory.push({
+                icono: '🧵',
+                nombre: 'Rollo de Seda',
+                descripcion: 'Seda del norte, tejida con hilos de plata.',
+              });
+              return `Trato hecho. Te llevas un rollo de seda por ${PRECIO_SEDA_MON} Mon. Mon restantes: ${playerMon}.`;
+            },
+          },
+          {
+            texto: 'Tal vez después.',
+            respuesta: 'Como gustes, Ronin. La seda no espera eternamente, pero aún tienes tiempo.',
+          },
+        ],
+      },
+      {
+        texto: 'No me interesan tus noticias ni tus sedas.',
+        respuesta: 'Como quieras, Ronin. Pero el mundo se mueve rápido, y los que ignoran las noticias suelen ser los primeros en caer. Cuídate.',
+      },
+    ];
+  }
 
   /* ─── DOM REFS ─── */
   const $ = (id) => document.getElementById(id);
@@ -289,6 +336,7 @@
     habladoConTakeshi = data.takeshi || false;
     madreDioItems = data.dioItems || false;
     inventory = data.inv || [];
+    playerMon = data.mon || 0;
     misionAldeanosCompletada = data.mision || false;
     aldeanosHablados = data.aldeanos ? new Set(data.aldeanos) : new Set();
     mapaActual = data.mapa || 'aldea';
@@ -414,6 +462,7 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
+    playerMon = 0;
     madreDioItems = false;
     visitadoCasaGenji = false;
     visitadoCasaMadre = false;
@@ -1814,6 +1863,28 @@
     tipear();
   }
 
+  function mostrarOpcionesDialogo(opciones) {
+    const cont = document.querySelector('.modal-evento-continuar');
+    if (cont) cont.style.display = 'none';
+    const contenedor = document.getElementById('modal-opciones');
+    contenedor.classList.remove('modal-opciones-oculto');
+    opciones.forEach((op, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'opcion-btn';
+      btn.textContent = (i + 1) + '. ' + op.texto;
+      btn.addEventListener('click', () => {
+        contenedor.classList.add('modal-opciones-oculto');
+        if (cont) cont.style.display = '';
+        modalEventoTexto.innerHTML = '';
+        const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
+        if (cursor) cursor.remove();
+        const respuesta = typeof op.respuesta === 'function' ? op.respuesta() : op.respuesta;
+        escribirEvento(respuesta, 20, true, op.opciones ? () => mostrarOpcionesDialogo(op.opciones) : null);
+      });
+      contenedor.appendChild(btn);
+    });
+  }
+
   function abrirEvento(titulo, texto, imagen, esPersonaje, opciones) {
     movimientoBloqueado = true;
     modalEventoTitulo.textContent = titulo;
@@ -1828,26 +1899,7 @@
       modalEventoImg.classList.add('modal-imagen-hidden');
     }
 
-    escribirEvento(texto, 20, esPersonaje, opciones ? () => {
-      const cont = document.querySelector('.modal-evento-continuar');
-      if (cont) cont.style.display = 'none';
-      const contenedor = document.getElementById('modal-opciones');
-      contenedor.classList.remove('modal-opciones-oculto');
-      opciones.forEach((op, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'opcion-btn';
-        btn.textContent = (i + 1) + '. ' + op.texto;
-        btn.addEventListener('click', () => {
-          contenedor.classList.add('modal-opciones-oculto');
-          if (cont) cont.style.display = '';
-          modalEventoTexto.innerHTML = '';
-          const cursor = document.querySelector('#modal-evento-texto + .modal-evento-cursor');
-          if (cursor) cursor.remove();
-          escribirEvento(op.respuesta, 20, true);
-        });
-        contenedor.appendChild(btn);
-      });
-    } : null);
+    escribirEvento(texto, 20, esPersonaje, opciones ? () => mostrarOpcionesDialogo(opciones) : null);
     modalEvento.classList.remove('modal-hidden');
   }
 
@@ -1857,12 +1909,15 @@
     const eraMadre = titulo === 'Tu madre';
     if (eraMadre && !madreDioItems) {
       madreDioItems = true;
+      playerMon += RECOMPENSA_MON_MADRE;
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/arroz_con_ciruelas.png', nombre: 'Ración de Arroz', descripcion: 'Recupera energía' },
       ]), 200);
       setTimeout(() => mostrarAnimRecoger([
         { icono: 'img/comida/cantimplora_de_te.png', nombre: 'Té de ciruela', descripcion: 'Bebida reconfortante' },
       ]), 2400);
+      objetivoTexto.textContent = `Recibiste comida y ${RECOMPENSA_MON_MADRE} Mon de tu madre.`;
+      objetivoTexto.style.opacity = '1';
     }
     const mapaNPC = {
       'Takeshi':'takeshi','Genji, el anciano':'genji','Hana, la sabia':'hana',
@@ -1928,7 +1983,7 @@
       abrirEvento('Letrero', CARTEL_TEXTO, null, true);
     } else if (DIALOGOS_AMBIENTE[tile]) {
       const d = DIALOGOS_AMBIENTE[tile];
-      abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
+      abrirEvento(d.titulo, d.texto, d.img, true, typeof d.opciones === 'function' ? d.opciones() : d.opciones);
     } else {
       // Detección por proximidad (adyacente)
       const cerca = [...npcsRutina.filter(n => n.activo), ...PATRULLAS].find(n => {
@@ -1948,10 +2003,10 @@
           abrirEvento('Hana, la sabia', HANA_DIALOGOS[Math.floor(Math.random() * HANA_DIALOGOS.length)], 'img/personajes/hana.png', true);
         } else if (cerca.id === 'madre') {
           visitadoCasaMadre = true;
-          abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true);
+          abrirEvento('Tu madre', MADRE_TEXTO, 'img/personajes/madre.png', true, MADRE_OPCIONES);
         } else if (DIALOGOS_AMBIENTE[cerca.emoji]) {
           const d = DIALOGOS_AMBIENTE[cerca.emoji];
-          abrirEvento(d.titulo, d.texto, d.img, true, d.opciones);
+          abrirEvento(d.titulo, d.texto, d.img, true, typeof d.opciones === 'function' ? d.opciones() : d.opciones);
         }
       }
     }
@@ -2001,6 +2056,7 @@
     playerY = 9;
     playerDir = { dx: 0, dy: -1 };
     inventory = [];
+    playerMon = 0;
     madreDioItems = false;
     playerNameDsp.textContent = playerName;
     if (mapaActivo !== MAP) setMapa(MAP);
@@ -2056,6 +2112,7 @@
         takeshi: habladoConTakeshi,
         dioItems: madreDioItems,
         inv: inventory,
+        mon: playerMon,
         mision: misionAldeanosCompletada,
         aldeanos: [...aldeanosHablados],
         mapa: mapaActual,
