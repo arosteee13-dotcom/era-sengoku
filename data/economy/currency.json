@@ -1,0 +1,49 @@
+{
+  "currencySystem": "tokugawa-inspired",
+  "currencies": [
+    {
+      "id": "ryo",
+      "name": "Ryo",
+      "displayName": "Ryō",
+      "material": "gold",
+      "tier": 3,
+      "valueInMon": 1000,
+      "symbol": "両"
+    },
+    {
+      "id": "bu",
+      "name": "Bu",
+      "displayName": "Bu",
+      "material": "silver",
+      "tier": 2,
+      "valueInMon": 100,
+      "symbol": "分"
+    },
+    {
+      "id": "mon",
+      "name": "Mon",
+      "displayName": "Mon",
+      "material": "copper",
+      "tier": 1,
+      "valueInMon": 1,
+      "symbol": "文"
+    }
+  ],
+  "conversions": {
+    "ryoToBu": 10,
+    "buToMon": 100,
+    "ryoToMon": 1000
+  },
+  "displayOrder": ["ryo", "bu", "mon"],
+  "rounding": {
+    "shopPrices": "floor",
+    "questRewards": "nearest_5_mon"
+  },
+  "examples": {
+    "merchantSilkRoll": {
+      "price": 10,
+      "currency": "mon",
+      "description": "Rollo de seda del mercader"
+    }
+  }
+}
